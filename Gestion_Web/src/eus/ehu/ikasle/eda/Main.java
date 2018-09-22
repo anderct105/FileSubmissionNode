@@ -5,8 +5,9 @@ import eus.ehu.ikasle.eda.utils.Stopwatch;
 public class Main {
 
     public static void main(String[] args) {
+        GestionWeb g = GestionWeb.getInstance();
         Stopwatch stopwatch = new Stopwatch();
-        Fichero.getInstance().cargarWebs();
+        g.cargarDatos();
         System.out.println(stopwatch.elapsedTime());
     }
 

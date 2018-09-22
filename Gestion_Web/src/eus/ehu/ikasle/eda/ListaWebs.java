@@ -1,27 +1,25 @@
 package eus.ehu.ikasle.eda;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 
 public class ListaWebs {
 
-    private HashMap<Integer,Web> webs;
+    private HashSet<Web> webs;
 
 
     public ListaWebs(){
-        this.webs = new HashMap<>();
+        this.webs = new HashSet<>();
     }
 
-    public void anadirWeb(Web web, int id){
-        this.webs.put(id,web);
+    public void anadirWeb(Web web){
+        this.webs.add(web);
     }
 
-    public Web getWebById(int id){
-        return null;
-    }
 
-    public List<Web> getWebOrdenadas(){
-        return null;
+    public boolean isEmpty() {
+        return this.webs.isEmpty();
     }
-
 }

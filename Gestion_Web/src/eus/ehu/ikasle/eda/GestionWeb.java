@@ -12,6 +12,13 @@ public class GestionWeb {
     private GestionWeb() {
     }
 
+    public void cargarDatos(){
+        Fichero f = Fichero.getInstance();
+        f.cargarDiccionario();
+        f.cargarWebs();
+        f.cargarRelaciones();
+    }
+
     private Web buscarWebById(int id){
         return null;
     }
