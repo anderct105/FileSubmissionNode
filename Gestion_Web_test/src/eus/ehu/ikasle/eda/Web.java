@@ -45,4 +45,16 @@ public class Web {
     public void addPalabra(Palabra palabra) {
         this.palabras.add(palabra);
     }
+
+    public boolean estaEnListaPalabras(Palabra palabra){
+        return this.palabras.contains(palabra);
+    }
+
+    @Override
+    public String toString() {
+        return "Web{" +
+                "id=" + id +
+                ", web='" + web + '\'' +
+                '}';
+    }
 }
