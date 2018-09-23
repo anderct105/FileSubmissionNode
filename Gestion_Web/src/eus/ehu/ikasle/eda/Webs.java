@@ -1,8 +1,13 @@
 package eus.ehu.ikasle.eda;
 
 import java.util.HashMap;
+import java.util.List;
 
 public class Webs {
+
+    public HashMap<Integer, Web> getWebs() {
+        return webs;
+    }
 
     private HashMap<Integer,Web> webs;
 
@@ -41,5 +46,16 @@ public class Webs {
             palabras.anadirWebAPalabras(web);
             web.setPalabras(palabras);
         }
+    }
+
+    public Web buscarWebByPalabras(List<Palabra> palabras) {
+        Web w_aux=null;
+        ListaPalabras lista_aux;
+        for (Web w: webs.values()){
+                if(w.contienePalabras(palabras)){
+                    w_aux=w;
+                }
+        }
+        return w_aux;
     }
 }

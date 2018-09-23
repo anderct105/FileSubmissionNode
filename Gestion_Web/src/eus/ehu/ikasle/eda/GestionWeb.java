@@ -23,8 +23,8 @@ public class GestionWeb {
         return null;
     }
 
-    private Web buscarWebByPalabras(List<Palabra> palabras){
-        return null;
+    private void buscarWebByPalabras(List<Palabra> palabras){
+        Web w=Webs.getInstance().buscarWebByPalabras(palabras);
     }
 
     private ListaWebs getWebsEnlazadas(Web web){
