@@ -1,5 +1,6 @@
 package eus.ehu.ikasle.eda;
 
+import java.util.Iterator;
 import java.util.List;
 
 public class GestionWeb {
@@ -20,10 +21,12 @@ public class GestionWeb {
     }
 
     private Web buscarWebById(int id){
-        return null;
+       Web web = Webs.getInstance().getWebById(id);
+       return web;
     }
 
     private Web buscarWebByPalabras(List<Palabra> palabras){
+
         return null;
     }
 
