@@ -2,6 +2,7 @@ package eus.ehu.ikasle.eda;
 
 import com.sun.xml.internal.ws.util.StringUtils;
 import eus.ehu.ikasle.eda.utils.Stopwatch;
+import javafx.scene.paint.Stop;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -16,7 +17,7 @@ public class Main {
         Stopwatch stopwatch = new Stopwatch();
         GestionWeb.getInstance().cargarDatos();
         System.out.println("Cargar  : " + stopwatch.elapsedTime());
-        stopwatch = new Stopwatch();
+        /*stopwatch = new Stopwatch();
         GestionWeb.getInstance().getWebByFullName("0-3ani.ro");
         System.out.println("Busqueda 0-3ani.ro  : " + stopwatch.elapsedTime());
         stopwatch = new Stopwatch();
@@ -44,7 +45,16 @@ public class Main {
         stopwatch = new Stopwatch();
         webs = GestionWeb.getInstance().buscarWebsByPalabrasRetainAll(new String[]{"a"}); // 0-interest-credit-cards.com 696
         System.out.println("Busqueda a  : (retain all)" + stopwatch.elapsedTime());
-        //System.out.println(Arrays.toString(webs.toArray()));
+        //System.out.println(Arrays.toString(webs.toArray()));*/
+        stopwatch = new Stopwatch();
+        List<Web> webs = GestionWeb.getInstance().buscarWebsByPalabrasRetainAll(new String[]{"a","e"}); // 0-interest-credit-cards.com 696
+        System.out.println("Busqueda a  e: (retain all)" + stopwatch.elapsedTime());
+        System.out.println(webs.size());
+        stopwatch = new Stopwatch();
+        webs = GestionWeb.getInstance().buscarWebsByPalabras(new String[]{"a","e"}); // 0-interest-credit-cards.com 696
+        System.out.println("Busqueda a  e: " + stopwatch.elapsedTime());
+        System.out.println(webs.size());
+
     }
 
 }
