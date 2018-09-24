@@ -1,5 +1,6 @@
 package eus.ehu.ikasle.eda;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -58,4 +59,29 @@ public class Webs {
         }
         return w_aux;
     }
+
+    public void getWebsOrdenadas() {
+        ArrayList<Web> lista=new ArrayList<Web>();
+        for(Web w: webs.values()){
+            lista.add(w);
+        }
+        int pivote = lista.size()/2;
+        int inicio= 0;
+        int fin=lista.size()-1;
+        while(inicio<fin){
+            while(lista.get(inicio).getNombre().compareTo(lista.get(pivote).getNombre())<0){
+                inicio++;
+            }
+            while (lista.get(fin).getNombre().compareTo(lista.get(pivote).getNombre()) > 0) {
+                fin--;
+            }
+            if(inicio<=fin){
+                Web temp = lista.get(inicio);
+                lista.set(inicio, lista.get(fin));
+                lista.set(fin, temp);
+            }
+        }
+
+    }
+
 }

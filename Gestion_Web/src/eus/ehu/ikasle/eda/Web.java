@@ -15,6 +15,10 @@ public class Web {
         this.webRelacionadas = new ListaWebs();
     }
 
+    public String getNombre() {
+        return nombre;
+    }
+
     public void addWebRelacionada(Web web){
         this.webRelacionadas.anadirWeb(web);
     }

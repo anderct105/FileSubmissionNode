@@ -28,7 +28,6 @@ public class ListaPalabras {
         }
     }
 
-
     public ListaPalabras getPalabras(Web web) {
         ListaPalabras lp = new ListaPalabras();
         Iterator<Palabra> it = palabras.iterator();
