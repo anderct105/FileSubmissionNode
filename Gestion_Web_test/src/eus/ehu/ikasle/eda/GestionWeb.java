@@ -14,7 +14,7 @@ public class GestionWeb {
     }
 
 
-    public void cargarDatos(){
+    public void cargarDatos() {
         Fichero f = Fichero.getInstance();
         f.cargarWebs();
         f.cargarRelaciones();
@@ -22,58 +22,67 @@ public class GestionWeb {
         f.cargarPalabrasRelacionadasConWebs();
     }
 
-    public Web getWebByFullName(String name){
+    public Web getWebByFullName(String name) {
         return Webs.getInstance().getWebByFullName(name);
     }
 
-    public List<Web> buscarWebsByPalabras(String[] palabras){
+    public List<Web> buscarWebsByPalabras(List<String> palabras) {
         List<Web> resultado = new ArrayList<>();
-        Diccionario dic = Diccionario.getInstance();
-        Palabra primera = dic.getPalabraByString(palabras[0]);
-        Palabra tmp;
-        if (primera != null){
-            if (palabras.length != 1){
-                boolean contenidas;
-                for (Web web: primera.getWebs()) {
-                    contenidas = true;
-                    for (int i = 1 ; i < palabras.length && contenidas; i++){
-                        tmp = dic.getPalabraByString(palabras[i]);
-                        if (tmp != null){
-                            if (!web.estaEnListaPalabras(tmp)){
+        if (palabras.size() > 0) {
+            Diccionario dic = Diccionario.getInstance();
+            Palabra primera = dic.getPalabraByString(palabras.get(0));
+            Palabra tmp;
+            if (primera != null) {
+                if (palabras.size() != 1) {
+                    boolean contenidas;
+                    for (Web web : primera.getWebs()) {
+                        contenidas = true;
+                        for (int i = 1; i < palabras.size() && contenidas; i++) {
+                            tmp = dic.getPalabraByString(palabras.get(i));
+                            if (tmp != null) {
+                                if (!web.estaEnListaPalabras(tmp)) {
+                                    contenidas = false;
+                                }
+                            } else {
+                                System.out.println("Error palabra no existente, se sigue la busqueda");
                                 contenidas = false;
+                                palabras.remove(i);
                             }
-                        }else{
-                            System.out.println("Error palabra no existente, se sigue la busqueda");
-                            contenidas = false;
+                        }
+                        if (contenidas) {
+                            resultado.add(web);
                         }
                     }
-                    if (contenidas){
-                        resultado.add(web);
-                    }
+                } else {
+                    resultado = primera.getWebs();
                 }
-            }else{
-                resultado = primera.getWebs();
+            } else {
+                System.out.println("Palabra no encontrada");
             }
-        }else{
-            System.out.println("Palabra no encontrada");
         }
+
         return resultado;
     }
 
-    public List<Web> buscarWebsByPalabrasRetainAll(String[] palabras){
+    public List<Web> buscarWebsByPalabrasRetainAll(List<String> palabras) {
         List<Web> resultado = new ArrayList<>();
         Diccionario dic = Diccionario.getInstance();
-        if (palabras.length > 0){
-            Palabra tmp = dic.getPalabraByString(palabras[0]);
-            if (tmp != null){
+        if (palabras.size() > 0) {
+            Palabra tmp = dic.getPalabraByString(palabras.get(0));
+            if (tmp != null) {
                 resultado = tmp.getWebs();
-                if (palabras.length > 1){
-                    for (int i = 1 ; i < palabras.length && !resultado.isEmpty();i++){
-                        tmp = dic.getPalabraByString(palabras[i]);
-                        resultado.retainAll(tmp.getWebs());
+                if (palabras.size() > 1) {
+                    for (int i = 1; i < palabras.size() && !resultado.isEmpty(); i++) {
+                        tmp = dic.getPalabraByString(palabras.get(i));
+                        //Si no encuentra alguna de las palabras la busqueda se cancela devolviendo un array vacio
+                        if (tmp != null){
+                            resultado.retainAll(tmp.getWebs());
+                        }else{
+                            resultado = new ArrayList<>();
+                        }
                     }
                 }
-            }else{
+            } else {
                 System.out.println("Error palabra no encontrada, se devolvera la lista vacia");
             }
 
