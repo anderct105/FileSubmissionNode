@@ -23,12 +23,7 @@ public class Diccionario {
 
     public  void cargarWebsRelacionadas() {
         final Webs webs = Webs.getInstance();
-        this.diccionario.forEach(new Consumer<Palabra>() {
-            @Override
-            public void accept(Palabra palabra) {
-                webs.websQueContienen(palabra);
-            }
-        });
+        this.diccionario.parallelStream().forEach(palabra -> webs.websQueContienen(palabra));
     }
 
     public void addPalabra(Palabra palabra){

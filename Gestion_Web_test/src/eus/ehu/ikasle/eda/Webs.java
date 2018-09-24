@@ -33,15 +33,19 @@ public class Webs {
     }
 
     public void websQueContienen(Palabra palabra) {
-        webs.forEach(new BiConsumer<Integer, Web>() {
-            @Override
-            public void accept(Integer integer, Web web) {
-                if (web.constains(palabra)){
-                    web.addPalabra(palabra);
-                    palabra.addWebConPalabra(web);
-                }
+        webs.entrySet().forEach((entry) -> {
+            Web web = entry.getValue();
+            if (web.constains(palabra)){
+                web.addPalabra(palabra);
+                palabra.addWebConPalabra(web);
             }
         });
+        /*webs.forEach((integer, web) -> {
+            if (web.constains(palabra)){
+                web.addPalabra(palabra);
+                palabra.addWebConPalabra(web);
+            }
+        });*/
     }
 
     public Web getWebByFullName(String name) {
