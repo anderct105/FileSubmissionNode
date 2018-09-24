@@ -22,15 +22,5 @@ public class GestionWebTest {
 
     @Test
     public void buscarWebsByPalabrasRetainAll() {
-        List<Web> webs,webs2;
-        Stopwatch stopwatch = new Stopwatch();
-        webs = GestionWeb.getInstance().buscarWebsByPalabrasRetainAll(new String[]{"a", "c", "e"}); // 0-interest-credit-cards.com 696
-        System.out.println("Busqueda a,c,e (retain all) : " + stopwatch.elapsedTime());
-        System.out.println(Arrays.toString(webs.toArray()));
-        stopwatch = new Stopwatch();
-        webs2 = GestionWeb.getInstance().buscarWebsByPalabras(new String[]{"a", "c", "e"}); // 0-interest-credit-cards.com 696
-        System.out.println("Busqueda a,c,e (retain all) : " + stopwatch.elapsedTime());
-        System.out.println(Arrays.toString(webs.toArray()));
-        assertEquals(webs,webs2);
     }
 }
