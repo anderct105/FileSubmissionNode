@@ -2,6 +2,7 @@ package eus.ehu.ikasle.eda;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.function.Consumer;
 
@@ -36,5 +37,21 @@ public class Diccionario {
 
     public void limpiar() {
         this.diccionario.clear();
+    }
+
+    public Palabra getPalabraByString(String palabra) {
+        Palabra p = null;
+
+        Iterator<Palabra> palabraIterator = this.diccionario.iterator();
+        Palabra tmp = null;
+
+        while(palabraIterator.hasNext() &&
+                !(tmp = palabraIterator.next()).toString().equalsIgnoreCase(palabra));
+
+        if (tmp.toString().equalsIgnoreCase(palabra)){
+            p = tmp;
+        }
+
+        return p;
     }
 }
