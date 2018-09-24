@@ -1,5 +1,7 @@
 package eus.ehu.ikasle.eda;
 
+import java.util.List;
+
 public class Web {
 
     private int id;
@@ -27,5 +29,13 @@ public class Web {
 
     public void setPalabras(ListaPalabras palabras) {
         this.palabras = palabras;
+    }
+
+    public ListaPalabras getListaPalabras(){
+        return this.palabras;
+    }
+
+    public boolean contienePalabras(List<Palabra> palabras) {
+        return this.palabras.contienePalabras(palabras);
     }
 }

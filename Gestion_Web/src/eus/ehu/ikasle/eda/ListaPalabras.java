@@ -5,6 +5,7 @@ import jdk.nashorn.internal.ir.WhileNode;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 
 public class ListaPalabras {
 
@@ -38,5 +39,19 @@ public class ListaPalabras {
             }
         }
         return lp;
+    }
+
+
+    public boolean contienePalabras(List<Palabra> words) {
+        boolean contiene=true;
+        Palabra p=null;
+        Iterator<Palabra>itr=words.iterator();
+        while(contiene&&itr.hasNext()){
+            p=itr.next();
+            if(!palabras.contains(p)){
+                contiene=false;
+            }
+        }
+        return contiene;
     }
 }
