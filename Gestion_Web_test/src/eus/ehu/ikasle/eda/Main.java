@@ -19,9 +19,9 @@ public class Main {
 
 
     public static void main(String[] args) {
-       // pruebaCarga();
-        pruebaCargaTotal();
-        pruebaBusqueda();
+        pruebaCarga();
+       // pruebaCargaTotal();
+       // pruebaBusqueda();
     }
 
     private static void pruebaCargaTotal() {
