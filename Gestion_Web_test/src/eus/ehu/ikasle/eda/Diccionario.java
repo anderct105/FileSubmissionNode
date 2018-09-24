@@ -1,14 +1,11 @@
 package eus.ehu.ikasle.eda;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 import java.util.function.Consumer;
 
 public class Diccionario {
 
-    private HashSet<Palabra> diccionario; //A grandes tamaños sale mas rentable hashset por ser de O(1)
+    private LinkedHashSet<Palabra> diccionario; //A grandes tamaños sale mas rentable hashset por ser de O(1)
     //List<Palabra> diccionario;
     private static Diccionario ourInstance = new Diccionario();
 
@@ -17,13 +14,16 @@ public class Diccionario {
     }
 
     private Diccionario() {
-        this.diccionario = new HashSet<>();
+        this.diccionario = new LinkedHashSet<>();
       //  this.diccionario = new ArrayList<>();
     }
 
     public  void cargarWebsRelacionadas() {
         final Webs webs = Webs.getInstance();
-        this.diccionario.parallelStream().forEach(palabra -> webs.websQueContienen(palabra));
+        this.diccionario.parallelStream().forEach(palabra -> {
+            //System.out.println(palabra);
+            webs.websQueContienen(palabra);
+        } );
     }
 
     public void addPalabra(Palabra palabra){

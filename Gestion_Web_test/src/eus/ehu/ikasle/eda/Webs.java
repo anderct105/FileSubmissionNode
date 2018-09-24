@@ -3,11 +3,12 @@ package eus.ehu.ikasle.eda;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.function.BiConsumer;
 
 public class Webs {
 
-    private HashMap<Integer,Web> webs;
+    private LinkedHashMap<Integer,Web> webs;
 
     private static Webs ourInstance = new Webs();
 
@@ -16,7 +17,7 @@ public class Webs {
     }
 
     private Webs() {
-        this.webs = new HashMap<>();
+        this.webs = new LinkedHashMap<>();
     }
 
 
@@ -33,19 +34,12 @@ public class Webs {
     }
 
     public void websQueContienen(Palabra palabra) {
-        webs.entrySet().forEach((entry) -> {
-            Web web = entry.getValue();
+        webs.forEach((integer, web) -> {
             if (web.constains(palabra)){
                 web.addPalabra(palabra);
                 palabra.addWebConPalabra(web);
             }
         });
-        /*webs.forEach((integer, web) -> {
-            if (web.constains(palabra)){
-                web.addPalabra(palabra);
-                palabra.addWebConPalabra(web);
-            }
-        });*/
     }
 
     public Web getWebByFullName(String name) {
