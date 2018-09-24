@@ -21,4 +21,8 @@ public class Palabra {
     public String toString() {
         return this.palabra;
     }
+
+    public List<Web> getWebs() {
+        return webs;
+    }
 }
