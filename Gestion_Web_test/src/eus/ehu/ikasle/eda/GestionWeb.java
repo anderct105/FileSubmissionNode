@@ -19,7 +19,7 @@ public class GestionWeb {
         f.cargarWebs();
         f.cargarRelaciones();
         f.cargarDiccionario();
-        f.cargarPalabrasRelacionadasConWebs();
+       // f.cargarPalabrasRelacionadasConWebs();
     }
 
     public Web getWebByFullName(String name) {
@@ -89,6 +89,10 @@ public class GestionWeb {
         }
 
         return resultado;
+    }
+
+    public List<Web> getWebOrdenada(){
+        return Webs.getInstance().getWebsOrdenadas();
     }
 
 }

@@ -52,9 +52,11 @@ public class Web {
 
     @Override
     public String toString() {
-        return "Web{" +
-                "id=" + id +
-                ", web='" + web + '\'' +
-                '}';
+        return this.web;
     }
+
+
+
+
+
 }

@@ -1,9 +1,6 @@
 package eus.ehu.ikasle.eda;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
+import java.util.*;
 import java.util.function.BiConsumer;
 
 public class Webs {
@@ -55,5 +52,12 @@ public class Webs {
             result = tmp;
         }
         return result;
+    }
+
+    public List<Web> getWebsOrdenadas() {
+        Collection<Web> webs =  this.webs.values();
+        List<Web> websList = new ArrayList<>(webs);
+        Collections.sort(websList, (web, t1) -> web.getWeb().compareToIgnoreCase(t1.getWeb()));
+        return  websList;
     }
 }
