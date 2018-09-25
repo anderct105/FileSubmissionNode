@@ -18,11 +18,17 @@ public class Main {
     public static void main(String[] args) {
        //pruebaCarga();
         pruebaCargaTotal();
-        //pruebaBusqueda();
+        pruebaBusqueda();
+        pruebaAnadirWeb();
+        pruebaOrdenacion();
+
+     //   System.out.println(Arrays.toString(web.toArray()));
+    }
+
+    private static void pruebaOrdenacion() {
         stopwatch = new Stopwatch();
         List<Web> web = GestionWeb.getInstance().getWebOrdenada();
         System.out.println(stopwatch.elapsedTime());
-     //   System.out.println(Arrays.toString(web.toArray()));
     }
 
     private static void pruebaCargaTotal() {
@@ -130,6 +136,12 @@ public class Main {
     }
 
 
-
+    public static void pruebaAnadirWeb(){
+        System.out.println(stopwatch.elapsedTime());
+        stopwatch = new Stopwatch();
+        Web w=new Web(1000000,"chinchilla1.com");
+        Webs.getInstance().anadirIdNuevo(w);
+        Fichero.getInstance().escribirWebs();
+    }
 
 }

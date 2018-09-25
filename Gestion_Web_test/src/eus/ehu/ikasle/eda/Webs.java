@@ -6,6 +6,7 @@ import java.util.function.BiConsumer;
 public class Webs {
 
     private LinkedHashMap<Integer,Web> webs;
+    private List<Integer> listaAnadidas;
 
     private static Webs ourInstance = new Webs();
 
@@ -15,11 +16,19 @@ public class Webs {
 
     private Webs() {
         this.webs = new LinkedHashMap<>();
+        this.listaAnadidas = new ArrayList<>();
     }
 
 
     public void addWeb(Web web){
         this.webs.put(web.getId(),web);
+    }
+
+    public void anadirIdNuevo (Web web){
+        if (!this.webs.containsKey(web.getId())) {
+            this.addWeb(web);
+            this.listaAnadidas.add(web.getId());
+        }
     }
 
     public Web getWebById(int id){
@@ -59,5 +68,13 @@ public class Webs {
         List<Web> websList = new ArrayList<>(webs);
         Collections.sort(websList, (web, t1) -> web.getWeb().compareToIgnoreCase(t1.getWeb()));
         return  websList;
+    }
+
+    public List<Integer> getListaAnadidas(){
+        return this.listaAnadidas;
+    }
+
+    public List<Web> getWebsOrdenadasQuickSort() {
+        return null;
     }
 }

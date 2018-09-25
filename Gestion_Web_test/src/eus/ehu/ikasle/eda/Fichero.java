@@ -1,6 +1,8 @@
 package eus.ehu.ikasle.eda;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -16,10 +18,10 @@ public class Fichero {
 
     public void cargarRelaciones(){
         try {
-            BufferedReader in = new BufferedReader(new FileReader(System.getProperty("user.dir")
-                    + File.separator + "pld-arcs-1-N_grande"));
             //BufferedReader in = new BufferedReader(new FileReader(System.getProperty("user.dir")
-            //+ File.separator + "smallpld-arcs-1-N"));
+            //        + File.separator + "pld-arcs-1-N_grande"));
+            BufferedReader in = new BufferedReader(new FileReader(System.getProperty("user.dir")
+            + File.separator + "smallpld-arcs-1-N"));
             String line;
             String[] entradas;
             Web web,webRelacionada;
@@ -53,10 +55,10 @@ public class Fichero {
 
     public void cargarWebs(){
         try {
-            BufferedReader in = new BufferedReader(new FileReader(System.getProperty("user.dir")
-                    + File.separator + "index_grande"));
             //BufferedReader in = new BufferedReader(new FileReader(System.getProperty("user.dir")
-            //       + File.separator + "smallindex"));
+             //       + File.separator + "index_grande"));
+            BufferedReader in = new BufferedReader(new FileReader(System.getProperty("user.dir")
+                   + File.separator + "smallindex"));
             String line;
             Web web;
             Webs webs = Webs.getInstance();
@@ -93,6 +95,23 @@ public class Fichero {
     public void cargarPalabrasRelacionadasConWebs(){
         Diccionario diccionario  = Diccionario.getInstance();
         diccionario.cargarWebsRelacionadas();
+    }
+
+    public void escribirWebs(){
+        try {
+            BufferedWriter bw= new BufferedWriter(new FileWriter(System.getProperty("user.dir") + File.separator
+                    + "smallindex",true));
+            List<Integer> lista=Webs.getInstance().getListaAnadidas();
+            for(Integer i : lista){
+                bw.newLine();
+                bw.write(Webs.getInstance().getWebById(i).getWeb()+" "+i);
+            }
+            bw.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }
