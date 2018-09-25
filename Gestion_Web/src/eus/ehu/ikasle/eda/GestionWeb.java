@@ -39,8 +39,8 @@ public class GestionWeb {
 
     }
 
-    private void getWebsOrdenadas(){
-        Webs.getInstance().getWebsOrdenadas();
+    private List<Web> getWebsOrdenadas(){
+        return Webs.getInstance().getWebsOrdenadas();
     }
 
 }

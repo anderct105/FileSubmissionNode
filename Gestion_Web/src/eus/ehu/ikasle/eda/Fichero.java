@@ -4,6 +4,7 @@ import eus.ehu.ikasle.eda.utils.Stopwatch;
 
 import java.io.*;
 import java.sql.SQLOutput;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.StringTokenizer;
 import java.util.logging.Logger;
@@ -87,7 +88,20 @@ public class Fichero {
     }
 
     public void escribirWebs(){
-        
+        try {
+            BufferedWriter bw= new BufferedWriter(new FileWriter(System.getProperty("user.dir") + File.separator
+                    + "smallindex(copia)",true));
+            ArrayList<Integer> lista=Webs.getInstance().getListaAnadidas();
+            for(Integer i : lista){
+                bw.newLine();
+                bw.write(Webs.getInstance().getWebById(i).getNombre()+" "+i);
+            }
+            bw.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }

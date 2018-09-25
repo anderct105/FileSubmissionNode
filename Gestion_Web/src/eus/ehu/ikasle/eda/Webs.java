@@ -10,6 +10,8 @@ public class Webs {
 
     private HashMap<Integer,Web> webs;
 
+    private ArrayList<Integer> listaAnadidas;
+
     private static Webs ourInstance = new Webs();
 
     public static Webs getInstance() {
@@ -18,10 +20,22 @@ public class Webs {
 
     private Webs() {
         this.webs = new HashMap<>();
+        this.listaAnadidas=new ArrayList<>();
+    }
+
+    public ArrayList<Integer> getListaAnadidas(){
+        return this.listaAnadidas;
     }
 
     public void addWeb(int id, Web web){
         this.webs.put(id,web);
+    }
+
+    public void anadirIdNuevo (int id, Web web){
+        if (!this.webs.containsKey(id)) {
+            this.addWeb(id, web);
+            this.listaAnadidas.add(id);
+        }
     }
 
     public Web getWebById(int id){
@@ -58,30 +72,7 @@ public class Webs {
         return w_aux;
     }
 
-    public void getWebsOrdenadas() {
-        /*ArrayList<Web> lista = new ArrayList<Web>();
-        for(Web w : webs.values()){
-            lista.add(w);
-        }*/
-        List<Web> lista = (List<Web>)this.webs.values();
-        int pivote = lista.size()/2;
-        int inicio = 0;
-        int fin = lista.size()-1;
-        while (0 < fin && inicio < lista.size()-1) {
-            while (inicio <= fin) {
-                while (lista.get(inicio).getNombre().compareTo(lista.get(pivote).getNombre()) < 0) {
-                    inicio++;
-                }
-                while (lista.get(fin).getNombre().compareTo(lista.get(pivote).getNombre()) > 0) {
-                    fin--;
-                }
-                if (inicio <= fin) {
-                    Web temp = lista.get(inicio);
-                    lista.set(inicio, lista.get(fin));
-                    lista.set(fin, temp);
-                }
-            }
-        }
+    public List<Web> getWebsOrdenadas() {
     }
 
 }
