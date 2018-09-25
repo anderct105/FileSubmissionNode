@@ -26,8 +26,9 @@ public class Main {
     }
 
     private static void pruebaOrdenacion() {
+        System.out.println("Empezando prueba ordenacion");
         stopwatch = new Stopwatch();
-        List<Web> web = GestionWeb.getInstance().getWebOrdenada();
+        List<Web> web = GestionWeb.getInstance().getWebsOrdenadasQuickSort();
         System.out.println(stopwatch.elapsedTime());
     }
 

@@ -75,6 +75,48 @@ public class Webs {
     }
 
     public List<Web> getWebsOrdenadasQuickSort() {
-        return null;
+        //List<Web> lista = new ArrayList<>();
+        //this.webs.values().forEach(web -> lista.add(web));
+        ArrayList<Web> lista = new ArrayList<Web>(){{
+            add(new Web(1,"a"));
+            add(new Web(1,"c"));
+            add(new Web(1,"d"));
+            add(new Web(1,"b"));
+            add(new Web(1,"e"));
+        }};
+        int fin=lista.size()-1;
+        int inicio=0;
+        int pivote=fin;
+        boolean primero=false;
+        boolean cambio=false;
+        while(pivote!=(lista.size()-1)||!primero) {
+            primero=true;
+            while (fin >= inicio) {
+                while (lista.get(inicio).getWeb().compareTo(lista.get(pivote).getWeb()) < 0) {
+                    inicio++;
+                }
+                while (lista.get(fin).getWeb().compareTo(lista.get(pivote).getWeb()) > 0) {
+                    fin--;
+                }
+                //if (inicio != fin) {
+                    Web tmp;
+                    tmp = lista.get(inicio);
+                    lista.set(inicio, lista.get(fin));
+                    lista.set(fin, tmp);
+
+                if(fin>1&&!cambio) {
+                    pivote = --fin;
+                    inicio = 0;
+
+                }
+                else{
+                    pivote=lista.size()-1;      //salgo
+                    fin=(lista.size()-1);
+                    inicio++;
+                    cambio=true;
+                }
+            }
+        }
+        return lista;
     }
 }

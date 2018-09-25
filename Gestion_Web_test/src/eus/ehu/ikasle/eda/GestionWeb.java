@@ -95,7 +95,7 @@ public class GestionWeb {
     public List<Web> getWebOrdenada(){
         return Webs.getInstance().getWebsOrdenadas();
     }
-    private List<Web> getWebsOrdenadasQuickSort(){
+    public List<Web> getWebsOrdenadasQuickSort(){
         return Webs.getInstance().getWebsOrdenadasQuickSort();
     }
 }
