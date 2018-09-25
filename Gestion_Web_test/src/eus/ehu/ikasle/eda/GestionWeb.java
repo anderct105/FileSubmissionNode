@@ -23,6 +23,7 @@ public class GestionWeb {
     }
 
     public Web getWebByFullName(String name) {
+
         return Webs.getInstance().getWebByFullName(name);
     }
 

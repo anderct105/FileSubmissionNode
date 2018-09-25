@@ -1,8 +1,6 @@
 package eus.ehu.ikasle.eda;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 public class Webs {
 
@@ -61,27 +59,29 @@ public class Webs {
     }
 
     public void getWebsOrdenadas() {
-        ArrayList<Web> lista=new ArrayList<Web>();
-        for(Web w: webs.values()){
+        /*ArrayList<Web> lista = new ArrayList<Web>();
+        for(Web w : webs.values()){
             lista.add(w);
-        }
+        }*/
+        List<Web> lista = (List<Web>)this.webs.values();
         int pivote = lista.size()/2;
-        int inicio= 0;
-        int fin=lista.size()-1;
-        while(inicio<fin){
-            while(lista.get(inicio).getNombre().compareTo(lista.get(pivote).getNombre())<0){
-                inicio++;
-            }
-            while (lista.get(fin).getNombre().compareTo(lista.get(pivote).getNombre()) > 0) {
-                fin--;
-            }
-            if(inicio<=fin){
-                Web temp = lista.get(inicio);
-                lista.set(inicio, lista.get(fin));
-                lista.set(fin, temp);
+        int inicio = 0;
+        int fin = lista.size()-1;
+        while (0 < fin && inicio < lista.size()-1) {
+            while (inicio <= fin) {
+                while (lista.get(inicio).getNombre().compareTo(lista.get(pivote).getNombre()) < 0) {
+                    inicio++;
+                }
+                while (lista.get(fin).getNombre().compareTo(lista.get(pivote).getNombre()) > 0) {
+                    fin--;
+                }
+                if (inicio <= fin) {
+                    Web temp = lista.get(inicio);
+                    lista.set(inicio, lista.get(fin));
+                    lista.set(fin, temp);
+                }
             }
         }
-
     }
 
 }
