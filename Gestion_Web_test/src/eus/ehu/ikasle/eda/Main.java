@@ -4,10 +4,7 @@ import com.sun.xml.internal.ws.util.StringUtils;
 import eus.ehu.ikasle.eda.utils.Stopwatch;
 import javafx.scene.paint.Stop;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class Main {
 
@@ -21,7 +18,11 @@ public class Main {
     public static void main(String[] args) {
        //pruebaCarga();
         pruebaCargaTotal();
-        pruebaBusqueda();
+        //pruebaBusqueda();
+        stopwatch = new Stopwatch();
+        List<Web> web = GestionWeb.getInstance().getWebOrdenada();
+        System.out.println(stopwatch.elapsedTime());
+     //   System.out.println(Arrays.toString(web.toArray()));
     }
 
     private static void pruebaCargaTotal() {
@@ -127,6 +128,8 @@ public class Main {
         System.out.println("Busqueda correcta : " + (websRetain.containsAll(websNoRetain) && websRetain.size() == websNoRetain.size()));
         System.out.println("----------");
     }
+
+
 
 
 }
