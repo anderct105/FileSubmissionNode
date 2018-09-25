@@ -18,10 +18,10 @@ public class Fichero {
 
     public void cargarRelaciones(){
         try {
-            //BufferedReader in = new BufferedReader(new FileReader(System.getProperty("user.dir")
-            //        + File.separator + "pld-arcs-1-N_grande"));
             BufferedReader in = new BufferedReader(new FileReader(System.getProperty("user.dir")
-            + File.separator + "smallpld-arcs-1-N"));
+                    + File.separator + "pld-arcs-1-N_grande"));
+            //BufferedReader in = new BufferedReader(new FileReader(System.getProperty("user.dir")
+            //+ File.separator + "smallpld-arcs-1-N"));
             String line;
             String[] entradas;
             Web web,webRelacionada;
@@ -55,10 +55,9 @@ public class Fichero {
 
     public void cargarWebs(){
         try {
+            BufferedReader in = new BufferedReader(new FileReader(System.getProperty("user.dir") + File.separator + "index_grande"));
             //BufferedReader in = new BufferedReader(new FileReader(System.getProperty("user.dir")
-             //       + File.separator + "index_grande"));
-            BufferedReader in = new BufferedReader(new FileReader(System.getProperty("user.dir")
-                   + File.separator + "smallindex"));
+            //       + File.separator + "smallindex"));
             String line;
             Web web;
             Webs webs = Webs.getInstance();
@@ -94,7 +93,7 @@ public class Fichero {
 
     public void cargarPalabrasRelacionadasConWebs(){
         Diccionario diccionario  = Diccionario.getInstance();
-        diccionario.cargarWebsRelacionadas();
+        //diccionario.cargarWebsRelacionadas();
     }
 
     public void escribirWebs(){

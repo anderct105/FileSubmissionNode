@@ -28,8 +28,11 @@ public class Main {
     private static void pruebaOrdenacion() {
         System.out.println("Empezando prueba ordenacion");
         stopwatch = new Stopwatch();
-        List<Web> web = GestionWeb.getInstance().getWebsOrdenadasQuickSort();
-        System.out.println(stopwatch.elapsedTime());
+        List<Web> web = GestionWeb.getInstance().getWebOrdenada();
+        System.out.println("No quicksort :" + stopwatch.elapsedTime());
+        /*stopwatch = new Stopwatch();
+         web = GestionWeb.getInstance().getWebsOrdenadasQuickSort();
+        System.out.println("Quicksort : " + stopwatch.elapsedTime());*/
     }
 
     private static void pruebaCargaTotal() {
@@ -70,7 +73,7 @@ public class Main {
         stopwatch = new Stopwatch();
         websRetain = gestionWeb.buscarWebsByPalabrasRetainAll(entrada);
         System.out.println("Tiempo busqueda una palabra (Retain) : " + stopwatch.elapsedTime() );
-        System.out.println("Busqueda correcta : " + (websRetain.containsAll(websNoRetain) && websRetain.size() == websNoRetain.size()));
+        //System.out.println("Busqueda correcta : " + (websRetain.containsAll(websNoRetain) && websRetain.size() == websNoRetain.size()));
         System.out.println("----------");
         entrada = new ArrayList<>();
         entrada.add("com");
@@ -80,7 +83,7 @@ public class Main {
         stopwatch = new Stopwatch();
         websRetain = gestionWeb.buscarWebsByPalabrasRetainAll(entrada);
         System.out.println("Tiempo busqueda (com)(Retain) : " + stopwatch.elapsedTime() );
-        System.out.println("Busqueda correcta : " + (websRetain.containsAll(websNoRetain) && websRetain.size() == websNoRetain.size()));
+        //System.out.println("Busqueda correcta : " + (websRetain.containsAll(websNoRetain) && websRetain.size() == websNoRetain.size()));
         System.out.println("----------");
         stopwatch = new Stopwatch();
         entrada = new ArrayList<>();
@@ -89,9 +92,9 @@ public class Main {
         websNoRetain = gestionWeb.buscarWebsByPalabras(entrada);
         System.out.println("Tiempo busqueda dos palabras (a,e)(No retain): " + stopwatch.elapsedTime());
         stopwatch = new Stopwatch();
-        websRetain = gestionWeb.buscarWebsByPalabrasRetainAll(entrada);
+        //websRetain = gestionWeb.buscarWebsByPalabrasRetainAll(entrada);
         System.out.println("Tiempo busqueda dos palabras (a, e)(Retain) : " + stopwatch.elapsedTime() );
-        System.out.println("Busqueda correcta : " + (websRetain.containsAll(websNoRetain) && websRetain.size() == websNoRetain.size()));
+        //System.out.println("Busqueda correcta : " + (websRetain.containsAll(websNoRetain) && websRetain.size() == websNoRetain.size()));
         System.out.println("----------");
         entrada = new ArrayList<>();
         entrada.add("com");
@@ -100,18 +103,18 @@ public class Main {
         websNoRetain = gestionWeb.buscarWebsByPalabras(entrada);
         System.out.println("Tiempo busqueda dos palabras (e,com)(No retain): " + stopwatch.elapsedTime());
         stopwatch = new Stopwatch();
-        websRetain = gestionWeb.buscarWebsByPalabrasRetainAll(entrada);
+        //websRetain = gestionWeb.buscarWebsByPalabrasRetainAll(entrada);
         System.out.println("Tiempo busqueda dos palabras (e,com)(Retain) : " + stopwatch.elapsedTime() );
-        System.out.println("Busqueda correcta : " + (websRetain.containsAll(websNoRetain) && websRetain.size() == websNoRetain.size()));
+        //System.out.println("Busqueda correcta : " + (websRetain.containsAll(websNoRetain) && websRetain.size() == websNoRetain.size()));
         System.out.println("----------");
         entrada = new ArrayList<>();
         stopwatch = new Stopwatch();
         websNoRetain = gestionWeb.buscarWebsByPalabras(entrada);
         System.out.println("Tiempo busqueda vacia (No retain): " + stopwatch.elapsedTime());
         stopwatch = new Stopwatch();
-        websRetain = gestionWeb.buscarWebsByPalabrasRetainAll(entrada);
+        //websRetain = gestionWeb.buscarWebsByPalabrasRetainAll(entrada);
         System.out.println("Tiempo busqueda vacia (Retain) : " + stopwatch.elapsedTime() );
-        System.out.println("Busqueda correcta : " + (websRetain.containsAll(websNoRetain) && websRetain.size() == websNoRetain.size()));
+        //System.out.println("Busqueda correcta : " + (websRetain.containsAll(websNoRetain) && websRetain.size() == websNoRetain.size()));
         System.out.println("----------");
         entrada = new ArrayList<>();
         entrada.add("dkfjglsdkfg");
@@ -119,9 +122,9 @@ public class Main {
         websNoRetain = gestionWeb.buscarWebsByPalabras(entrada);
         System.out.println("Tiempo busqueda no existe (No retain): " + stopwatch.elapsedTime());
         stopwatch = new Stopwatch();
-        websRetain = gestionWeb.buscarWebsByPalabrasRetainAll(entrada);
+        //websRetain = gestionWeb.buscarWebsByPalabrasRetainAll(entrada);
         System.out.println("Tiempo busqueda no existe (Retain) : " + stopwatch.elapsedTime() );
-        System.out.println("Busqueda correcta : " + (websRetain.containsAll(websNoRetain) && websRetain.size() == websNoRetain.size()));
+        //System.out.println("Busqueda correcta : " + (websRetain.containsAll(websNoRetain) && websRetain.size() == websNoRetain.size()));
         System.out.println("----------");
         entrada = new ArrayList<>();
         entrada.add("a");
@@ -130,10 +133,22 @@ public class Main {
         websNoRetain = gestionWeb.buscarWebsByPalabras(entrada);
         System.out.println("Tiempo busqueda no existe el segundo (No retain): " + stopwatch.elapsedTime());
         stopwatch = new Stopwatch();
-        websRetain = gestionWeb.buscarWebsByPalabrasRetainAll(entrada);
+        //websRetain = gestionWeb.buscarWebsByPalabrasRetainAll(entrada);
         System.out.println("Tiempo busqueda no existe el segundo (Retain) : " + stopwatch.elapsedTime() );
-        System.out.println("Busqueda correcta : " + (websRetain.containsAll(websNoRetain) && websRetain.size() == websNoRetain.size()));
+        //System.out.println("Busqueda correcta : " + (websRetain.containsAll(websNoRetain) && websRetain.size() == websNoRetain.size()));
         System.out.println("----------");
+        entrada = new ArrayList<>();
+        entrada.add("o");
+        entrada.add("u");
+        stopwatch = new Stopwatch();
+        websNoRetain = gestionWeb.buscarWebsByPalabras(entrada);
+        System.out.println("Tiempo busqueda (o,u) (No retain): " + stopwatch.elapsedTime());
+        stopwatch = new Stopwatch();
+        //websRetain = gestionWeb.buscarWebsByPalabrasRetainAll(entrada);
+        System.out.println("Tiempo busqueda (o,u)(Retain) : " + stopwatch.elapsedTime() );
+        //System.out.println("Busqueda correcta : " + (websRetain.containsAll(websNoRetain) && websRetain.size() == websNoRetain.size()));
+        System.out.println("----------");
+
     }
 
 

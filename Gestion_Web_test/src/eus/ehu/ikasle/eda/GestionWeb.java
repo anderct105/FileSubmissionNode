@@ -31,23 +31,27 @@ public class GestionWeb {
         List<Web> resultado = new ArrayList<>();
         if (palabras.size() > 0) {
             Diccionario dic = Diccionario.getInstance();
-            Palabra primera = dic.getPalabraByString(palabras.get(0));
+            Palabra tmp1;
+            List<Palabra> palabrasList = new ArrayList<>();
+            for (String pStr : palabras) {
+                tmp1 = dic.getPalabraByString(pStr);
+                if (tmp1 != null) {
+                    dic.cargarWebsRelacionadas(tmp1);
+
+                }
+                palabrasList.add(tmp1);
+            }
+            Palabra primera = palabrasList.get(0);
             Palabra tmp;
             if (primera != null) {
-                if (palabras.size() != 1) {
+                if (palabrasList.size() != 1) {
                     boolean contenidas;
                     for (Web web : primera.getWebs()) {
                         contenidas = true;
-                        for (int i = 1; i < palabras.size() && contenidas; i++) {
-                            tmp = dic.getPalabraByString(palabras.get(i));
-                            if (tmp != null) {
-                                if (!web.estaEnListaPalabras(tmp)) {
-                                    contenidas = false;
-                                }
-                            } else {
-                                System.out.println("Error palabra no existente, se sigue la busqueda");
+                        for (int i = 1; i < palabrasList.size() && contenidas; i++) {
+                            tmp = palabrasList.get(i);
+                            if (!web.estaEnListaPalabras(tmp)) {
                                 contenidas = false;
-                                palabras.remove(i);
                             }
                         }
                         if (contenidas) {
@@ -66,19 +70,29 @@ public class GestionWeb {
     }
 
     public List<Web> buscarWebsByPalabrasRetainAll(List<String> palabras) {
+        // Devuelve una lista vacia si cualquiera de las palabras no estan en el diccionario
         List<Web> resultado = new ArrayList<>();
         Diccionario dic = Diccionario.getInstance();
         if (palabras.size() > 0) {
-            Palabra tmp = dic.getPalabraByString(palabras.get(0));
+            Palabra tmp1;
+            List<Palabra> palabrasList = new ArrayList<>();
+            for (String pStr : palabras) {
+                tmp1 = dic.getPalabraByString(pStr);
+                if (tmp1 != null) {
+                    dic.cargarWebsRelacionadas(tmp1);
+                }
+                palabrasList.add(tmp1);
+            }
+            Palabra tmp = palabrasList.get(0);
             if (tmp != null) {
                 resultado = tmp.getWebs();
-                if (palabras.size() > 1) {
-                    for (int i = 1; i < palabras.size() && !resultado.isEmpty(); i++) {
-                        tmp = dic.getPalabraByString(palabras.get(i));
+                if (palabrasList.size() > 1) {
+                    for (int i = 1; i < palabrasList.size() && !resultado.isEmpty(); i++) {
+                        tmp = palabrasList.get(i);
                         //Si no encuentra alguna de las palabras la busqueda se cancela devolviendo un array vacio
-                        if (tmp != null){
+                        if (tmp != null) {
                             resultado.retainAll(tmp.getWebs());
-                        }else{
+                        } else {
                             resultado = new ArrayList<>();
                         }
                     }
@@ -92,10 +106,11 @@ public class GestionWeb {
         return resultado;
     }
 
-    public List<Web> getWebOrdenada(){
+    public List<Web> getWebOrdenada() {
         return Webs.getInstance().getWebsOrdenadas();
     }
-    public List<Web> getWebsOrdenadasQuickSort(){
+
+    public List<Web> getWebsOrdenadasQuickSort() {
         return Webs.getInstance().getWebsOrdenadasQuickSort();
     }
 }

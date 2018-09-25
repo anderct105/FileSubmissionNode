@@ -5,7 +5,7 @@ import java.util.function.Consumer;
 
 public class Diccionario {
 
-    private LinkedHashSet<Palabra> diccionario; //A grandes tamaños sale mas rentable hashset por ser de O(1)
+    private LinkedList<Palabra> diccionario; //A grandes tamaños sale mas rentable hashset por ser de O(1)
     //List<Palabra> diccionario;
     private static Diccionario ourInstance = new Diccionario();
 
@@ -14,16 +14,29 @@ public class Diccionario {
     }
 
     private Diccionario() {
-        this.diccionario = new LinkedHashSet<>();
+        this.diccionario = new LinkedList<>();
       //  this.diccionario = new ArrayList<>();
     }
 
-    public  void cargarWebsRelacionadas() {
+    public  void cargarWebsRelacionadas(List<Palabra> palabras) {
         final Webs webs = Webs.getInstance();
-        this.diccionario.parallelStream().forEach(palabra -> {
-            //System.out.println(palabra);
+        List<Palabra> tmp = new ArrayList<>();
+        for (Palabra palabra: palabras
+             ) {
+            if (this.diccionario.contains(palabra)){
+                tmp.add(palabra);
+            }
+        }
+        palabras.parallelStream().forEach(palabra -> {
             webs.websQueContienen(palabra);
         } );
+    }
+
+    public  void cargarWebsRelacionadas(Palabra palabra) {
+        if (!palabra.isRelacionado()){
+            Webs.getInstance().websQueContienen(palabra);
+            palabra.setRelacionado(true);
+        }
     }
 
     public void addPalabra(Palabra palabra){
