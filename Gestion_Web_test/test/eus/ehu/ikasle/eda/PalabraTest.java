@@ -13,7 +13,7 @@ public class PalabraTest {
     private Web w1;
     private Web w2;
     private Web w3;
-    private List<Web> websEnlazadas;
+    private List<Web> ws;
 
     @org.junit.Before
     public void setUp() throws Exception {
@@ -23,7 +23,7 @@ public class PalabraTest {
         w1 = new Web (1, "a");
         w2 = new Web (2, "b");
         w3 = new Web (3, "c");
-        websEnlazadas = new ArrayList<Web>();
+        ws = new ArrayList<Web>();
     }
 
     @org.junit.After
@@ -53,6 +53,8 @@ public class PalabraTest {
 
     @org.junit.Test
     public void setRelacionado() {
-
+        assertFalse(p1.isRelacionado());
+        p1.setRelacionado(true);
+        assertTrue(p1.isRelacionado());
     }
 }

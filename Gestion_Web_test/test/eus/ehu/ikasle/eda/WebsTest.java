@@ -34,12 +34,11 @@ public class WebsTest {
 
     @org.junit.Test
     public void addWeb() {
-        assertEquals(webs.size(), 0);
-
     }
 
     @org.junit.Test
     public void anadirIdNuevo() {
+
     }
 
     @org.junit.Test

@@ -38,7 +38,7 @@ public class Web {
         this.websEnlazadas.add(webRelacionada);
     }
 
-    public boolean contains(Palabra palabra) {
+    public boolean constains(Palabra palabra) {
         return this.web.contains(palabra.toString());
     }
 
