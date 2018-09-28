@@ -16,6 +16,66 @@ public class Fichero {
     private Fichero() {
     }
 
+    public void cargarRelacionesPruebas(){
+        try {
+            //BufferedReader in = new BufferedReader(new FileReader(System.getProperty("user.dir")
+            //      + File.separator + "pld-arcs-1-N_grande"));
+            BufferedReader in = new BufferedReader(new FileReader(System.getProperty("user.dir")
+                    + File.separator + "relaciones_prueba"));
+            String line;
+            String[] entradas;
+            Web web,webRelacionada;
+            Webs webs = Webs.getInstance();
+            while((line = in.readLine()) != null){
+                // entrada ej: 0 --> 283 870 450 277 357 277 65 616 510 169 882
+                // la web de id 0 esta relacionada con esas
+                line = line.replaceAll("\\D+"," ");
+                entradas = line.split(" ");
+                web = webs.getWebById(Integer.parseInt(entradas[0]));
+                if (web != null){
+                    if (entradas.length > 1 ){
+                        for (int i = 1 ; i < entradas.length; i++){
+                            webRelacionada = webs.getWebById(Integer.parseInt(entradas[i]));
+                            if (webRelacionada != null){
+                                web.addWebRelacionada(webRelacionada);
+                            }else{
+                                System.out.println("Error en la carga de las relaciones , web relacionada no encontrada");
+                            }
+                        }
+                    }
+                }else{
+                    System.out.println("Error en la carga de las relaciones no se encuentra el id");
+                }
+
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void cargarWebsPruebas(){
+        try {
+            //BufferedReader in = new BufferedReader(new FileReader(System.getProperty("user.dir") + File.separator + "index_grande"));
+            BufferedReader in = new BufferedReader(new FileReader(System.getProperty("user.dir")
+                    + File.separator + "index_prueba"));
+            String line;
+            Web web;
+            Webs webs = Webs.getInstance();
+            while((line = in.readLine()) != null){
+                // entrada ej:  0-3ani.ro 0 , Web(0,"0-3ani.ro")
+                web = new Web(Integer.parseInt(line.substring(line.lastIndexOf(" ")+1)),
+                        line.substring(0,line.lastIndexOf(" ")));
+                webs.addWeb(web); // añadir al hashmap de webs la web de la linea correspondiente
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void cargarRelaciones(){
         try {
             //BufferedReader in = new BufferedReader(new FileReader(System.getProperty("user.dir")
@@ -82,7 +142,9 @@ public class Fichero {
             Diccionario dic = Diccionario.getInstance();
             Palabra palabra;
             while((line = in.readLine()) != null){
-                dic.addPalabra(new Palabra(line));
+                if (!line.isEmpty()){
+                    dic.addPalabra(new Palabra(line));
+                }
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();

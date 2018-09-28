@@ -13,7 +13,6 @@ public class GestionWeb {
     private GestionWeb() {
     }
 
-
     public void cargarDatos() {
         Fichero f = Fichero.getInstance();
         f.cargarWebs();
@@ -33,18 +32,11 @@ public class GestionWeb {
             Diccionario dic = Diccionario.getInstance();
             Palabra tmp1;
             List<Palabra> palabrasList = new ArrayList<>();
-            for (String pStr : palabras) {
-                tmp1 = dic.getPalabraByString(pStr);
-                if (tmp1 != null) {
-                    dic.cargarWebsRelacionadas(tmp1);
-
-                }
-                palabrasList.add(tmp1);
-            }
+            getPalabrasDelDiccionario(palabras, dic, palabrasList);
             Palabra primera = palabrasList.get(0);
             Palabra tmp;
             if (primera != null) {
-                if (palabrasList.size() != 1) {
+                if (palabrasList.size() > 1) {
                     boolean contenidas;
                     for (Web web : primera.getWebs()) {
                         contenidas = true;
@@ -69,6 +61,18 @@ public class GestionWeb {
         return resultado;
     }
 
+    private void getPalabrasDelDiccionario(List<String> palabras, Diccionario dic, List<Palabra> palabrasList) {
+        Palabra tmp1;
+        for (String pStr : palabras) {
+            tmp1 = dic.getPalabraByString(pStr);
+            if (tmp1 != null) {
+                dic.cargarWebsRelacionadas(tmp1);
+
+            }
+            palabrasList.add(tmp1);
+        }
+    }
+
     public List<Web> buscarWebsByPalabrasRetainAll(List<String> palabras) {
         // Devuelve una lista vacia si cualquiera de las palabras no estan en el diccionario
         List<Web> resultado = new ArrayList<>();
@@ -76,13 +80,7 @@ public class GestionWeb {
         if (palabras.size() > 0) {
             Palabra tmp1;
             List<Palabra> palabrasList = new ArrayList<>();
-            for (String pStr : palabras) {
-                tmp1 = dic.getPalabraByString(pStr);
-                if (tmp1 != null) {
-                    dic.cargarWebsRelacionadas(tmp1);
-                }
-                palabrasList.add(tmp1);
-            }
+            getPalabrasDelDiccionario(palabras, dic, palabrasList);
             Palabra tmp = palabrasList.get(0);
             if (tmp != null) {
                 resultado = tmp.getWebs();

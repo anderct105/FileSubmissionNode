@@ -1,7 +1,6 @@
 package eus.ehu.ikasle.eda;
 
 import java.util.*;
-import java.util.function.BiConsumer;
 
 public class Webs {
 
@@ -41,7 +40,7 @@ public class Webs {
 
     public void websQueContienen(Palabra palabra) {
         webs.forEach((integer, web) -> {
-            if (web.constains(palabra)){
+            if (web.contains(palabra)){
                 web.addPalabra(palabra);
                 palabra.addWebConPalabra(web);
             }

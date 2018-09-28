@@ -161,7 +161,7 @@ public class Main {
     }
 
 
-    private static void esIgual(List<Web> listOne, List<Web> listTwo){
+    public static void esIgual(List<Web> listOne, List<Web> listTwo){
         Collection<Web> similar = new HashSet<Web>( listOne );
         Collection<Web> different = new HashSet<Web>();
         different.addAll( listOne );
@@ -174,5 +174,17 @@ public class Main {
         System.out.printf("Different:%s%n",different);
     }
 
+    public static void esIgualPalabras(List<Palabra> listOne, List<Palabra> listTwo){
+        Collection<Palabra> similar = new HashSet<Palabra>( listOne );
+        Collection<Palabra> different = new HashSet<Palabra>();
+        different.addAll( listOne );
+        different.addAll( listTwo );
+
+        similar.retainAll( listTwo );
+        different.removeAll( similar );
+
+        //System.out.printf("Similar:%s%nDifferent:%s%n",similar, different);
+        System.out.printf("Different:%s%n",different);
+    }
 
 }

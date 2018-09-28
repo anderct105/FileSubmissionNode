@@ -22,6 +22,7 @@ public class WebsTest {
         w3 = new Web (3, "c");
         webs = new LinkedHashMap<>();
         listaAnadidas = new ArrayList<>();
+
     }
 
     @org.junit.After
@@ -34,6 +35,13 @@ public class WebsTest {
 
     @org.junit.Test
     public void addWeb() {
+        /*assertEquals(webs.size(), 0);
+        webs.put(1, w1);
+        assertEquals(webs.size(), 1);
+        webs.put(2, w2);
+        assertEquals(webs.size(), 2);
+        webs.put(3, w3);
+        assertEquals(webs.size(), 3);*/
     }
 
     @org.junit.Test
@@ -43,7 +51,6 @@ public class WebsTest {
 
     @org.junit.Test
     public void getWebById() {
-
     }
 
     @org.junit.Test

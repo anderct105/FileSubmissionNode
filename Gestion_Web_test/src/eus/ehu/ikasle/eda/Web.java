@@ -26,6 +26,8 @@ public class Web {
         return web;
     }
 
+
+
     public List<Web> getWebsEnlazadas() {
         return websEnlazadas;
     }
@@ -38,7 +40,7 @@ public class Web {
         this.websEnlazadas.add(webRelacionada);
     }
 
-    public boolean constains(Palabra palabra) {
+    public boolean contains(Palabra palabra) {
         return this.web.contains(palabra.toString());
     }
 
@@ -48,6 +50,10 @@ public class Web {
 
     public boolean estaEnListaPalabras(Palabra palabra){
         return this.palabras.contains(palabra);
+    }
+
+    public void fillPalabras(){
+        Diccionario.getInstance().fillPalabrasDeWeb(this);
     }
 
     @Override

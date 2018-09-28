@@ -4,6 +4,7 @@ import com.sun.org.apache.xpath.internal.operations.Bool;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Palabra {
 
@@ -18,6 +19,14 @@ public class Palabra {
 
     public void addWebConPalabra(Web web){
         this.webs.add(web);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Palabra palabra1 = (Palabra) o;
+        return this.palabra.equalsIgnoreCase(palabra1.palabra);
     }
 
     @Override

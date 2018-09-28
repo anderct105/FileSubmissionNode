@@ -62,4 +62,13 @@ public class Diccionario {
 
         return p;
     }
+
+    public void fillPalabrasDeWeb(Web web) {
+        this.diccionario.forEach(palabra -> {
+            if (web.contains(palabra)){
+                web.addPalabra(palabra);
+                palabra.addWebConPalabra(web);
+            }
+        });
+    }
 }
