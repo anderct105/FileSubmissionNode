@@ -91,4 +91,8 @@ public class Fichero {
         diccionario.cargarWebsRelacionadas();
     }
 
+    public void guardarWebs(){
+
+    }
+
 }

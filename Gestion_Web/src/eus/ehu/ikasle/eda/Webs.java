@@ -1,17 +1,21 @@
 package eus.ehu.ikasle.eda;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 public class Webs {
 
-    public HashMap<Integer, Web> getWebs() {
-        return webs;
-    }
 
     private HashMap<Integer,Web> webs;
 
+    private ArrayList<Integer> anadidos; //comentar
+
     private static Webs ourInstance = new Webs();
+
+    public HashMap<Integer, Web> getWebs() {
+        return webs;
+    }
 
     public static Webs getInstance() {
         return ourInstance;
@@ -19,10 +23,20 @@ public class Webs {
 
     private Webs() {
         this.webs = new HashMap<>();
+        this.anadidos=new ArrayList<>();
     }
 
     public void addWeb(int id, Web web){
         this.webs.put(id,web);
+        this.anadidos.add(id);
+    }
+
+    public Web devolverElemento(int id){  //comentar
+        return this.webs.get(id);
+    }
+
+    public ArrayList<Integer> getAnadidos(){  //comentar
+        return this.anadidos;
     }
 
     public Web getWebById(int id){
@@ -39,6 +53,7 @@ public class Webs {
         }
         return websRelacionadas;
     }
+
 
     public void cargarPalabras() {
         for (Web web: this.webs.values()){
@@ -58,4 +73,5 @@ public class Webs {
         }
         return w_aux;
     }
+
 }

@@ -9,6 +9,10 @@ public class Web {
     private ListaWebs webRelacionadas;
     private ListaPalabras palabras;
 
+    public String getNombre() {
+        return nombre;
+    }
+
     public Web(int id,String nombre){
         this.nombre = nombre;
         this.id = id;
@@ -37,5 +41,9 @@ public class Web {
 
     public boolean contienePalabras(List<Palabra> palabras) {
         return this.palabras.contienePalabras(palabras);
+    }
+
+    public int getId() {
+        return this.id;
     }
 }

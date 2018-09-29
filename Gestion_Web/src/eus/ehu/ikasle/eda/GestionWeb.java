@@ -32,6 +32,7 @@ public class GestionWeb {
     }
 
     private boolean insertarWeb(Web web){
+        Webs.getInstance().addWeb(web.getId(),web);
         return false;
     }
 

@@ -4,6 +4,7 @@ import eus.ehu.ikasle.eda.utils.Stopwatch;
 
 import java.io.*;
 import java.sql.SQLOutput;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.StringTokenizer;
 import java.util.logging.Logger;
@@ -86,8 +87,22 @@ public class Fichero {
         }
     }
 
-    public void escribirWebs(){
-        
+      ;
     }
-
+   /* private int numeroLineas(){
+        try {
+            BufferedReader in = new BufferedReader(new FileReader(System.getProperty("user.dir") + File.separator
+                    + "smallindex"));
+            String linea;
+            int cuantos=0;
+            while((linea=in.readLine())!=null){
+                cuantos++;
+            }
+            return cuantos;
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }*/
 }

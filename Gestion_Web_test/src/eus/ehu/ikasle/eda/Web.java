@@ -18,9 +18,6 @@ public class Web {
         this.palabras = new ArrayList<>();
     }
 
-    public int getId() {
-        return id;
-    }
 
     public String getWeb() {
         return web;
