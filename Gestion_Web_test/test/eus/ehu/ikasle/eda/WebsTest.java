@@ -8,21 +8,15 @@ import static org.junit.Assert.*;
 
 public class WebsTest {
 
-    private Web w1;
-    private Web w2;
-    private Web w3;
-    private LinkedHashMap<Integer,Web> webs;
-    private List<Integer> listaAnadidas;
+    private Web w0, w1, w10;
 
     @org.junit.Before
     public void setUp() throws Exception {
 
-        w1 = new Web (1, "a");
-        w2 = new Web (2, "b");
-        w3 = new Web (3, "c");
-        webs = new LinkedHashMap<>();
-        listaAnadidas = new ArrayList<>();
-
+        Fichero.getInstance().cargarWebsPruebas();
+        w0 = Webs.getInstance().getWebById(0);
+        w1 = Webs.getInstance().getWebById(1);
+        w10 = new Web(10, "abc");
     }
 
     @org.junit.After
@@ -35,22 +29,20 @@ public class WebsTest {
 
     @org.junit.Test
     public void addWeb() {
-        /*assertEquals(webs.size(), 0);
-        webs.put(1, w1);
-        assertEquals(webs.size(), 1);
-        webs.put(2, w2);
-        assertEquals(webs.size(), 2);
-        webs.put(3, w3);
-        assertEquals(webs.size(), 3);*/
+
     }
 
     @org.junit.Test
     public void anadirIdNuevo() {
-
+        assertEquals(Webs.getInstance().getListaAnadidas().size(), 0);
+        Webs.getInstance().anadirIdNuevo(w10);
+        assertEquals(Webs.getInstance().getListaAnadidas().size(), 1);
     }
 
     @org.junit.Test
     public void getWebById() {
+        assertEquals(Webs.getInstance().getWebById(0), w0);
+        assertEquals(Webs.getInstance().getWebById(1), w1);
     }
 
     @org.junit.Test
@@ -71,6 +63,9 @@ public class WebsTest {
 
     @org.junit.Test
     public void getListaAnadidas() {
+        assertEquals(Webs.getInstance().getListaAnadidas().size(), 0);
+        Webs.getInstance().anadirIdNuevo(w10);
+        assertEquals(Webs.getInstance().getListaAnadidas().size(), 1);
     }
 
     @org.junit.Test
