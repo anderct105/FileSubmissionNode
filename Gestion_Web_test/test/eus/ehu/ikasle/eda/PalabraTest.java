@@ -9,7 +9,7 @@ import static org.junit.Assert.*;
 public class PalabraTest {
 
     private Web w0, w1, w2, w4, w10;
-    private Palabra p1, p2, p3;
+    private Palabra p1, p2;
 
     @org.junit.Before
     public void setUp() throws Exception {
@@ -23,7 +23,6 @@ public class PalabraTest {
         w10 = new Web(10, "an");
         p1 = new Palabra("poker");
         p2 = new Palabra("a");
-        p3 = new Palabra ("o");
     }
 
     @org.junit.After
@@ -39,6 +38,7 @@ public class PalabraTest {
 
     @org.junit.Test
     public void getWebs() {
+        p1.addWebConPalabra(w4);
         List<Web> wp = p1.getWebs();
         List<Web> wp1 = new ArrayList(){{
             add(Webs.getInstance().getWebById(4));

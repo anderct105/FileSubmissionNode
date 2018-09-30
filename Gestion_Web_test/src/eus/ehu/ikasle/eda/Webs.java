@@ -24,7 +24,6 @@ public class Webs {
         this.webs.put(web.getId(),web);
     }
 
-
     /**
      * @para*m  web
      * Añade la web (con el ultimo id disponible) solo si no se encuentra ya en la lista

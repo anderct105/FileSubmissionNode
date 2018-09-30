@@ -29,7 +29,7 @@ public class WebsTest {
     }
 
     @org.junit.Test
-    public void anadirIdNuevo() {
+    public void addWebNueva() {
         assertEquals(Webs.getInstance().getListaAnadidas().size(), 0);
         Webs.getInstance().addWebNueva(w10);
         assertEquals(Webs.getInstance().getListaAnadidas().size(), 1);
@@ -43,6 +43,7 @@ public class WebsTest {
 
     @org.junit.Test
     public void limpiar() {
+
     }
 
     @org.junit.Test
