@@ -1,9 +1,5 @@
 package eus.ehu.ikasle.eda;
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-
 import static org.junit.Assert.*;
 
 public class WebsTest {
@@ -35,7 +31,7 @@ public class WebsTest {
     @org.junit.Test
     public void anadirIdNuevo() {
         assertEquals(Webs.getInstance().getListaAnadidas().size(), 0);
-        Webs.getInstance().anadirIdNuevo(w10);
+        Webs.getInstance().addWebNueva(w10);
         assertEquals(Webs.getInstance().getListaAnadidas().size(), 1);
     }
 
@@ -64,7 +60,7 @@ public class WebsTest {
     @org.junit.Test
     public void getListaAnadidas() {
         assertEquals(Webs.getInstance().getListaAnadidas().size(), 0);
-        Webs.getInstance().anadirIdNuevo(w10);
+        Webs.getInstance().addWebNueva(w10);
         assertEquals(Webs.getInstance().getListaAnadidas().size(), 1);
     }
 

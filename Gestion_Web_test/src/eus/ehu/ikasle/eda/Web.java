@@ -2,8 +2,9 @@ package eus.ehu.ikasle.eda;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
-public class Web {
+public class Web implements  Comparable<Web>{
 
     private int id;
     private String web;
@@ -13,6 +14,12 @@ public class Web {
 
     public Web(int id, String web){
         this.id = id;
+        this.web = web;
+        this.websEnlazadas = new ArrayList<>();
+        this.palabras = new ArrayList<>();
+    }
+
+    public Web(String web){
         this.web = web;
         this.websEnlazadas = new ArrayList<>();
         this.palabras = new ArrayList<>();
@@ -56,6 +63,10 @@ public class Web {
         return this.palabras.contains(palabra);
     }
 
+    /**
+     * Rellena la lista de palabras que tiene la web y añade la web a la listas de webs de cada palabra que coincida
+     *
+     * */
     public void fillPalabras(){
         Diccionario.getInstance().fillPalabrasDeWeb(this);
     }
@@ -66,7 +77,19 @@ public class Web {
     }
 
 
+    public int compareTo(Web web) {
+        return this.web.compareTo(web.web);
+    }
 
+    public void setId(int id) {
+        this.id = id;
+    }
 
-
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Web web1 = (Web) o;
+        return web.equalsIgnoreCase(web1.web);
+    }
 }

@@ -1,8 +1,6 @@
 package eus.ehu.ikasle.eda;
 
-import com.sun.xml.internal.ws.util.StringUtils;
 import eus.ehu.ikasle.eda.utils.Stopwatch;
-import javafx.scene.paint.Stop;
 
 import java.util.*;
 
@@ -16,20 +14,44 @@ public class Main {
 
 
     public static void main(String[] args) {
-       pruebaCargaTotal();
+        pruebaCargaTotal();
+        pruebaOrdenacion();
+        pruebaBusqueda();
+        //pruebaAnadirWeb();
     }
 
     private static void pruebaOrdenacion() {
-        System.out.println("Empezando prueba ordenacion");
+        System.out.println("- Prueba ordenación (quicksort manual)");
         stopwatch = new Stopwatch();
-        List<Web> web = GestionWeb.getInstance().getWebOrdenada();
-        System.out.println("No quicksort :" + stopwatch.elapsedTime());
-        /*stopwatch = new Stopwatch();
-         web = GestionWeb.getInstance().getWebsOrdenadasQuickSort();
-        System.out.println("Quicksort : " + stopwatch.elapsedTime());*/
+        List<Web> web = GestionWeb.getInstance().getWebsOrdenadasQuickSort();
+        System.out.println("Tiempo ordenación de " + web.size() +" webs :" + stopwatch.elapsedTime());
+        System.out.println("\t- Comprobación");
+        boolean correcto = true;
+        for (int i = 0; i < web.size() -1 && correcto; i++){
+            if (web.get(i).compareTo(web.get(i+1)) > 0 ){
+                correcto = false;
+            }
+        }
+        System.out.println("Ordenado : " + correcto);
+        System.out.println("- Prueba ordenación (sort java)");
+        //System.out.println(Arrays.toString(web.toArray()));
+        stopwatch = new Stopwatch();
+         web = GestionWeb.getInstance().getWebsOrdenadas();
+        System.out.println("Tiempo ordenación de " + web.size() +" webs :" + stopwatch.elapsedTime());
+        System.out.println("\t- Comprobación");
+        correcto = true;
+        for (int i = 0; i < web.size() -1 && correcto; i++){
+            if (web.get(i).compareTo(web.get(i+1)) > 0 ){
+                correcto = false;
+            }
+        }
+        System.out.println("Ordenado : " + correcto);
+        //System.out.println(Arrays.toString(web.toArray()));
+
     }
 
     private static void pruebaCargaTotal() {
+        System.out.println("- Prueba Carga total");
         dic.limpiar();
         webs.limpiar();
         stopwatch = new Stopwatch();
@@ -53,101 +75,73 @@ public class Main {
     }
 
     public static void pruebaBusqueda(){
-        List<Web> websNoRetain,websRetain;
+        System.out.println("- Prueba busqueda");
+        List<Web> websNoRetain;
         List<String> entrada;
         entrada = new ArrayList<>();
         entrada.add("a");
         stopwatch = new Stopwatch();
         websNoRetain = gestionWeb.buscarWebsByPalabras(entrada);
-        System.out.println("Tiempo busqueda una palabra (No retain): " + stopwatch.elapsedTime());
-        stopwatch = new Stopwatch();
-        websRetain = gestionWeb.buscarWebsByPalabrasRetainAll(entrada);
-        System.out.println("Tiempo busqueda una palabra (Retain) : " + stopwatch.elapsedTime() );
-        //esIgual(websRetain,websNoRetain);
-        System.out.println("----------");
+        System.out.println("Tiempo busqueda <'a'>: " + stopwatch.elapsedTime());
+        System.out.println("Nº webs : " + websNoRetain.size());
         entrada = new ArrayList<>();
         entrada.add("com");
         stopwatch = new Stopwatch();
         websNoRetain = gestionWeb.buscarWebsByPalabras(entrada);
-        System.out.println("Tiempo busqueda (com)(No retain): " + stopwatch.elapsedTime());
-        stopwatch = new Stopwatch();
-        websRetain = gestionWeb.buscarWebsByPalabrasRetainAll(entrada);
-        System.out.println("Tiempo busqueda (com)(Retain) : " + stopwatch.elapsedTime() );
-        //esIgual(websRetain,websNoRetain);
-        System.out.println("----------");
+        System.out.println("Tiempo busqueda <'com'>: " + stopwatch.elapsedTime());
+        System.out.println("Nº webs : " + websNoRetain.size());
         stopwatch = new Stopwatch();
         entrada = new ArrayList<>();
         entrada.add("a");
         entrada.add("e");
         websNoRetain = gestionWeb.buscarWebsByPalabras(entrada);
-        System.out.println("Tiempo busqueda dos palabras (a,e)(No retain): " + stopwatch.elapsedTime());
-        stopwatch = new Stopwatch();
-        websRetain = gestionWeb.buscarWebsByPalabrasRetainAll(entrada);
-        System.out.println("Tiempo busqueda dos palabras (a, e)(Retain) : " + stopwatch.elapsedTime() );
-        //esIgual(websRetain,websNoRetain);
-        System.out.println("----------");
+        System.out.println("Tiempo busqueda <'a','e'>: " + stopwatch.elapsedTime());
+        System.out.println("Nº webs : " + websNoRetain.size());
         entrada = new ArrayList<>();
         entrada.add("com");
         entrada.add("e");
         stopwatch = new Stopwatch();
         websNoRetain = gestionWeb.buscarWebsByPalabras(entrada);
-        System.out.println("Tiempo busqueda dos palabras (e,com)(No retain): " + stopwatch.elapsedTime());
-        stopwatch = new Stopwatch();
-        websRetain = gestionWeb.buscarWebsByPalabrasRetainAll(entrada);
-        System.out.println("Tiempo busqueda dos palabras (e,com)(Retain) : " + stopwatch.elapsedTime() );
-        //esIgual(websRetain,websNoRetain);
-        System.out.println("----------");
+        System.out.println("Tiempo busqueda dos palabras <'com','e'>: " + stopwatch.elapsedTime());
+        System.out.println("Nº webs : " + websNoRetain.size());
         entrada = new ArrayList<>();
         stopwatch = new Stopwatch();
         websNoRetain = gestionWeb.buscarWebsByPalabras(entrada);
-        System.out.println("Tiempo busqueda vacia (No retain): " + stopwatch.elapsedTime());
-        stopwatch = new Stopwatch();
-        websRetain = gestionWeb.buscarWebsByPalabrasRetainAll(entrada);
-        System.out.println("Tiempo busqueda vacia (Retain) : " + stopwatch.elapsedTime() );
-        //esIgual(websRetain,websNoRetain);
-        System.out.println("----------");
+        System.out.println("Tiempo busqueda vacia : " + stopwatch.elapsedTime());
+        System.out.println("Nº webs : " + websNoRetain.size());
         entrada = new ArrayList<>();
         entrada.add("dkfjglsdkfg");
         stopwatch = new Stopwatch();
         websNoRetain = gestionWeb.buscarWebsByPalabras(entrada);
-        System.out.println("Tiempo busqueda no existe (No retain): " + stopwatch.elapsedTime());
-        stopwatch = new Stopwatch();
-        websRetain = gestionWeb.buscarWebsByPalabrasRetainAll(entrada);
-        System.out.println("Tiempo busqueda no existe (Retain) : " + stopwatch.elapsedTime() );
-        //esIgual(websRetain,websNoRetain);
-        System.out.println("----------");
+        System.out.println("Tiempo busqueda no existe :" + stopwatch.elapsedTime());
+        System.out.println("Nº webs : " + websNoRetain.size());
         entrada = new ArrayList<>();
         entrada.add("a");
         entrada.add("dkfjglsdkfg");
         stopwatch = new Stopwatch();
         websNoRetain = gestionWeb.buscarWebsByPalabras(entrada);
-        System.out.println("Tiempo busqueda no existe el segundo (No retain): " + stopwatch.elapsedTime());
-        stopwatch = new Stopwatch();
-        websRetain = gestionWeb.buscarWebsByPalabrasRetainAll(entrada);
-        System.out.println("Tiempo busqueda no existe el segundo (Retain) : " + stopwatch.elapsedTime() );
-        //esIgual(websRetain,websNoRetain);
-        System.out.println("----------");
+        System.out.println("Tiempo busqueda no existe el segundo <'a','sdfs'>: " + stopwatch.elapsedTime());
+        System.out.println("Nº webs : " + websNoRetain.size());
         entrada = new ArrayList<>();
         entrada.add("o");
         entrada.add("u");
         stopwatch = new Stopwatch();
         websNoRetain = gestionWeb.buscarWebsByPalabras(entrada);
-        System.out.println("Tiempo busqueda (o,u) (No retain): " + stopwatch.elapsedTime());
-        stopwatch = new Stopwatch();
-        websRetain = gestionWeb.buscarWebsByPalabrasRetainAll(entrada);
-        System.out.println("Tiempo busqueda (o,u)(Retain) : " + stopwatch.elapsedTime() );
-        //esIgual(websRetain,websNoRetain);
+        System.out.println("Tiempo busqueda <'o','u'>: " + stopwatch.elapsedTime());
+        System.out.println("Nº webs : " + websNoRetain.size());
         System.out.println("----------");
-
     }
 
 
     public static void pruebaAnadirWeb(){
-        System.out.println(stopwatch.elapsedTime());
+        System.out.println("Prueba añadir webs");
         stopwatch = new Stopwatch();
-        Web w=new Web(1000000,"chinchilla1.com");
-        Webs.getInstance().anadirIdNuevo(w);
-        Fichero.getInstance().escribirWebs();
+        Web w=new Web("afh.com");
+        Webs.getInstance().addWebNueva(w);
+        w=new Web("chinchilla2.com");
+        Webs.getInstance().addWebNueva(w);
+        GestionWeb.getInstance().guardarWebsAnadidas();
+        System.out.println("2 webs : " + stopwatch.elapsedTime());
     }
 
 

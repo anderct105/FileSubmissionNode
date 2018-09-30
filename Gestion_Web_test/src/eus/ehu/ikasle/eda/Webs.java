@@ -5,8 +5,9 @@ import java.util.*;
 public class Webs {
 
     private LinkedHashMap<Integer,Web> webs;
-    private List<Integer> listaAnadidas;
-
+    private List<Web> listaAnadidas;
+    private static int lastId;
+    
     private static Webs ourInstance = new Webs();
 
     public static Webs getInstance() {
@@ -23,10 +24,17 @@ public class Webs {
         this.webs.put(web.getId(),web);
     }
 
-    public void anadirIdNuevo (Web web){
-        if (!this.webs.containsKey(web.getId())) {
+
+    /**
+     * @para*m  web
+     * Añade la web (con el ultimo id disponible) solo si no se encuentra ya en la lista
+     * */
+    public void addWebNueva(Web web){
+        if (!this.webs.containsValue(web)){
+            web.setId(++lastId);
+            web.fillPalabras();
             this.addWeb(web);
-            this.listaAnadidas.add(web.getId());
+            this.listaAnadidas.add(web);
         }
     }
 
@@ -68,48 +76,89 @@ public class Webs {
         return result;
     }
 
+    /**
+     * Realiza una ordenacion mediante Collections.sort
+     * @return
+     * List de webs ordenadas alfabeticamente
+     * */
     public List<Web> getWebsOrdenadas() {
         Collection<Web> webs =  this.webs.values();
         List<Web> websList = new ArrayList<>(webs);
-        Collections.sort(websList, (web, t1) -> web.getWeb().compareToIgnoreCase(t1.getWeb()));
+        Collections.sort(websList, Web::compareTo);
         return  websList;
     }
 
-    public List<Integer> getListaAnadidas(){
+    public List<Web> getListaAnadidas(){
         return this.listaAnadidas;
     }
 
+    /**
+     * Realiza un randomized quick sort para ordenar alfabeticamente las webs
+     * @return
+     * List de webs ordenadas alfabeticamente
+     * */
     public List<Web> getWebsOrdenadasQuickSort() {
-        List<Web> lista = new ArrayList<>();
-        this.webs.values().forEach(web -> lista.add(web));
-        quickSort(lista,0,lista.size()-1);
+        List<Web> lista = new ArrayList<>(this.webs.values());
+        quicksort((ArrayList<Web>) lista,0,lista.size()-1);
         return lista;
     }
 
-    private void quickSort(List<Web> webs ,int menor, int mayor) {
-        int i = menor;
-        int j = mayor-1;
-        Web temp;
-        Web valor = webs.get(mayor);
-        do {
-            for (;i < mayor && webs.get(i).getWeb().compareToIgnoreCase(valor.getWeb()) < 0 ; i++);
-            for (; j > i && webs.get(j).getWeb().compareToIgnoreCase(valor.getWeb()) > 0;j--);
-            if (i < j ){
-                temp = webs.get(i);
-                webs.set(i,webs.get(j));
-                webs.set(j,temp);
-                i++;
-                j--;
+    private static void swap(ArrayList<Web> elements, int i, int j){
+        //Method to swap 2 elements in an arraylist
+        Web temp= elements.get(i);
+        elements.set(i, elements.get(j));
+        elements.set(j, temp);
+    }
+
+    private static int partition(ArrayList<Web> elements, int beg, int end){
+
+        //Get a random pivot between beg and end
+        int random=beg + ((int)Math.random()*(elements.size()))/(end-beg+1);
+
+        //New position of pivot element
+        int last=end;
+
+        //Move the pivot element to right edge of the array
+        swap(elements, random, end);
+        end--;
+
+        while(beg<=end){
+            if(elements.get(beg).compareTo(elements.get(last)) < 0) beg++; //Accumulate smaller elements to the left
+            else {
+                swap(elements, beg, end);
+                end--;
             }
-        }while(i < j);
-        temp = webs.get(i);
-        webs.set(i,valor);
-        webs.set(mayor,temp);
-        if (menor < i-1){
-            quickSort(webs,menor,i-1);
         }
-        if (i+1 < mayor){
-            quickSort(webs,i+1,mayor);
+
+        //Move pivot element to its correct position
+        swap(elements, beg, last);
+
+        return beg;
+    }
+
+    private static void quicksort(ArrayList<Web> elements, int beg, int end){
+        if(beg>=end) return;
+        if(beg<0) return;
+        if(end>elements.size()-1) return;
+
+        int pivot = partition(elements, beg, end);
+        quicksort(elements, beg, pivot-1);
+        quicksort(elements, pivot+1, end);
+    }
+
+    public List<Web> ordenarQuicksort(ArrayList<Web> webs) {
+        quicksort(webs,0,webs.size()-1);
+        return webs;
+    }
+
+    public void loadLastId() {
+        int max = -1;
+        for (int id :
+                this.webs.keySet()) {
+            if (id > max){
+                max = id;
+            }
         }
+        Webs.lastId = max;
     }
 }

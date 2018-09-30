@@ -13,7 +13,7 @@ public class WebTest {
     @org.junit.Before
     public void setUp() throws Exception {
         Fichero.getInstance().cargarWebsPruebas();
-        Fichero.getInstance().cargarDiccionario();
+        Fichero.getInstance().cargarDiccionario(GestionWeb.WORDS_FILE_PATH);
         w0 = Webs.getInstance().getWebById(0);
         w1 = Webs.getInstance().getWebById(1);
         w2 = Webs.getInstance().getWebById(2);
