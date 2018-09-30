@@ -11,6 +11,7 @@ public class Palabra {
     private String palabra;
     private List<Web> webs; // webs que tienen dicha palabra
     private boolean relacionado;
+
     public Palabra(String palabra){
         this.palabra = palabra;
         this.webs = new ArrayList<>();

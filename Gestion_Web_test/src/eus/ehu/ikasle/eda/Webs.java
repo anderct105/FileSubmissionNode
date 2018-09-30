@@ -30,6 +30,12 @@ public class Webs {
         }
     }
 
+    /**
+     * @param id
+     * id de la web a buscar
+     * @return
+     * la web o null si no se ha encontrado
+     * */
     public Web getWebById(int id){
         return this.webs.get(id);
     }

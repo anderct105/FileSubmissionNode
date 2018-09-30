@@ -16,13 +16,7 @@ public class Main {
 
 
     public static void main(String[] args) {
-       //pruebaCarga();
-        pruebaCargaTotal();
-        pruebaBusqueda();
-        pruebaAnadirWeb();
-        pruebaOrdenacion();
-
-     //   System.out.println(Arrays.toString(web.toArray()));
+       pruebaCargaTotal();
     }
 
     private static void pruebaOrdenacion() {
@@ -48,18 +42,14 @@ public class Main {
         dic.limpiar();
         webs.limpiar();
         stopwatch = new Stopwatch();
-        fichero.cargarWebs();
+        fichero.cargarWebs(GestionWeb.INDEX_FILE_PATH);
         System.out.println("Tiempo carga Webs : " + stopwatch.elapsedTime());
         stopwatch = new Stopwatch();
-        fichero.cargarRelaciones();
+        fichero.cargarRelaciones(GestionWeb.RELATIONS_FILE_PATH);
         System.out.println("Tiempo carga Relaciones : " +   stopwatch.elapsedTime());
         stopwatch = new Stopwatch();
-        fichero.cargarDiccionario();
+        fichero.cargarDiccionario(GestionWeb.WORDS_FILE_PATH);
         System.out.println("Tiempo carga Diccionario : " + stopwatch.elapsedTime());
-        stopwatch = new Stopwatch();
-        fichero.cargarPalabrasRelacionadasConWebs();
-        System.out.println("Tiempo carga Palabras de cada web y webs de cada palabra : " + stopwatch.elapsedTime());
-        System.out.println("----------");
     }
 
     public static void pruebaBusqueda(){

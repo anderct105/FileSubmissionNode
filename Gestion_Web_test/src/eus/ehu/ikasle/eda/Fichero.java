@@ -76,12 +76,9 @@ public class Fichero {
         }
     }
 
-    public void cargarRelaciones(){
+    public void cargarRelaciones(String path){
         try {
-            //BufferedReader in = new BufferedReader(new FileReader(System.getProperty("user.dir")
-            //      + File.separator + "pld-arcs-1-N_grande"));
-            BufferedReader in = new BufferedReader(new FileReader(System.getProperty("user.dir")
-            + File.separator + "smallpld-arcs-1-N"));
+            BufferedReader in = new BufferedReader(new FileReader(path));
             String line;
             String[] entradas;
             Web web,webRelacionada;
@@ -89,13 +86,13 @@ public class Fichero {
             while((line = in.readLine()) != null){
                 // entrada ej: 0 --> 283 870 450 277 357 277 65 616 510 169 882
                 // la web de id 0 esta relacionada con esas
-                line = line.replaceAll("\\D+"," ");
-                entradas = line.split(" ");
-                    web = webs.getWebById(Integer.parseInt(entradas[0]));
-                    if (web != null){
-                        for (int i = 1 ; i < entradas.length; i++){
+                line = line.replaceAll("\\D+"," "); // cambia todos los caracteres que no sean digitos por un espacio
+                entradas = line.split(" "); // devuelve todos lo digitos como un array de strings
+                    web = webs.getWebById(Integer.parseInt(entradas[0])); // El primer elemento es el id de la pagina
+                    if (web != null){ // Si existe la pagina
+                        for (int i = 1 ; i < entradas.length; i++){ // Por cada entrada comprueba que existe dicha web
                             webRelacionada = webs.getWebById(Integer.parseInt(entradas[i]));
-                            if (webRelacionada != null){
+                            if (webRelacionada != null){ // Si existe se añade
                                 web.addWebRelacionada(webRelacionada);
                             }else{
                                 System.out.println("Error en la carga de las relaciones , web relacionada no encontrada");
@@ -106,38 +103,31 @@ public class Fichero {
                     }
 
             }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public void cargarWebs(){
+    public void cargarWebs(String path){
         try {
-            //BufferedReader in = new BufferedReader(new FileReader(System.getProperty("user.dir") + File.separator + "index_grande"));
-            BufferedReader in = new BufferedReader(new FileReader(System.getProperty("user.dir")
-                   + File.separator + "smallindex"));
+            BufferedReader in = new BufferedReader(new FileReader(path));
             String line;
             Web web;
             Webs webs = Webs.getInstance();
             while((line = in.readLine()) != null){
-                // entrada ej:  0-3ani.ro 0 , Web(0,"0-3ani.ro")
+                // entrada ej:  0-3ani.ro 0 -> Web(0,"0-3ani.ro")
                 web = new Web(Integer.parseInt(line.substring(line.lastIndexOf(" ")+1)),
                         line.substring(0,line.lastIndexOf(" ")));
                 webs.addWeb(web); // añadir al hashmap de webs la web de la linea correspondiente
             }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public void cargarDiccionario(){
+    public void cargarDiccionario(String path){
         try {
-            BufferedReader in = new BufferedReader(new FileReader(System.getProperty("user.dir")
-                    + File.separator + "words.txt"));
+            BufferedReader in = new BufferedReader(new FileReader(path));
             String line;
             Diccionario dic = Diccionario.getInstance();
             Palabra palabra;
@@ -153,10 +143,6 @@ public class Fichero {
         }
     }
 
-    public void cargarPalabrasRelacionadasConWebs(){
-        Diccionario diccionario  = Diccionario.getInstance();
-        //diccionario.cargarWebsRelacionadas();
-    }
 
     public void escribirWebs(){
         try {

@@ -36,6 +36,10 @@ public class Web {
         return palabras;
     }
 
+    /**
+     * Añade la web dada por el parametro a la lista de webs relacionadas a dicha web
+     *
+     * */
     public void addWebRelacionada(Web webRelacionada) {
         this.websEnlazadas.add(webRelacionada);
     }
