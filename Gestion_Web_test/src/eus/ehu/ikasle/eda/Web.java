@@ -33,8 +33,6 @@ public class Web implements  Comparable<Web>{
         return web;
     }
 
-
-
     public List<Web> getWebsEnlazadas() {
         return websEnlazadas;
     }

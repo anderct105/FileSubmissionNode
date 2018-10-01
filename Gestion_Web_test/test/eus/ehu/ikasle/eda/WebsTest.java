@@ -1,5 +1,10 @@
 package eus.ehu.ikasle.eda;
 
+import org.junit.Test;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.Assert.*;
 
 public class WebsTest {
@@ -43,15 +48,30 @@ public class WebsTest {
 
     @org.junit.Test
     public void limpiar() {
-
+        assertEquals(Webs.getInstance().getWebById(0), w0);
+        Webs.getInstance().limpiar();
+        assertNull(Webs.getInstance().getWebById(0));
     }
 
-    @org.junit.Test
+    @Test
     public void websQueContienen() {
+        Palabra p0 = new Palabra("a");
+        Webs.getInstance().websQueContienen(p0);
+
+        List<Web> lw = p0.getWebs();
+        List<Web> lw0 = new ArrayList(){{
+            add(Webs.getInstance().getWebById(0));
+            add(Webs.getInstance().getWebById(3));
+            add(Webs.getInstance().getWebById(5));
+            add(Webs.getInstance().getWebById(7));
+        }};
+        assertEquals(lw.size(), lw0.size());
     }
 
     @org.junit.Test
     public void getWebByFullName() {
+        assertEquals(Webs.getInstance().getWebByFullName("0-3ani.ro"), w0);
+        assertEquals(Webs.getInstance().getWebByFullName("0086k.com"), w1);
     }
 
     @org.junit.Test
