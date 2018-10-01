@@ -84,7 +84,7 @@ public class Webs {
         Collection<Web> webs =  this.webs.values();
         List<Web> websList = new ArrayList<>(webs);
         Collections.sort(websList, Web::compareTo);
-        return  websList;
+        return websList;
     }
 
     public List<Web> getListaAnadidas(){

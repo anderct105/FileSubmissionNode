@@ -24,6 +24,7 @@ public class GestionWebTest {
 
     @org.junit.Test
     public void getInstance() {
+        assertNotNull(GestionWeb.getInstance());
     }
 
     @org.junit.Test

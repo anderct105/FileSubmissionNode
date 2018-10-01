@@ -26,6 +26,7 @@ public class WebsTest {
 
     @org.junit.Test
     public void getInstance() {
+        assertNotNull(Webs.getInstance());
     }
 
     @org.junit.Test
@@ -76,6 +77,20 @@ public class WebsTest {
 
     @org.junit.Test
     public void getWebsOrdenadas() {
+        List<Web> wo = new ArrayList(){{
+           add(Webs.getInstance().getWebById(0));
+           add(Webs.getInstance().getWebById(3));
+           add(Webs.getInstance().getWebById(4));
+           add(Webs.getInstance().getWebById(9));
+           add(Webs.getInstance().getWebById(5));
+           add(Webs.getInstance().getWebById(7));
+           add(Webs.getInstance().getWebById(6));
+           add(Webs.getInstance().getWebById(1));
+           add(Webs.getInstance().getWebById(2));
+           add(Webs.getInstance().getWebById(8));
+        }};
+        List<Web> gwo = Webs.getInstance().getWebsOrdenadas();
+        assertEquals(wo, gwo);
     }
 
     @org.junit.Test
@@ -84,8 +99,8 @@ public class WebsTest {
         Webs.getInstance().addWebNueva(w10);
         assertEquals(Webs.getInstance().getListaAnadidas().size(), 1);
     }
-
+    /*
     @org.junit.Test
     public void getWebsOrdenadasQuickSort() {
-    }
+    }*/
 }
