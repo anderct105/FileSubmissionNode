@@ -8,21 +8,21 @@ import static org.junit.Assert.*;
 
 public class PalabraTest {
 
-    private Web w0, w1, w2, w4;
+    private Web w0, w1, w2, w4, w10;
     private Palabra p1, p2;
 
     @org.junit.Before
     public void setUp() throws Exception {
-        Fichero.getInstance().cargarWebs();
-        Fichero.getInstance().cargarDiccionario();
-        Fichero.getInstance().cargarPalabrasRelacionadasConWebs();
-        Fichero.getInstance().cargarRelaciones();
+        Fichero.getInstance().cargarWebsPruebas();
+        Fichero.getInstance().cargarRelacionesPruebas();
+        Fichero.getInstance().cargarDiccionario(GestionWeb.WORDS_FILE_PATH);
         w0 = Webs.getInstance().getWebById(0);
         w1 = Webs.getInstance().getWebById(1);
         w2 = Webs.getInstance().getWebById(2);
         w4 = Webs.getInstance().getWebById(4);
-        Palabra p1 = new Palabra("poker");
-        Palabra p2 = new Palabra("ander");
+        w10 = new Web(10, "an");
+        p1 = new Palabra("poker");
+        p2 = new Palabra("a");
     }
 
     @org.junit.After
@@ -31,13 +31,18 @@ public class PalabraTest {
 
     @org.junit.Test
     public void addWebConPalabra() {
-
+        assertEquals (p2.getWebs().size(), 0);
+        p2.addWebConPalabra(w10);
+        assertEquals(p2.getWebs().size(), 1);
     }
 
     @org.junit.Test
     public void getWebs() {
-        List<Web> ls = new ArrayList();
-        ls.add(w4);
-        assertThat(p1.getWebs(), is(ls));
+        p1.addWebConPalabra(w4);
+        List<Web> wp = p1.getWebs();
+        List<Web> wp1 = new ArrayList(){{
+            add(Webs.getInstance().getWebById(4));
+        }};
+        assertThat(wp, is(wp1));
     }
 }

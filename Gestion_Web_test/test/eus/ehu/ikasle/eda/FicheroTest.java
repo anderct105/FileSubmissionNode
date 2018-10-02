@@ -14,6 +14,7 @@ public class FicheroTest {
 
     @org.junit.Test
     public void getInstance() {
+        assertNotNull(Fichero.getInstance());
     }
 
     @org.junit.Test
@@ -31,8 +32,9 @@ public class FicheroTest {
     @org.junit.Test
     public void cargarPalabrasRelacionadasConWebs() {
     }
-
+/*
     @org.junit.Test
     public void escribirWebs() {
     }
+    */
 }
