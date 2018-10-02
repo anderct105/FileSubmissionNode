@@ -1,14 +1,11 @@
 package eus.ehu.ikasle.eda;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 import java.util.function.Consumer;
 
 public class Diccionario {
 
-    private HashSet<Palabra> diccionario; //A grandes tamaños sale mas rentable hashset por ser de O(1)
+    private LinkedList<Palabra> diccionario; //A grandes tamaños sale mas rentable hashset por ser de O(1)
     //List<Palabra> diccionario;
     private static Diccionario ourInstance = new Diccionario();
 
@@ -17,18 +14,29 @@ public class Diccionario {
     }
 
     private Diccionario() {
-        this.diccionario = new HashSet<>();
+        this.diccionario = new LinkedList<>();
       //  this.diccionario = new ArrayList<>();
     }
 
-    public  void cargarWebsRelacionadas() {
+    public  void cargarWebsRelacionadas(List<Palabra> palabras) {
         final Webs webs = Webs.getInstance();
-        this.diccionario.forEach(new Consumer<Palabra>() {
-            @Override
-            public void accept(Palabra palabra) {
-                webs.websQueContienen(palabra);
+        List<Palabra> tmp = new ArrayList<>();
+        for (Palabra palabra: palabras
+             ) {
+            if (this.diccionario.contains(palabra)){
+                tmp.add(palabra);
             }
-        });
+        }
+        palabras.parallelStream().forEach(palabra -> {
+            webs.websQueContienen(palabra);
+        } );
+    }
+
+    public  void cargarWebsRelacionadas(Palabra palabra) {
+        if (!palabra.isRelacionado()){
+            Webs.getInstance().websQueContienen(palabra);
+            palabra.setRelacionado(true);
+        }
     }
 
     public void addPalabra(Palabra palabra){
@@ -53,5 +61,14 @@ public class Diccionario {
         }
 
         return p;
+    }
+
+    public void fillPalabrasDeWeb(Web web) {
+        this.diccionario.forEach(palabra -> {
+            if (web.contains(palabra)){
+                web.addPalabra(palabra);
+                palabra.addWebConPalabra(web);
+            }
+        });
     }
 }

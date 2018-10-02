@@ -23,6 +23,8 @@ public class Web {
         return web;
     }
 
+
+
     public List<Web> getWebsEnlazadas() {
         return websEnlazadas;
     }
@@ -35,7 +37,7 @@ public class Web {
         this.websEnlazadas.add(webRelacionada);
     }
 
-    public boolean constains(Palabra palabra) {
+    public boolean contains(Palabra palabra) {
         return this.web.contains(palabra.toString());
     }
 
@@ -47,11 +49,17 @@ public class Web {
         return this.palabras.contains(palabra);
     }
 
+    public void fillPalabras(){
+        Diccionario.getInstance().fillPalabrasDeWeb(this);
+    }
+
     @Override
     public String toString() {
-        return "Web{" +
-                "id=" + id +
-                ", web='" + web + '\'' +
-                '}';
+        return this.web;
     }
+
+
+
+
+
 }
