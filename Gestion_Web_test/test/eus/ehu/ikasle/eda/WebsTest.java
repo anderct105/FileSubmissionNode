@@ -30,11 +30,6 @@ public class WebsTest {
     }
 
     @org.junit.Test
-    public void addWeb() {
-
-    }
-
-    @org.junit.Test
     public void addWebNueva() {
         assertEquals(Webs.getInstance().getListaAnadidas().size(), 0);
         Webs.getInstance().addWebNueva(w10);

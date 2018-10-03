@@ -72,4 +72,9 @@ public class Diccionario {
             }
         });
     }
+
+    public int getCantidad () {
+        int cant = diccionario.size();
+        return cant;
+    }
 }

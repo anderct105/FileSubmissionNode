@@ -160,4 +160,9 @@ public class Webs {
         }
         Webs.lastId = max;
     }
+
+    public int getCantidad(){
+        int cant = webs.size();
+        return cant;
+    }
 }
