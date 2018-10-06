@@ -115,8 +115,10 @@ public class Fichero {
             String line;
             Web web;
             Webs webs = Webs.getInstance();
+            webs.limpiar();
             while((line = in.readLine()) != null){
                 if (!line.isEmpty()) {
+                    line = line.trim();
                     // entrada ej:  0-3ani.ro 0 -> Web(0,"0-3ani.ro")
                     web = new Web(Integer.parseInt(line.substring(line.lastIndexOf(" ")+1)),
                             line.substring(0,line.lastIndexOf(" ")));
@@ -134,6 +136,7 @@ public class Fichero {
             BufferedReader in = new BufferedReader(new FileReader(path));
             String line;
             Diccionario dic = Diccionario.getInstance();
+            dic.limpiar();
             Palabra palabra;
             while((line = in.readLine()) != null){
                 if (!line.isEmpty()){

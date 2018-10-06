@@ -25,6 +25,13 @@ public class Web implements  Comparable<Web>{
         this.palabras = new ArrayList<>();
     }
 
+    public Web(int id) {
+        this.id = id;
+        this.websEnlazadas = new ArrayList<>();
+        this.palabras = new ArrayList<>();
+
+    }
+
     public int getId() {
         return id;
     }
@@ -76,7 +83,19 @@ public class Web implements  Comparable<Web>{
 
 
     public int compareTo(Web web) {
-        return this.web.compareTo(web.web);
+        int result;
+        if (this.web == null || web.web == null){
+            if (this.id == web.id){
+                result = 0;
+            }else if (this.id < web.id){
+                result = -1;
+            }else{
+                result = 1;
+            }
+        }else{
+            result = this.web.compareTo(web.web);
+        }
+        return result;
     }
 
     public void setId(int id) {
@@ -88,6 +107,6 @@ public class Web implements  Comparable<Web>{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Web web1 = (Web) o;
-        return web.equalsIgnoreCase(web1.web);
+        return this.id == web1.id;
     }
 }
