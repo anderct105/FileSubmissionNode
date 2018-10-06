@@ -3,8 +3,8 @@ package eus.ehu.ikasle.eda;
 import java.util.*;
 
 public class Webs {
-    private TreeSet<Web> webs;
-    //private HashMap<Integer,Web> webs;
+
+    private LinkedHashMap<Integer,Web> webs;
     private List<Web> listaAnadidas;
     private static int lastId;
     
@@ -15,22 +15,21 @@ public class Webs {
     }
 
     private Webs() {
-        this.webs = new TreeSet<>();
+        this.webs = new LinkedHashMap<>();
         this.listaAnadidas = new ArrayList<>();
     }
 
 
     public void addWeb(Web web){
-        this.webs.add(web);
-        //this.webs.put(web.getId(),web);
+        this.webs.put(web.getId(),web);
     }
 
     /**
-     * @param  web
+     * @para*m  web
      * Añade la web (con el ultimo id disponible) solo si no se encuentra ya en la lista
      * */
     public void addWebNueva(Web web){
-        if (!this.webs.contains(web)){
+        if (!this.webs.containsValue(web)){
             web.setId(++lastId);
             web.fillPalabras();
             this.addWeb(web);
@@ -45,9 +44,7 @@ public class Webs {
      * la web o null si no se ha encontrado
      * */
     public Web getWebById(int id){
-        Web tmp = new Web(id);
-        SortedSet sortedSet = this.webs.subSet(tmp,true,tmp,true);
-        return  (Web)sortedSet.first();
+        return this.webs.get(id);
     }
 
     public void limpiar(){
@@ -55,7 +52,7 @@ public class Webs {
     }
 
     public void websQueContienen(Palabra palabra) {
-        webs.forEach((web) -> {
+        webs.forEach((integer, web) -> {
             if (web.contains(palabra)){
                 web.addPalabra(palabra);
                 palabra.addWebConPalabra(web);
@@ -65,7 +62,10 @@ public class Webs {
 
     public Web getWebByFullName(String name) {
         Web result = null;
-        Iterator<Web> itr = this.webs.iterator();
+
+        Collection<Web> websCollection = this.webs.values();
+        //busqueda desordenada ¿?¿?¿??¿
+        Iterator<Web> itr = this.webs.values().iterator();
         Web tmp = null;
         // mientras tenga siguiente y ese no tenga el mismo nombre que estoy buscando , sigue
         while(itr.hasNext() && !(tmp = itr.next()).getWeb().equalsIgnoreCase(name));
@@ -81,11 +81,10 @@ public class Webs {
      * List de webs ordenadas alfabeticamente
      * */
     public List<Web> getWebsOrdenadas() {
-       /* Collection<Web> webs =  this.webs.values();
+        Collection<Web> webs =  this.webs.values();
         List<Web> websList = new ArrayList<>(webs);
         Collections.sort(websList, Web::compareTo);
-        return websList;*/
-       return new ArrayList<>(this.webs);
+        return websList;
     }
 
     public List<Web> getListaAnadidas(){
@@ -98,7 +97,7 @@ public class Webs {
      * List de webs ordenadas alfabeticamente
      * */
     public List<Web> getWebsOrdenadasQuickSort() {
-        List<Web> lista = new ArrayList<>(this.webs);
+        List<Web> lista = new ArrayList<>(this.webs.values());
         quicksort((ArrayList<Web>) lista,0,lista.size()-1);
         return lista;
     }
@@ -152,7 +151,14 @@ public class Webs {
     }
 
     public void loadLastId() {
-        Webs.lastId = this.webs.last().getId();
+        int max = -1;
+        for (int id :
+                this.webs.keySet()) {
+            if (id > max){
+                max = id;
+            }
+        }
+        Webs.lastId = max;
     }
 
     public int getCantidad(){

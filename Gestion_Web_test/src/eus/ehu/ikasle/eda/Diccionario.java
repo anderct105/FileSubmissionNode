@@ -5,7 +5,7 @@ import java.util.function.Consumer;
 
 public class Diccionario {
 
-    private List<Palabra> diccionario; //A grandes tamaños sale mas rentable hashset por ser de O(1)
+    private LinkedList<Palabra> diccionario; //A grandes tamaños sale mas rentable hashset por ser de O(1)
     //List<Palabra> diccionario;
     private static Diccionario ourInstance = new Diccionario();
 
@@ -14,7 +14,7 @@ public class Diccionario {
     }
 
     private Diccionario() {
-        this.diccionario = new ArrayList<>();
+        this.diccionario = new LinkedList<>();
       //  this.diccionario = new ArrayList<>();
     }
 
@@ -73,7 +73,8 @@ public class Diccionario {
         });
     }
 
-    public int getCantidad (){
-        return this.diccionario.size();
+    public int getCantidad () {
+        int cant = diccionario.size();
+        return cant;
     }
 }
