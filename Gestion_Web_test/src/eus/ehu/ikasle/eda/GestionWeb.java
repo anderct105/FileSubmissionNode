@@ -134,6 +134,9 @@ public class GestionWeb {
     public List<Web> getWebsOrdenadasQuickSort() {
         return Webs.getInstance().getWebsOrdenadasQuickSort();
     }
+    public List<Web> getWebsOrdenadasMergeSort() {
+        return Webs.getInstance().getWebsOrdenadasMergeSort();
+    }
 
     /**
      * Añade las nuevas webs al archivo sin sobreescribir el fichero
