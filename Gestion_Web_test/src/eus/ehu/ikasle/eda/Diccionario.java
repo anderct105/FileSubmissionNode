@@ -5,7 +5,7 @@ import java.util.function.Consumer;
 
 public class Diccionario {
 
-    private LinkedList<Palabra> diccionario; //A grandes tamaños sale mas rentable hashset por ser de O(1)
+    private List<Palabra> diccionario; //Se manteniene el orden de insercion
     //List<Palabra> diccionario;
     private static Diccionario ourInstance = new Diccionario();
 
@@ -14,7 +14,7 @@ public class Diccionario {
     }
 
     private Diccionario() {
-        this.diccionario = new LinkedList<>();
+        this.diccionario = new ArrayList<>();
       //  this.diccionario = new ArrayList<>();
     }
 

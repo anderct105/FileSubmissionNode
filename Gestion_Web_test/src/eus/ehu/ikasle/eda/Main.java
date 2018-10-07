@@ -21,9 +21,9 @@ public class Main {
     }
 
     private static void pruebaOrdenacion() {
-        System.out.println("- Prueba ordenación (quicksort manual)");
+        System.out.println("- Prueba ordenación (merge manual)");
         stopwatch = new Stopwatch();
-        List<Web> web = GestionWeb.getInstance().getWebsOrdenadasQuickSort();
+        List<Web> web = GestionWeb.getInstance().getWebsOrdenadasMergeSort();
         System.out.println("Tiempo ordenación de " + web.size() +" webs :" + stopwatch.elapsedTime());
         System.out.println("\t- Comprobación");
         boolean correcto = true;
@@ -46,6 +46,8 @@ public class Main {
             }
         }
         System.out.println("Ordenado : " + correcto);
+        System.out.println("- Prueba ordenación (merge sort manual)");
+        stopwatch = new Stopwatch();
         //System.out.println(Arrays.toString(web.toArray()));
 
     }

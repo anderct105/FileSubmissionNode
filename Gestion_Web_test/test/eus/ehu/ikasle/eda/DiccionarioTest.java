@@ -1,7 +1,7 @@
 package eus.ehu.ikasle.eda;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
+
 import java.util.List;
 
 import static org.hamcrest.core.Is.is;

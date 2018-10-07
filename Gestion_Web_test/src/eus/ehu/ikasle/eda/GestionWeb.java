@@ -25,6 +25,10 @@ public class GestionWeb {
     private GestionWeb() {
     }
 
+    public static void nuevaWeb(String nombre) {
+        Webs.getInstance().addWebNueva(new Web(nombre));
+    }
+
     public void cargarDatos() {
         Fichero f = Fichero.getInstance();
         f.cargarWebs(GestionWeb.INDEX_FILE_PATH);
@@ -134,11 +138,18 @@ public class GestionWeb {
     public List<Web> getWebsOrdenadasQuickSort() {
         return Webs.getInstance().getWebsOrdenadasQuickSort();
     }
+    public List<Web> getWebsOrdenadasMergeSort() {
+        return Webs.getInstance().getWebsOrdenadasMergeSort();
+    }
 
     /**
      * Añade las nuevas webs al archivo sin sobreescribir el fichero
      * */
     public void guardarWebsAnadidas() {
         Fichero.getInstance().escribirWebs(GestionWeb.INDEX_FILE_PATH);
+    }
+
+    public Web getWebById(int id2) {
+        return Webs.getInstance().getWebById(id2);
     }
 }

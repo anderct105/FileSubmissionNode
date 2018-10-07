@@ -90,4 +90,10 @@ public class Web implements  Comparable<Web>{
         Web web1 = (Web) o;
         return web.equalsIgnoreCase(web1.web);
     }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(web);
+    }
 }
