@@ -79,7 +79,7 @@ public class Main2 {
         System.out.println("Tiempo : " + stopwatch.elapsedTime() + "s");
         System.out.println("Lista ordenada exitosamente");
         System.out.println("¿Quieres ver la lista de webs ordenada?(Y/N) ");
-        String opcion = sc.nextLine();
+        String opcion = sc.next();
         if(opcion.equalsIgnoreCase("y")){
             for(Web web : l){
                 System.out.println(web.getWeb());
