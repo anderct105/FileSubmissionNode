@@ -62,9 +62,7 @@ public class Webs {
 
     public Web getWebByFullName(String name) {
         Web result = null;
-
         Collection<Web> websCollection = this.webs.values();
-        //busqueda desordenada ¿?¿?¿??¿
         Iterator<Web> itr = this.webs.values().iterator();
         Web tmp = null;
         // mientras tenga siguiente y ese no tenga el mismo nombre que estoy buscando , sigue

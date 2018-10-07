@@ -25,6 +25,10 @@ public class GestionWeb {
     private GestionWeb() {
     }
 
+    public static void nuevaWeb(String nombre) {
+        Webs.getInstance().addWebNueva(new Web(nombre));
+    }
+
     public void cargarDatos() {
         Fichero f = Fichero.getInstance();
         f.cargarWebs(GestionWeb.INDEX_FILE_PATH);

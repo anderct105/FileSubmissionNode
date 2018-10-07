@@ -92,8 +92,10 @@ public class Main2 {
 
     private static void menuBusquedaWebsEnlazadas(Scanner sc) {
         //Scanner sb = new Scanner(System.in);
-        System.out.println("Inserte el id o el nombre entero de la web (example.com)");
-        String input = sc.next();
+        String input;
+        while((input = sc.nextLine()).isEmpty()){
+            System.out.println("Inserte el id o el nombre entero de la web (example.com)");
+        }
         Web w;
         try{
             int id2 = Integer.parseInt(input);
@@ -144,7 +146,7 @@ public class Main2 {
                 System.out.println("Vuelve a introducir");
             }
         }*/
-        Webs.getInstance().addWebNueva(new Web(nombre));
+        GestionWeb.nuevaWeb(nombre);
         System.out.println("Web añadida exitosamente!");
     }
 
@@ -153,7 +155,7 @@ public class Main2 {
         boolean vacio = true;
         System.out.println("Haz tu busqueda:  (credit card com)");
         while(vacio) {
-            String busqueda = sc.next();
+            String busqueda = sc.nextLine();
             StringTokenizer st = new StringTokenizer(busqueda);
             while (st.hasMoreTokens()) {
                 vacio = false;
