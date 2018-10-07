@@ -5,7 +5,9 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
 
+
 import static org.junit.Assert.*;
+import static org.hamcrest.CoreMatchers.*;
 
 public class WebsTest {
 
@@ -85,7 +87,7 @@ public class WebsTest {
            add(Webs.getInstance().getWebById(8));
         }};
         List<Web> gwo = Webs.getInstance().getWebsOrdenadas();
-        assertEquals(wo, gwo);
+        assertThat(gwo,is(wo));
     }
 
     @org.junit.Test
