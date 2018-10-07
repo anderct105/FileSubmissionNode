@@ -4,7 +4,7 @@ import java.util.*;
 
 public class Webs {
 
-    private LinkedHashMap<Integer,Web> webs;
+    private LinkedHashMap<Integer,Web> webs;//Se manteniene el orden de insercion
     private List<Web> listaAnadidas;
     private static int lastId;
     
