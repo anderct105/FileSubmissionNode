@@ -144,4 +144,8 @@ public class GestionWeb {
     public void guardarWebsAnadidas() {
         Fichero.getInstance().escribirWebs(GestionWeb.INDEX_FILE_PATH);
     }
+
+    public Web getWebById(int id2) {
+        return Webs.getInstance().getWebById(id2);
+    }
 }
