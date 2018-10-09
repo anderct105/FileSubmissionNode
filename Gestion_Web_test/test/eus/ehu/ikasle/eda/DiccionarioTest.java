@@ -9,7 +9,7 @@ import static org.junit.Assert.*;
 
 public class DiccionarioTest {
     Palabra p0, p1;
-    private Web w0, w1, w2, w4;
+    private Web w0, w1, w2, w4, w5;
 
     @org.junit.Before
     public void setUp() throws Exception {
@@ -21,6 +21,7 @@ public class DiccionarioTest {
         w1 = Webs.getInstance().getWebById(1);
         w2 = Webs.getInstance().getWebById(2);
         w4 = Webs.getInstance().getWebById(4);
+        w5 = Webs.getInstance().getWebById(5);
     }
 
     @org.junit.After
@@ -53,10 +54,6 @@ public class DiccionarioTest {
         assertThat(wp, is(wp1));
     }
 
-/*    @org.junit.Test
-    public void cargarWebsRelacionadas1() {
-    }*/
-
     @org.junit.Test
     public void addPalabra() {
         assertEquals(Diccionario.getInstance().getCantidad(), 354983);
@@ -64,14 +61,32 @@ public class DiccionarioTest {
         Diccionario.getInstance().addPalabra(p);
         assertEquals (Diccionario.getInstance().getCantidad(), 354984);
     }
-/*
-    @org.junit.Test
-    public void limpiar() {
-    }
-*/
+
     @org.junit.Test
     public void getPalabraByString() {
         assertEquals(Diccionario.getInstance().getPalabraByString("a"), p0);
         assertEquals(Diccionario.getInstance().getPalabraByString("o"), p1);
+    }
+
+    @org.junit.Test
+    public void fillPalabrasDeWeb(){assertEquals(w5.getPalabras().size(), 0 );
+        w5.fillPalabras();
+        assertEquals(w5.getPalabras().size(), 11);
+        List<Palabra> pa5 = w5.getPalabras();
+        List<Palabra> w5Pa = new ArrayList(){{
+            add(Diccionario.getInstance().getPalabraByString("a"));
+            add(Diccionario.getInstance().getPalabraByString("ax"));
+            add(Diccionario.getInstance().getPalabraByString("i"));
+            add(Diccionario.getInstance().getPalabraByString("r"));
+            add(Diccionario.getInstance().getPalabraByString("t"));
+            add(Diccionario.getInstance().getPalabraByString("ta"));
+            add(Diccionario.getInstance().getPalabraByString("tax"));
+            add(Diccionario.getInstance().getPalabraByString("taxi"));
+            add(Diccionario.getInstance().getPalabraByString("u"));
+            add(Diccionario.getInstance().getPalabraByString("x"));
+            add(Diccionario.getInstance().getPalabraByString("xi"));
+        }};
+        Main.esIgualPalabras(pa5,w5Pa);
+        assertThat(w5Pa,is(pa5));
     }
 }

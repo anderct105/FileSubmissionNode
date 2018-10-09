@@ -91,7 +91,7 @@ public class Main2 {
             int id2 = Integer.parseInt(input);
             w = gestionWeb.getWebById(id2);
         }catch (NumberFormatException ex){
-            w = gestionWeb.getWebByFullName(input);
+            w = gestionWeb.getWebPorURL(input);
         }
         if (w != null){
             List<Web> ls = w.getWebsEnlazadas();
@@ -139,7 +139,7 @@ public class Main2 {
             }
         }
         Stopwatch sw = new Stopwatch();
-        List<Web> lw = gestionWeb.buscarWebsByPalabras(lista);
+        List<Web> lw = gestionWeb.buscarWebsPorPalabras(lista);
         System.out.println("Resultado de la busqueda" + "(" + sw.elapsedTime() + "s)"+": ");
         if(lw.size() != 0) {
             for (Web w : lw) {

@@ -36,16 +36,15 @@ public class GestionWeb {
         f.cargarDiccionario(GestionWeb.WORDS_FILE_PATH);
     }
 
-    public Web getWebByFullName(String name) {
+    public Web getWebPorURL(String name) {
 
         return Webs.getInstance().getWebByFullName(name);
     }
-
-    /**
+   /**
      * @return List de webs que contienen las palabras
      * si una palabra no existe devolvera la lista vacia
      */
-    public List<Web> buscarWebsByPalabras(List<String> palabras) {
+    public List<Web> buscarWebsPorPalabras(List<String> palabras) {
         List<Web> resultado = new ArrayList<>();
         if (palabras.size() > 0) { // si la lista tiene palabras
             Diccionario dic = Diccionario.getInstance();
