@@ -3,8 +3,7 @@ package eus.ehu.ikasle.eda;
 import eus.ehu.ikasle.eda.utils.Stopwatch;
 
 import java.util.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+
 
 public class Main2 {
 
@@ -30,17 +29,12 @@ public class Main2 {
         boolean visto = false;
         boolean terminado = false;
         do {
-            //try {
                 if (!visto) {
                     visto = true;
                     menu();
                 }
                 Scanner sc = new Scanner(System.in);
                 int tmp = sc.nextInt();
-               /* if (tmp < 0 || tmp > 4) {
-                    throw new Exception();
-                }*/
-                //visto = false;
                 switch (tmp) {
                     case 1:
                         menuBusqueda(sc);
@@ -65,14 +59,11 @@ public class Main2 {
                     default:
                         System.out.println("Numero no valido introduce otra vez: ");
                 }
-            /*} catch (Exception e) {
-
-            }*/
         }while(!terminado);
     }
 
     private static void menuOrdenacion(Scanner sc) {
-        Stopwatch stopwatch;//Scanner sr = new Scanner(System.in);
+        Stopwatch stopwatch;
         System.out.println("Ordenando Webs");
         stopwatch = new Stopwatch();
         List<Web> l = gestionWeb.getWebsOrdenadasMergeSort();
@@ -91,7 +82,6 @@ public class Main2 {
     }
 
     private static void menuBusquedaWebsEnlazadas(Scanner sc) {
-        //Scanner sb = new Scanner(System.in);
         String input;
         while((input = sc.nextLine()).isEmpty()){
             System.out.println("Inserte el id o el nombre entero de la web (example.com)");
@@ -119,7 +109,6 @@ public class Main2 {
     }
 
     private static void menuInsercion(Scanner sc) {
-        //Scanner sp = new Scanner(System.in);
         System.out.println("Introduce el nombre de la web: ");
         boolean match;
         String nombre;
@@ -133,19 +122,6 @@ public class Main2 {
                 match = true;
             }
         }while(!match);
-
-        /*while((nombre = sc..isEmpty()){
-            System.out.println("Error -> Introduzca un nombre");
-        }*/
-        /*while(empty) {
-            nombre = sc.nextLine();
-            if(!nombre.isEmpty()){
-                empty = false;
-            }
-            else{
-                System.out.println("Vuelve a introducir");
-            }
-        }*/
         GestionWeb.nuevaWeb(nombre);
         System.out.println("Web añadida exitosamente!");
     }
