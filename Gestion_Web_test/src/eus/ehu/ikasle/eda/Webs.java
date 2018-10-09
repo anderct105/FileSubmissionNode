@@ -62,7 +62,6 @@ public class Webs {
 
     public Web getWebByFullName(String name) {
         Web result = null;
-        Collection<Web> websCollection = this.webs.values();
         Iterator<Web> itr = this.webs.values().iterator();
         Web tmp = null;
         // mientras tenga siguiente y ese no tenga el mismo nombre que estoy buscando , sigue
@@ -90,71 +89,17 @@ public class Webs {
     }
 
     /**
-     * Realiza un randomized quick sort para ordenar alfabeticamente las webs
+     * Realiza un merge-sort para ordenar alfabeticamente las webs
      * @return
      * List de webs ordenadas alfabeticamente
      * */
-    public List<Web> getWebsOrdenadasQuickSort() {
-        List<Web> lista = new ArrayList<>(this.webs.values());
-        quicksort((ArrayList<Web>) lista,0,lista.size()-1);
-        return lista;
-    }
-
-    private static void swap(ArrayList<Web> elements, int i, int j){
-        //Method to swap 2 elements in an arraylist
-        Web temp= elements.get(i);
-        elements.set(i, elements.get(j));
-        elements.set(j, temp);
-    }
-
-    private static int partition(ArrayList<Web> elements, int beg, int end){
-
-        //Get a random pivot between beg and end
-        int random=beg + ((int)Math.random()*(elements.size()))/(end-beg+1);
-
-        //New position of pivot element
-        int last=end;
-
-        //Move the pivot element to right edge of the array
-        swap(elements, random, end);
-        end--;
-
-        while(beg<=end){
-            if(elements.get(beg).compareTo(elements.get(last)) < 0) beg++; //Accumulate smaller elements to the left
-            else {
-                swap(elements, beg, end);
-                end--;
-            }
-        }
-
-        //Move pivot element to its correct position
-        swap(elements, beg, last);
-
-        return beg;
-    }
-
-    private static void quicksort(ArrayList<Web> elements, int beg, int end){
-        if(beg>=end) return;
-        if(beg<0) return;
-        if(end>elements.size()-1) return;
-
-        int pivot = partition(elements, beg, end);
-        quicksort(elements, beg, pivot-1);
-        quicksort(elements, pivot+1, end);
-    }
-
-    public List<Web> ordenarQuicksort(ArrayList<Web> webs) {
-        quicksort(webs,0,webs.size()-1);
-        return webs;
-    }
-
     public List<Web> getWebsOrdenadasMergeSort() {
         List<Web> lista = new ArrayList<>(this.webs.values());
         mergeSort((ArrayList<Web>) lista);
         return lista;
     }
 
-    public ArrayList<Web> mergeSort(ArrayList<Web> whole) {
+    private ArrayList<Web> mergeSort(ArrayList<Web> whole) {
         ArrayList<Web> left = new ArrayList<>();
         ArrayList<Web> right = new ArrayList<>();
         int center;

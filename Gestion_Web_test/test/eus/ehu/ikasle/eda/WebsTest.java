@@ -62,6 +62,7 @@ public class WebsTest {
             add(Webs.getInstance().getWebById(3));
             add(Webs.getInstance().getWebById(5));
             add(Webs.getInstance().getWebById(7));
+            add(w10);
         }};
         assertEquals(lw.size(), lw0.size());
     }

@@ -50,7 +50,7 @@ public class GestionWeb {
         if (palabras.size() > 0) { // si la lista tiene palabras
             Diccionario dic = Diccionario.getInstance();
             Palabra tmp1;
-            List<Palabra> palabrasList = getPalabrasDelDiccionario(palabras); // rellena la lista con las palabras que se han encontrado o si no con null
+            List<Palabra> palabrasList = dic.getPalabrasDelDiccionario(palabras); // rellena la lista con las palabras que se han encontrado o si no con null
             if (palabras.size() == palabrasList.size()) { // si tienen el mismo tamaño significa que se han encontrado todas la palabras
                 //solo devolvera el resultado si se han encontrado todas las palabras
                 Palabra primera = palabrasList.get(0);
@@ -81,25 +81,7 @@ public class GestionWeb {
         return resultado;
     }
 
-    /**
-     * Devuelve la lista de palabras que contienen la web y carga las webs de esa palabra
-     *
-     * @return List de palabras que coinciden con el string.
-     * Si no la encuentra no se añade a la lista
-     */
-    private List<Palabra> getPalabrasDelDiccionario(List<String> palabras) {
-        List<Palabra> palabraList = new ArrayList<>();
-        Palabra tmp1;
-        Diccionario dic = Diccionario.getInstance();
-        for (String pStr : palabras) {
-            tmp1 = dic.getPalabraByString(pStr);
-            if (tmp1 != null) { // si existe la palabra añadirá las webs de la palabra y viceversa
-                dic.cargarWebsRelacionadas(tmp1);
-                palabraList.add(tmp1);
-            }
-        }
-        return palabraList;
-    }
+
 
     /*public List<Web> buscarWebsByPalabrasRetainAll(List<String> palabras) {
         // Devuelve una lista vacia si cualquiera de las palabras no estan en el diccionario
@@ -135,9 +117,7 @@ public class GestionWeb {
         return Webs.getInstance().getWebsOrdenadas();
     }
 
-    public List<Web> getWebsOrdenadasQuickSort() {
-        return Webs.getInstance().getWebsOrdenadasQuickSort();
-    }
+
     public List<Web> getWebsOrdenadasMergeSort() {
         return Webs.getInstance().getWebsOrdenadasMergeSort();
     }

@@ -62,6 +62,25 @@ public class Diccionario {
     }
 
     /**
+     * Devuelve la lista de palabras que contienen la web y carga las webs de esa palabra
+     *
+     * @return List de palabras que coinciden con el string.
+     * Si no la encuentra no se añade a la lista
+     */
+    public List<Palabra> getPalabrasDelDiccionario(List<String> palabras) {
+        List<Palabra> palabraList = new ArrayList<>();
+        Palabra tmp1;
+        for (String pStr : palabras) {
+            tmp1 = this.getPalabraByString(pStr);
+            if (tmp1 != null) { // si existe la palabra añadirá las webs de la palabra y viceversa
+                this.cargarWebsRelacionadas(tmp1);
+                palabraList.add(tmp1);
+            }
+        }
+        return palabraList;
+    }
+
+    /**
      * Asigna a cada palabra que contenga esa web a su lista de palabras y añade la web a la listas de webs de la palabra
      * */
     public void fillPalabrasDeWeb(Web web) {

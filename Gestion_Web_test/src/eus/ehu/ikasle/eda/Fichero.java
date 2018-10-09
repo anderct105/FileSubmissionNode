@@ -65,10 +65,14 @@ public class Fichero {
             Webs webs = Webs.getInstance();
             while((line = in.readLine()) != null){
                 if (!line.isEmpty()) {
-                    // entrada ej:  0-3ani.ro 0 -> Web(0,"0-3ani.ro")
-                    web = new Web(Integer.parseInt(line.substring(line.lastIndexOf(" ")+1)),
-                            line.substring(0,line.lastIndexOf(" ")));
-                    webs.addWeb(web); // añadir al hashmap de webs la web de la linea correspondiente
+                    try{
+                        // entrada ej:  0-3ani.ro 0 -> Web(0,"0-3ani.ro")
+                        web = new Web(Integer.parseInt(line.substring(line.lastIndexOf(" ")+1)),
+                                line.substring(0,line.lastIndexOf(" ")));
+                        webs.addWeb(web); // añadir al hashmap de webs la web de la linea correspondiente
+                    }catch(NumberFormatException ex){
+                        System.out.println("Formato del archivo incorrecto, se seguirá comprobando");
+                    }
                 }
             }
         } catch (IOException e) {
