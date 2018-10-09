@@ -81,13 +81,9 @@ public class GestionWebTest {
         palabras.add("a");
         palabras.add("o");
         List<Web> resultado = new ArrayList<>();
-        resultado = GestionWeb.getInstance().buscarWebsByPalabras(palabras);
+        resultado = GestionWeb.getInstance().buscarWebsPorPalabras(palabras);
         assertEquals(resultado.size(), 2);
     }
-
-   /* @org.junit.Test
-    public void buscarWebsByPalabrasRetainAll() {
-    } */
 
     @org.junit.Test
     public void getWebsOrdenadas() {

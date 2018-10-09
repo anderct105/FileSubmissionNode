@@ -19,7 +19,7 @@ public class WebsTest {
         Fichero.getInstance().cargarWebsPruebas();
         w0 = Webs.getInstance().getWebById(0);
         w1 = Webs.getInstance().getWebById(1);
-        w10 = new Web(10, "abc");
+        //w10 = new Web(10, "abc");
     }
 
     @org.junit.After
@@ -29,13 +29,6 @@ public class WebsTest {
     @org.junit.Test
     public void getInstance() {
         assertNotNull(Webs.getInstance());
-    }
-
-    @org.junit.Test
-    public void addWebNueva() {
-        assertEquals(Webs.getInstance().getListaAnadidas().size(), 0);
-        Webs.getInstance().addWebNueva(w10);
-        assertEquals(Webs.getInstance().getListaAnadidas().size(), 1);
     }
 
     @org.junit.Test
@@ -63,7 +56,7 @@ public class WebsTest {
             add(Webs.getInstance().getWebById(5));
             add(Webs.getInstance().getWebById(7));
         }};
-        assertEquals(lw.size(), lw0.size());
+        assertThat(lw, is(lw0));
     }
 
     @org.junit.Test
@@ -96,8 +89,4 @@ public class WebsTest {
         Webs.getInstance().addWebNueva(w10);
         assertEquals(Webs.getInstance().getListaAnadidas().size(), 1);
     }
-    /*
-    @org.junit.Test
-    public void getWebsOrdenadasQuickSort() {
-    }*/
 }

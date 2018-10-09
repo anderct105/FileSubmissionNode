@@ -70,10 +70,4 @@ public class FicheroTest {
         Fichero.getInstance().cargarDiccionario(GestionWeb.WORDS_FILE_PATH);
         assertEquals(Diccionario.getInstance().getCantidad(), 354983);
     }
-
-/*
-    @org.junit.Test
-    public void escribirWebs() {
-    }
-    */
 }
