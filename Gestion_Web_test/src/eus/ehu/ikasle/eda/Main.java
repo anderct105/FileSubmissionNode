@@ -2,10 +2,7 @@ package eus.ehu.ikasle.eda;
 
 import eus.ehu.ikasle.eda.utils.Stopwatch;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 
 public class Main {
 
@@ -66,7 +63,7 @@ public class Main {
         System.out.println("\n");
     }
 
-    public static void pruebaBusquedaIndividual(List<String> entrada){
+    private static void pruebaBusquedaIndividual(List<String> entrada){
         String salida = "\t Prueba búsqueda <";
         String valores = "";
         for (String entr:entrada) {
