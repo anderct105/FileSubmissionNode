@@ -32,8 +32,13 @@ public class GestionWeb {
     private GestionWeb() {
     }
 
-    public static void nuevaWeb(String nombre) {
-        Webs.getInstance().addWebNueva(new Web(nombre));
+    public boolean nuevaWeb(String nombre) {
+        boolean resultado = false;
+        String patternRegex = "[a-z0-9]+([\\-\\.]+[a-z0-9]+)*\\.[a-z]+";
+        if (nombre.matches(patternRegex)){
+            resultado = Webs.getInstance().addWebNueva(new Web(nombre));
+        }
+        return resultado;
     }
 
     public void cargarDatos() {

@@ -19,7 +19,7 @@ public class Main {
         pruebaCargaTotal();
         pruebaOrdenacion();
         pruebaBusquedaWebsConPalabras();
-        //pruebaAnadirWeb();
+        pruebaAnadirWeb();
 
         //Pruebas con el fichero pequeño
         System.out.println("Pruebas Fichero pequeño");
@@ -100,6 +100,9 @@ public class Main {
         entrada.add("a");
         pruebaBusquedaIndividual(entrada);
         entrada.clear();
+        entrada.add("a");
+        pruebaBusquedaIndividual(entrada);
+        entrada.clear();
         entrada.add("dkjsdfl");
         pruebaBusquedaIndividual(entrada);
         entrada.clear();
@@ -127,16 +130,20 @@ public class Main {
 
     public static void pruebaAnadirWeb() {
         System.out.println("Prueba añadir webs");
-        stopwatch = new Stopwatch();
-        Web w = new Web("afh.com");
-        Webs.getInstance().addWebNueva(w);
-        w = new Web("chinchilla2.com");
-        Webs.getInstance().addWebNueva(w);
-        GestionWeb.getInstance().guardarWebsAnadidas();
-        System.out.println("2 webs : " + stopwatch.elapsedTime());
-
+        pruebaAnadirWebIndividual("chinchilla.com");
+        pruebaAnadirWebIndividual("");
+        pruebaAnadirWebIndividual("0-00.pl");
+        pruebaAnadirWebIndividual("chinchilla 2");
     }
 
+
+    private static void pruebaAnadirWebIndividual(String webName){
+        System.out.println("\t Prueba añadir");
+        stopwatch = new Stopwatch();
+        boolean insertado = gestionWeb.nuevaWeb(webName);
+        System.out.println("\t\t Tiempo añadido : " + stopwatch.elapsedTime());
+        System.out.println("\t\t Añadido " + webName + " : " + insertado);
+    }
 
     public static void esIgual(List<Web> listOne, List<Web> listTwo) {
         Collection<Web> similar = new HashSet<Web>(listOne);

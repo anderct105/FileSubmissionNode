@@ -28,13 +28,16 @@ public class Webs {
      * @para*m web
      * Añade la web (con el ultimo id disponible) solo si no se encuentra ya en la lista
      */
-    public void addWebNueva(Web web) {
+    public boolean addWebNueva(Web web) {
+        boolean insertado = false;
         if (!this.webs.containsValue(web)) {
             web.setId(++lastId);
             web.fillPalabras();
             this.addWeb(web);
             this.listaAnadidas.add(web);
+            insertado = true;
         }
+        return insertado;
     }
 
     /**
