@@ -148,7 +148,7 @@ public class Webs {
         return webs;
     }
 
-    public List<Web> getWebsOrdenadasMergeSort() {
+    public List<Web> bn getWebsOrdenadasMergeSort() {
         List<Web> lista = new ArrayList<>(this.webs.values());
         mergeSort((ArrayList<Web>) lista);
         return lista;
