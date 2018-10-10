@@ -1,10 +1,8 @@
 package eus.ehu.ikasle.eda;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class Palabra {
 
@@ -12,13 +10,13 @@ public class Palabra {
     private List<Web> webs; // webs que tienen dicha palabra
     private boolean relacionado;
 
-    public Palabra(String palabra){
+    public Palabra(String palabra) {
         this.palabra = palabra;
         this.webs = new ArrayList<>();
         this.relacionado = false;
     }
 
-    public void addWebConPalabra(Web web){
+    public void addWebConPalabra(Web web) {
         this.webs.add(web);
     }
 
@@ -43,7 +41,7 @@ public class Palabra {
         return relacionado;
     }
 
-    public void setRelacionado(boolean relacionado){
+    public void setRelacionado(boolean relacionado) {
         this.relacionado = relacionado;
     }
 }

@@ -2,175 +2,169 @@ package eus.ehu.ikasle.eda;
 
 import eus.ehu.ikasle.eda.utils.Stopwatch;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
 
 public class Main {
 
     private static Diccionario dic = Diccionario.getInstance();
-    private static Webs webs  = Webs.getInstance();
+    private static Webs webs = Webs.getInstance();
     private static Fichero fichero = Fichero.getInstance();
     private static GestionWeb gestionWeb = GestionWeb.getInstance();
     private static Stopwatch stopwatch;
 
 
     public static void main(String[] args) {
+        //Pruebas con el fichero grande
+        System.out.println("Pruebas Fichero grande");
         pruebaCargaTotal();
         pruebaOrdenacion();
-        pruebaBusqueda();
+        pruebaBusquedaWebsConPalabras();
         //pruebaAnadirWeb();
+
+        //Pruebas con el fichero pequeño
+        System.out.println("Pruebas Fichero pequeño");
+        pruebaCargaPequeño();
+        pruebaOrdenacion();
+        pruebaBusquedaWebsConPalabras();
     }
 
     private static void pruebaOrdenacion() {
-        System.out.println("- Prueba ordenación (merge manual)");
+        System.out.println("\t Prueba ordenación (merge manual)");
         stopwatch = new Stopwatch();
         List<Web> web = GestionWeb.getInstance().getWebsOrdenadasMergeSort();
-        System.out.println("Tiempo ordenación de " + web.size() +" webs :" + stopwatch.elapsedTime());
-        System.out.println("\t- Comprobación");
+        System.out.println("\t\tTiempo ordenación de " + web.size() + " webs :" + stopwatch.elapsedTime());
+        System.out.print("\t\t Comprobación : ");
         boolean correcto = true;
-        for (int i = 0; i < web.size() -1 && correcto; i++){
-            if (web.get(i).compareTo(web.get(i+1)) > 0 ){
+        for (int i = 0; i < web.size() - 1 && correcto; i++) {
+            if (web.get(i).compareTo(web.get(i + 1)) > 0) {
                 correcto = false;
             }
         }
-        System.out.println("Ordenado : " + correcto);
-        System.out.println("- Prueba ordenación (sort java)");
-        //System.out.println(Arrays.toString(web.toArray()));
-        stopwatch = new Stopwatch();
-         web = GestionWeb.getInstance().getWebsOrdenadas();
-        System.out.println("Tiempo ordenación de " + web.size() +" webs :" + stopwatch.elapsedTime());
-        System.out.println("\t- Comprobación");
-        correcto = true;
-        for (int i = 0; i < web.size() -1 && correcto; i++){
-            if (web.get(i).compareTo(web.get(i+1)) > 0 ){
-                correcto = false;
-            }
-        }
-        System.out.println("Ordenado : " + correcto);
-        System.out.println("- Prueba ordenación (merge sort manual)");
-        stopwatch = new Stopwatch();
-        //System.out.println(Arrays.toString(web.toArray()));
-
+        System.out.println(correcto ? "Correcto" : "Incorrecto");
     }
 
     private static void pruebaCargaTotal() {
-        System.out.println("- Prueba Carga total");
         dic.limpiar();
         webs.limpiar();
         stopwatch = new Stopwatch();
         gestionWeb.cargarDatos();
-        System.out.println("Tiempo total de carga de datos: " + stopwatch.elapsedTime());
-        System.out.println("----------");
+        System.out.println("\t Tiempo total de carga de datos: " + stopwatch.elapsedTime());
+        System.out.println("\n");
     }
 
-    public static void pruebaCarga(){
+    public static void pruebaCargaPequeño() {
         dic.limpiar();
         webs.limpiar();
         stopwatch = new Stopwatch();
-        fichero.cargarWebs(GestionWeb.INDEX_FILE_PATH);
-        System.out.println("Tiempo carga Webs : " + stopwatch.elapsedTime());
-        stopwatch = new Stopwatch();
-        fichero.cargarRelaciones(GestionWeb.RELATIONS_FILE_PATH);
-        System.out.println("Tiempo carga Relaciones : " +   stopwatch.elapsedTime());
-        stopwatch = new Stopwatch();
+        fichero.cargarWebs(GestionWeb.SMALL_INDEX_FILE_PATH);
+        fichero.cargarRelaciones(GestionWeb.SMALL_RELATIONS_FILE_PATH);
         fichero.cargarDiccionario(GestionWeb.WORDS_FILE_PATH);
-        System.out.println("Tiempo carga Diccionario : " + stopwatch.elapsedTime());
+        System.out.println("\t Tiempo carga Total : " + stopwatch.elapsedTime());
+        System.out.println("\n");
     }
 
-    public static void pruebaBusqueda(){
-        System.out.println("- Prueba busqueda");
-        List<Web> websNoRetain;
+    public static void pruebaBusquedaIndividual(List<String> entrada){
+        String salida = "\t Prueba búsqueda <";
+        String valores = "";
+        for (String entr:entrada) {
+            valores += entr + ", ";
+        }
+        if (valores.length()-2 >0){
+            salida += valores.substring(0,valores.length()-2);
+        }
+        salida += "> :";
+        System.out.println(salida);
+        stopwatch = new Stopwatch();
+        List<Web> webs= gestionWeb.buscarWebsPorPalabras(entrada);
+        System.out.println("\t\t Tiempo : " + stopwatch.elapsedTime());
+        System.out.println("\t\t Nº resultados : " + webs.size());
+        System.out.print("\t\t Comprobacion: ");
+        boolean correcto = true;
+        for (int i = 0; i < webs.size() && correcto; i++){
+            for (int j = 0; j < entrada.size() && correcto; j++){
+                if (!webs.get(i).getWeb().toLowerCase().contains(entrada.get(j).toLowerCase())){
+                    correcto = false;
+                }
+            }
+        }
+        System.out.println(correcto ? "Correcto":"Incorrecto");
+    }
+
+    public static void pruebaBusquedaWebsConPalabras() {
+        System.out.println("\t Prueba Búsqueda de webs que contienen palabras");
         List<String> entrada;
         entrada = new ArrayList<>();
+        entrada.clear();
+        pruebaBusquedaIndividual(entrada);
+        entrada.clear();
         entrada.add("a");
-        stopwatch = new Stopwatch();
-        websNoRetain = gestionWeb.buscarWebsPorPalabras(entrada);
-        System.out.println("Tiempo busqueda <'a'>: " + stopwatch.elapsedTime());
-        System.out.println("Nº webs : " + websNoRetain.size());
-        entrada = new ArrayList<>();
+        pruebaBusquedaIndividual(entrada);
+        entrada.clear();
+        entrada.add("dkjsdfl");
+        pruebaBusquedaIndividual(entrada);
+        entrada.clear();
+        entrada.add("card");
+        entrada.add("credit");
+        pruebaBusquedaIndividual(entrada);
+        entrada.clear();
+        entrada.add("a");
+        entrada.add("es");
         entrada.add("com");
-        stopwatch = new Stopwatch();
-        websNoRetain = gestionWeb.buscarWebsPorPalabras(entrada);
-        System.out.println("Tiempo busqueda <'com'>: " + stopwatch.elapsedTime());
-        System.out.println("Nº webs : " + websNoRetain.size());
-        stopwatch = new Stopwatch();
-        entrada = new ArrayList<>();
+        pruebaBusquedaIndividual(entrada);
+        entrada.clear();
         entrada.add("a");
-        entrada.add("e");
-        websNoRetain = gestionWeb.buscarWebsPorPalabras(entrada);
-        System.out.println("Tiempo busqueda <'a','e'>: " + stopwatch.elapsedTime());
-        System.out.println("Nº webs : " + websNoRetain.size());
-        entrada = new ArrayList<>();
+        entrada.add("asdkfsdlf");
         entrada.add("com");
-        entrada.add("e");
-        stopwatch = new Stopwatch();
-        websNoRetain = gestionWeb.buscarWebsPorPalabras(entrada);
-        System.out.println("Tiempo busqueda dos palabras <'com','e'>: " + stopwatch.elapsedTime());
-        System.out.println("Nº webs : " + websNoRetain.size());
-        entrada = new ArrayList<>();
-        stopwatch = new Stopwatch();
-        websNoRetain = gestionWeb.buscarWebsPorPalabras(entrada);
-        System.out.println("Tiempo busqueda vacia : " + stopwatch.elapsedTime());
-        System.out.println("Nº webs : " + websNoRetain.size());
-        entrada = new ArrayList<>();
-        entrada.add("dkfjglsdkfg");
-        stopwatch = new Stopwatch();
-        websNoRetain = gestionWeb.buscarWebsPorPalabras(entrada);
-        System.out.println("Tiempo busqueda no existe :" + stopwatch.elapsedTime());
-        System.out.println("Nº webs : " + websNoRetain.size());
-        entrada = new ArrayList<>();
-        entrada.add("a");
-        entrada.add("dkfjglsdkfg");
-        stopwatch = new Stopwatch();
-        websNoRetain = gestionWeb.buscarWebsPorPalabras(entrada);
-        System.out.println("Tiempo busqueda no existe el segundo <'a','sdfs'>: " + stopwatch.elapsedTime());
-        System.out.println("Nº webs : " + websNoRetain.size());
-        entrada = new ArrayList<>();
-        entrada.add("o");
-        entrada.add("u");
-        stopwatch = new Stopwatch();
-        websNoRetain = gestionWeb.buscarWebsPorPalabras(entrada);
-        System.out.println("Tiempo busqueda <'o','u'>: " + stopwatch.elapsedTime());
-        System.out.println("Nº webs : " + websNoRetain.size());
-        System.out.println("----------");
+        pruebaBusquedaIndividual(entrada);
+        entrada.clear();
+        entrada.add("asfgs");
+        entrada.add("asdfsifdfa");
+        entrada.add("wqerqwergfgf");
+        pruebaBusquedaIndividual(entrada);
+        System.out.println("\n");
     }
 
 
-    public static void pruebaAnadirWeb(){
+    public static void pruebaAnadirWeb() {
         System.out.println("Prueba añadir webs");
         stopwatch = new Stopwatch();
-        Web w=new Web("afh.com");
+        Web w = new Web("afh.com");
         Webs.getInstance().addWebNueva(w);
-        w=new Web("chinchilla2.com");
+        w = new Web("chinchilla2.com");
         Webs.getInstance().addWebNueva(w);
         GestionWeb.getInstance().guardarWebsAnadidas();
         System.out.println("2 webs : " + stopwatch.elapsedTime());
+
     }
 
 
-    public static void esIgual(List<Web> listOne, List<Web> listTwo){
-        Collection<Web> similar = new HashSet<Web>( listOne );
+    public static void esIgual(List<Web> listOne, List<Web> listTwo) {
+        Collection<Web> similar = new HashSet<Web>(listOne);
         Collection<Web> different = new HashSet<Web>();
-        different.addAll( listOne );
-        different.addAll( listTwo );
+        different.addAll(listOne);
+        different.addAll(listTwo);
 
-        similar.retainAll( listTwo );
-        different.removeAll( similar );
+        similar.retainAll(listTwo);
+        different.removeAll(similar);
 
         //System.out.printf("Similar:%s%nDifferent:%s%n",similar, different);
-        System.out.printf("Different:%s%n",different);
+        System.out.printf("Different:%s%n", different);
     }
 
-    public static void esIgualPalabras(List<Palabra> listOne, List<Palabra> listTwo){
-        Collection<Palabra> similar = new HashSet<Palabra>( listOne );
+    public static void esIgualPalabras(List<Palabra> listOne, List<Palabra> listTwo) {
+        Collection<Palabra> similar = new HashSet<Palabra>(listOne);
         Collection<Palabra> different = new HashSet<Palabra>();
-        different.addAll( listOne );
-        different.addAll( listTwo );
+        different.addAll(listOne);
+        different.addAll(listTwo);
 
-        similar.retainAll( listTwo );
-        different.removeAll( similar );
+        similar.retainAll(listTwo);
+        different.removeAll(similar);
 
         //System.out.printf("Similar:%s%nDifferent:%s%n",similar, different);
-        System.out.printf("Different:%s%n",different);
+        System.out.printf("Different:%s%n", different);
     }
 
 }
