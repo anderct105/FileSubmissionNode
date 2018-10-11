@@ -19,7 +19,7 @@ public class Main {
         pruebaCargaTotal();
         pruebaOrdenacion();
         pruebaBusquedaWebsConPalabras();
-        //pruebaAnadirWeb();
+        pruebaAnadirWeb();
         pruebaEscribirWeb();
         //Pruebas con el fichero pequeño
         System.out.println("Pruebas Fichero pequeño");
@@ -29,6 +29,7 @@ public class Main {
     }
 
     private static void pruebaEscribirWeb() {
+    	Webs.getInstance().limparAnadidas();
         System.out.println("\t Prueba escribir fichero");
         System.out.println("\t\t ninguna");
         stopwatch = new Stopwatch();
