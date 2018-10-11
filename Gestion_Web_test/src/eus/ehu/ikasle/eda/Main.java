@@ -20,7 +20,7 @@ public class Main {
         pruebaOrdenacion();
         pruebaBusquedaWebsConPalabras();
         pruebaAnadirWeb();
-        pruebaEscribirWeb();
+        //pruebaEscribirWeb();
         //Pruebas con el fichero pequeño
         System.out.println("Pruebas Fichero pequeño");
         pruebaCargaPequeño();
