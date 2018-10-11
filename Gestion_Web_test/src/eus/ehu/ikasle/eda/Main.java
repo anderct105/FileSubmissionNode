@@ -19,13 +19,39 @@ public class Main {
         pruebaCargaTotal();
         pruebaOrdenacion();
         pruebaBusquedaWebsConPalabras();
-        pruebaAnadirWeb();
-
+        //pruebaAnadirWeb();
+        pruebaEscribirWeb();
         //Pruebas con el fichero pequeño
         System.out.println("Pruebas Fichero pequeño");
         pruebaCargaPequeño();
         pruebaOrdenacion();
         pruebaBusquedaWebsConPalabras();
+    }
+
+    private static void pruebaEscribirWeb() {
+        System.out.println("\t Prueba escribir fichero");
+        System.out.println("\t\t ninguna");
+        stopwatch = new Stopwatch();
+        gestionWeb.guardarWebsAnadidas();
+        System.out.println("\t\t Tiempo : " + stopwatch.elapsedTime());
+        pruebaAnadirWebIndividualSinMensajes("chinchilla1.com");
+        System.out.println("\t\t 1 inserción");
+        stopwatch = new Stopwatch();
+        gestionWeb.guardarWebsAnadidas();
+        System.out.println("\t\t Tiempo : " + stopwatch.elapsedTime());
+        pruebaAnadirWebIndividualSinMensajes("chinchilla2.com");
+        pruebaAnadirWebIndividualSinMensajes("chinchilla3.com");
+        System.out.println("\t\t 2 inserciones");
+        stopwatch = new Stopwatch();
+        gestionWeb.guardarWebsAnadidas();
+        System.out.println("\t\t Tiempo : " + stopwatch.elapsedTime());
+        for (int i = 4; i < 55; i ++){
+            pruebaAnadirWebIndividualSinMensajes("chinchilla" + i +".com");
+        }
+        System.out.println("\t\t 50 inserciones");
+        stopwatch = new Stopwatch();
+        gestionWeb.guardarWebsAnadidas();
+        System.out.println("\t\t Tiempo : " + stopwatch.elapsedTime());
     }
 
     private static void pruebaOrdenacion() {
@@ -143,6 +169,10 @@ public class Main {
         boolean insertado = gestionWeb.nuevaWeb(webName);
         System.out.println("\t\t Tiempo añadido : " + stopwatch.elapsedTime());
         System.out.println("\t\t Añadido " + webName + " : " + insertado);
+    }
+
+    private static void pruebaAnadirWebIndividualSinMensajes(String webName){
+        gestionWeb.nuevaWeb(webName);
     }
 
     public static void esIgual(List<Web> listOne, List<Web> listTwo) {

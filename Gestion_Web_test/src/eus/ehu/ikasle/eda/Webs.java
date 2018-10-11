@@ -165,4 +165,8 @@ public class Webs {
         int cant = webs.size();
         return cant;
     }
+
+    public void limparAnadidas() {
+        this.listaAnadidas.clear();
+    }
 }

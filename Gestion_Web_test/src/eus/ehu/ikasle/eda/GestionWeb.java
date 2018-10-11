@@ -104,6 +104,7 @@ public class GestionWeb {
      */
     public void guardarWebsAnadidas() {
         Fichero.getInstance().escribirWebs(GestionWeb.INDEX_FILE_PATH);
+        Webs.getInstance().limparAnadidas();
     }
 
     public Web getWebById(int id2) {
