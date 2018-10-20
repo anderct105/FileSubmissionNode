@@ -2,6 +2,7 @@ package eus.ehu.ikasle.eda.segundaFase;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+import java.util.function.Consumer;
 
 public class CircularLinkedList<T> implements ListADT<T> {
 
@@ -29,6 +30,14 @@ public class CircularLinkedList<T> implements ListADT<T> {
 	// Elimina el primer elemento de la lista
         // Precondici�n: la lista tiene al menos un elemento
 		// COMPLETAR EL CODIGO Y CALCULAR EL COSTE
+		if(this.last.next != null) {
+			this.last.next = this.last.next.next;
+		}
+		else{
+			this.last = null;
+		}
+		return (T) this;//???para que devuelve algo
+		//coste lineal; el mejor de los casos que el último apunte a null
 
 	}
 
@@ -36,13 +45,33 @@ public class CircularLinkedList<T> implements ListADT<T> {
 	// Elimina el �ltimo elemento de la lista
         // Precondici�n: la lista tiene al menos un elemento
 			// COMPLETAR EL CODIGO Y CALCULAR EL COSTE
-
+			Iterator<T> itr = this.iterator();
+			Node<T> n = null;
+			if(!last.next.equals(last)) {
+				while (!itr.next().equals(last)) {
+					n = (Node<T>) itr.next(); //es necesario esta instruccion? como es circular el siguiente nunca es null
+				}
+				n.next = last.next;
+			}
+			else{
+				last=null;
+			}
+			return null;
 		   }
 
 
 	public T remove(T elem) {
 	//Elimina un elemento concreto de la lista
 		// COMPLETAR EL CODIGO Y CALCULAR EL COSTE
+		Iterator<T> itr = this.iterator();
+		Node<T> n1 = null;
+		Node<T> n2 = this.last;
+		while(!n2.equals(elem)){
+			n1 = n2;
+			n2 = (Node<T>) itr.next();
+		}
+		n1.next = n2.next;
+		return null;
 	}
 
 	public T first() {
@@ -60,13 +89,24 @@ public class CircularLinkedList<T> implements ListADT<T> {
 	}
 
 	public boolean contains(T elem) {
+		Iterator<T> itr = this.iterator();
+		Node<T> n = last;
+		boolean esta = true;
+		while(!n.equals(elem) && esta){
+			n = (Node<T>) itr.next();
+			if(n.equals(last)){ //si ha dado una vuelta para
+				esta = false;
+			}
+		}
+		return esta;
+
 
 		   }
 
 	public T find(T elem) {
 	//Determina si la lista contiene un elemento concreto, y develve su referencia, null en caso de que no est�
 		// COMPLETAR EL CODIGO Y CALCULAR EL COSTE
-
+		return null;
 	}
 
 	public boolean isEmpty() 
@@ -75,15 +115,42 @@ public class CircularLinkedList<T> implements ListADT<T> {
 	
 	public int size() 
 	//Determina el n�mero de elementos de la lista
-	{ return count;};
+	{
+		Iterator<T>itr = this.iterator();
+		Node<T> n = null;
+		count = 0;
+		while(itr.hasNext()){
+			count++;
+		}
+		return count;};
 	
 	/** Return an iterator to the stack that iterates through the items . */ 
 	   public Iterator<T> iterator() { return new ListIterator(); } 
 
 	   // an iterator, doesn't implement remove() since it's optional 
-	   private class ListIterator implements Iterator<T> { 
+	   private class ListIterator implements Iterator<T> {
+		   @Override
+		   public boolean hasNext() {
+			   return false;
+		   }
 
-		// COMPLETAR EL CODIGO Y CALCULAR EL COSTE
+		   @Override
+		   public T next() {
+			   return null;
+		   }
+
+		   @Override
+		   public void remove() {
+
+		   }
+
+		   @Override
+		   public void forEachRemaining(Consumer<? super T> consumer) {
+
+		   }
+
+
+		   // COMPLETAR EL CODIGO Y CALCULAR EL COSTE
 
 
 
