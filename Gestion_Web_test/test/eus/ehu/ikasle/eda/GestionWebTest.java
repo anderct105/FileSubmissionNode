@@ -85,39 +85,7 @@ public class GestionWebTest {
         assertEquals(resultado.size(), 2);
     }
 
-    @org.junit.Test
-    public void getWebsOrdenadas() {
-        List<Web> wo = GestionWeb.getInstance().getWebsOrdenadas();
-        List<Web> gwo = new ArrayList() {{
-            add(Webs.getInstance().getWebById(0));
-            add(Webs.getInstance().getWebById(3));
-            add(Webs.getInstance().getWebById(4));
-            add(Webs.getInstance().getWebById(9));
-            add(Webs.getInstance().getWebById(5));
-            add(Webs.getInstance().getWebById(7));
-            add(Webs.getInstance().getWebById(6));
-            add(Webs.getInstance().getWebById(1));
-            add(Webs.getInstance().getWebById(2));
-            add(Webs.getInstance().getWebById(8));
-        }};
-        assertThat(wo, is(gwo));
-    }
 
-    @org.junit.Test
-    public void getWebsOrdenadasQuickSort() {
-        List<Web> wo = GestionWeb.getInstance().getWebsOrdenadasQuickSort();
-        List<Web> gwo = new ArrayList() {{
-            add(Webs.getInstance().getWebById(0));
-            add(Webs.getInstance().getWebById(3));
-            add(Webs.getInstance().getWebById(4));
-            add(Webs.getInstance().getWebById(9));
-            add(Webs.getInstance().getWebById(5));
-            add(Webs.getInstance().getWebById(7));
-            add(Webs.getInstance().getWebById(6));
-            add(Webs.getInstance().getWebById(1));
-            add(Webs.getInstance().getWebById(2));
-            add(Webs.getInstance().getWebById(8));
-        }};
-        assertThat(wo, is(gwo));
-    }
+
+
 }

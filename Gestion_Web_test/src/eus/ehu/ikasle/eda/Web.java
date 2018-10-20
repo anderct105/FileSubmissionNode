@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class Web implements  Comparable<Web>{
+public class Web implements Comparable<Web> {
 
     private int id;
     private String web;
@@ -12,14 +12,14 @@ public class Web implements  Comparable<Web>{
     private List<Palabra> palabras;
 
 
-    public Web(int id, String web){
+    public Web(int id, String web) {
         this.id = id;
         this.web = web;
         this.websEnlazadas = new ArrayList<>();
         this.palabras = new ArrayList<>();
     }
 
-    public Web(String web){
+    public Web(String web) {
         this.web = web;
         this.websEnlazadas = new ArrayList<>();
         this.palabras = new ArrayList<>();
@@ -43,8 +43,7 @@ public class Web implements  Comparable<Web>{
 
     /**
      * Añade la web dada por el parametro a la lista de webs relacionadas a dicha web
-     *
-     * */
+     */
     public void addWebRelacionada(Web webRelacionada) {
         this.websEnlazadas.add(webRelacionada);
     }
@@ -57,15 +56,15 @@ public class Web implements  Comparable<Web>{
         this.palabras.add(palabra);
     }
 
-    public boolean estaEnListaPalabras(Palabra palabra){
+    public boolean estaEnListaPalabras(Palabra palabra) {
         return this.palabras.contains(palabra);
     }
 
     /**
-     * Rellena la lista de palabras que tiene la web y añade la web a la listas de webs de cada palabra que coincida
-     *
-     * */
-    public void fillPalabras(){
+     * Rellena la lista de palabras que tiene la web
+     * y añade la web a la listas de webs de cada palabra que coincida
+     */
+    public void fillPalabras() {
         Diccionario.getInstance().fillPalabrasDeWeb(this);
     }
 
@@ -93,7 +92,6 @@ public class Web implements  Comparable<Web>{
 
     @Override
     public int hashCode() {
-
         return Objects.hash(web);
     }
 }

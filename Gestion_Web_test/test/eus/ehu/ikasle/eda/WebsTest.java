@@ -55,6 +55,7 @@ public class WebsTest {
             add(Webs.getInstance().getWebById(3));
             add(Webs.getInstance().getWebById(5));
             add(Webs.getInstance().getWebById(7));
+            add(w10);
         }};
         assertThat(lw, is(lw0));
     }
@@ -63,24 +64,6 @@ public class WebsTest {
     public void getWebByFullName() {
         assertEquals(Webs.getInstance().getWebByFullName("0-3ani.ro"), w0);
         assertEquals(Webs.getInstance().getWebByFullName("0086k.com"), w1);
-    }
-
-    @org.junit.Test
-    public void getWebsOrdenadas() {
-        List<Web> wo = new ArrayList(){{
-           add(Webs.getInstance().getWebById(0));
-           add(Webs.getInstance().getWebById(3));
-           add(Webs.getInstance().getWebById(4));
-           add(Webs.getInstance().getWebById(9));
-           add(Webs.getInstance().getWebById(5));
-           add(Webs.getInstance().getWebById(7));
-           add(Webs.getInstance().getWebById(6));
-           add(Webs.getInstance().getWebById(1));
-           add(Webs.getInstance().getWebById(2));
-           add(Webs.getInstance().getWebById(8));
-        }};
-        List<Web> gwo = Webs.getInstance().getWebsOrdenadas();
-        assertThat(gwo,is(wo));
     }
 
     @org.junit.Test
