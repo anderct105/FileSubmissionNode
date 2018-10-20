@@ -123,7 +123,7 @@ public class Main2 {
                 match = true;
             }
         } while (!match);
-        GestionWeb.nuevaWeb(nombre);
+        GestionWeb.getInstance().nuevaWeb(nombre);
         System.out.println("Web añadida exitosamente!");
     }
 
