@@ -4,7 +4,7 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.function.Consumer;
 
-public class CircularLinkedList<T> implements ListADT<T> {
+public class CircularLinkedList<T extends Comparable<T>> implements ListADT<T> {
 
 	// Atributos
 	protected Node<T> last; // apuntador al ultimo
