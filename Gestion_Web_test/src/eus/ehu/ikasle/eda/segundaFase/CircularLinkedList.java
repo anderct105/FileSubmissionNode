@@ -13,7 +13,7 @@ public class CircularLinkedList<T extends Comparable<T>> implements ListADT<T> {
 
 	// Constructor
 	public CircularLinkedList() {
-	     last = null;
+		last = null;
 		descr = "";
 		count = 0;
 	}
@@ -104,9 +104,18 @@ public class CircularLinkedList<T extends Comparable<T>> implements ListADT<T> {
 		   }
 
 	public T find(T elem) {
+		T info = null;
+		Iterator<T> itr = this.iterator();
+		Node<T> n1 = null;
+		Node<T> n2 = this.last;
+		while (!n2.equals(elem) || itr.hasNext()) {
+			n1 = n2;
+			n2 = (Node<T>) itr.next();
+		}
+		info = n1.data;
 	//Determina si la lista contiene un elemento concreto, y develve su referencia, null en caso de que no est�
 		// COMPLETAR EL CODIGO Y CALCULAR EL COSTE
-		return null;
+		return info;
 	}
 
 	public boolean isEmpty() 

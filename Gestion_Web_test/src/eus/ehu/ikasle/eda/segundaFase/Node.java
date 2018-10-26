@@ -11,6 +11,14 @@ package eus.ehu.ikasle.eda.segundaFase;
 			next = null;
 
 		}
+
+		public T getData(){
+			return data;
+		}
+
+		public Node<T> getNext(){
+			return next;
+		}
 	}
 
 
