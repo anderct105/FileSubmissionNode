@@ -13,7 +13,7 @@ public class CircularLinkedList<T extends Comparable<T>> implements ListADT<T> {
 
 	// Constructor
 	public CircularLinkedList() {
-	     last = null;
+		last = null;
 		descr = "";
 		count = 0;
 	}
@@ -26,7 +26,7 @@ public class CircularLinkedList<T extends Comparable<T>> implements ListADT<T> {
 	  return descr;
 	}
 
-	public T removeFirst() {
+	public T removeFirst() {  //O(1)
 	// Elimina el primer elemento de la lista
         // Precondici�n: la lista tiene al menos un elemento
 		// COMPLETAR EL CODIGO Y CALCULAR EL COSTE
@@ -39,12 +39,10 @@ public class CircularLinkedList<T extends Comparable<T>> implements ListADT<T> {
 			this.last = null;
 		}
 		return n;
-		//O(1)
-
 	}
 
-	public T removeLast() {
-	// Elimina el �ltimo elemento de la lista
+	public T removeLast() {  //O(n) -> n = el número de elementos de la lista
+		// Elimina el �ltimo elemento de la lista
         // Precondici�n: la lista tiene al menos un elemento
 			// COMPLETAR EL CODIGO Y CALCULAR EL COSTE
 			Iterator<T> itr = this.iterator();
@@ -62,8 +60,7 @@ public class CircularLinkedList<T extends Comparable<T>> implements ListADT<T> {
 			return last_aux;
 		   }
 
-
-	public T remove(T elem) {
+	public T remove(T elem) {  //O(n) -> n = el número de elementos de la lista
 	//Elimina un elemento concreto de la lista
 		// COMPLETAR EL CODIGO Y CALCULAR EL COSTE
 		Node<T> actual = this.last;
@@ -84,14 +81,14 @@ public class CircularLinkedList<T extends Comparable<T>> implements ListADT<T> {
 		return removed.data;
 	}
 
-	public T first() {
+	public T first() {  //O(1)
 	//Da acceso al primer elemento de la lista
 	      if (isEmpty())
 	          return null;
 	      else return last.next.data;
 	}
 
-	public T last() {
+	public T last() {  //O(1)
 	//Da acceso al �ltimo elemento de la lista
 	      if (isEmpty())
 	          return null;
@@ -117,11 +114,9 @@ public class CircularLinkedList<T extends Comparable<T>> implements ListADT<T> {
             actual = actual.next;
         }while(!esta && actual != last.next );
 		return esta;
-
-
 	}
 
-	public T find(T elem) {
+	public T find(T elem) {  //coste O(n) y n = al numero de elementos de la lista
 	//Determina si la lista contiene un elemento concreto, y develve su referencia, null en caso de que no est�
 		// COMPLETAR EL CODIGO Y CALCULAR EL COSTE
         Node<T> actual= last.next, result = null;
@@ -184,13 +179,6 @@ public class CircularLinkedList<T extends Comparable<T>> implements ListADT<T> {
 
 	           return result;
 		   }
-
-
-
-		   // COMPLETAR EL CODIGO Y CALCULAR EL COSTE
-
-
-
 	   } // private class
 		
 		
@@ -199,7 +187,7 @@ public class CircularLinkedList<T extends Comparable<T>> implements ListADT<T> {
 		}
 
 		@Override
-		public String toString() {
+		public String toString() {  //coste O(n) y n = al numero de elementos de la lista
 			String result = new String();
 			Iterator<T> it = iterator();
 			while (it.hasNext()) {

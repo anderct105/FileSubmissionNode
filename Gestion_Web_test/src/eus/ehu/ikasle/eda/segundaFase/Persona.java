@@ -20,7 +20,7 @@ public class Persona implements Comparable<Persona> {
 	public void setDni(String dni) { this.dni = dni; }
 
 	@Override
-	public boolean equals(Object obj) {
+	public boolean equals(Object obj) { //O(1)
 		if (this == obj)
 			return true;
 		if (obj == null)
@@ -39,10 +39,10 @@ public class Persona implements Comparable<Persona> {
 	@Override
 	public int compareTo(Persona arg0) {
 		return name.compareToIgnoreCase(arg0.name);
-	}
+	}  //O(1)
 
 	public String toString() {
 		return name + " " + dni;
-	}
+	}  //O(1)
 	
 } // end Persona
