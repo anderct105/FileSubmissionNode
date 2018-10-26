@@ -1,6 +1,6 @@
 package eus.ehu.ikasle.eda.segundaFase;
 
-public interface UnorderedListADT<T> extends ListADT<T> {
+public interface UnorderedListADT<T extends Comparable<T>> extends ListADT<T> {
 	
 	public void addToFront(T elem);
 	// a�ade un elemento al comienzo 

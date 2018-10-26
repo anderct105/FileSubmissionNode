@@ -8,7 +8,7 @@
 
 package eus.ehu.ikasle.eda.segundaFase;
 
-public interface IndexedListADT<T> extends ListADT<T>
+public interface IndexedListADT<T extends Comparable<T>> extends ListADT<T>
 {
    /**  
     * Inserts the specified element at the specified index. 

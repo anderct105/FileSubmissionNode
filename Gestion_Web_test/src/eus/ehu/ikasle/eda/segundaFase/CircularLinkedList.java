@@ -30,14 +30,16 @@ public class CircularLinkedList<T extends Comparable<T>> implements ListADT<T> {
 	// Elimina el primer elemento de la lista
         // Precondici�n: la lista tiene al menos un elemento
 		// COMPLETAR EL CODIGO Y CALCULAR EL COSTE
-		if(this.last.next != null) {
+		T n= null;
+		if(this.last.next != last) {
+			n = this.last.next.data;
 			this.last.next = this.last.next.next;
 		}
 		else{
 			this.last = null;
 		}
-		return (T) this;//???para que devuelve algo
-		//coste lineal; el mejor de los casos que el último apunte a null
+		return n;
+		//O(1)
 
 	}
 
@@ -47,6 +49,7 @@ public class CircularLinkedList<T extends Comparable<T>> implements ListADT<T> {
 			// COMPLETAR EL CODIGO Y CALCULAR EL COSTE
 			Iterator<T> itr = this.iterator();
 			Node<T> n = null;
+			T last_aux = last.data;
 			if(!last.next.equals(last)) {
 				while (!itr.next().equals(last)) {
 					n = (Node<T>) itr.next(); //es necesario esta instruccion? como es circular el siguiente nunca es null
@@ -56,22 +59,29 @@ public class CircularLinkedList<T extends Comparable<T>> implements ListADT<T> {
 			else{
 				last=null;
 			}
-			return null;
+			return last_aux;
 		   }
 
 
 	public T remove(T elem) {
 	//Elimina un elemento concreto de la lista
 		// COMPLETAR EL CODIGO Y CALCULAR EL COSTE
-		Iterator<T> itr = this.iterator();
-		Node<T> n1 = null;
-		Node<T> n2 = this.last;
-		while(!n2.equals(elem)){
-			n1 = n2;
-			n2 = (Node<T>) itr.next();
-		}
-		n1.next = n2.next;
-		return null;
+		Node<T> actual = this.last;
+		Node<T> removed = null;
+		boolean encontrado = false;
+		do {
+		    if (actual.next.data.equals(elem)){
+		        encontrado = true;
+		        removed = actual.next;
+            }else{
+                actual = actual.next;
+            }
+        }while(actual != last && !encontrado);
+		if (encontrado){
+            actual.next = actual.next.next;
+        }
+
+		return removed.data;
 	}
 
 	public T first() {
@@ -88,66 +98,93 @@ public class CircularLinkedList<T extends Comparable<T>> implements ListADT<T> {
 	      else return last.data;
 	}
 
-	public boolean contains(T elem) {
-		Iterator<T> itr = this.iterator();
+	public boolean contains(T elem) { //coste O(n) y n = al numero de elementos de la lista
+		/*Iterator<T> itr = this.iterator();
 		Node<T> n = last;
 		boolean esta = true;
 		while(!n.equals(elem) && esta){
 			n = (Node<T>) itr.next();
-			if(n.equals(last)){ //si ha dado una vuelta para
+			if(itr.hasNext()){ //si ha dado una vuelta para
 				esta = false;
 			}
-		}
+		}*/
+		boolean esta = false;
+		Node actual = this.last.next;
+		do{
+		    if(actual.data.equals(elem)){
+		        esta = true;
+            }
+            actual = actual.next;
+        }while(!esta && actual != last.next );
 		return esta;
 
 
-		   }
+	}
 
 	public T find(T elem) {
 	//Determina si la lista contiene un elemento concreto, y develve su referencia, null en caso de que no est�
 		// COMPLETAR EL CODIGO Y CALCULAR EL COSTE
-		return null;
+        Node<T> actual= last.next, result = null;
+        /*boolean esta = false;
+        do{
+            if(actual.data.equals(elem)){
+                esta = true;
+                result = actual;
+            }
+            actual = actual.next;
+        }while(actual != last.next && !esta);
+        if(!esta){
+            actual = null;
+        }
+		return result.data;
+        */
+        while((actual = actual.next) != this.last && !actual.data.equals(elem));
+        if (!actual.data.equals(elem)){
+            actual = null;
+        }
+
+        return (actual != null)?actual.data:null;
+
 	}
 
 	public boolean isEmpty() 
 	//Determina si la lista est� vac�a
 	{ return last == null;};
 	
-	public int size() 
-	//Determina el n�mero de elementos de la lista
-	{
-		Iterator<T>itr = this.iterator();
-		Node<T> n = null;
-		count = 0;
-		while(itr.hasNext()){
-			count++;
-		}
-		return count;};
+	public int size() {
+        //Determina el n�mero de elementos de la lista
+        return this.count;
+    }
+
 	
 	/** Return an iterator to the stack that iterates through the items . */ 
 	   public Iterator<T> iterator() { return new ListIterator(); } 
 
 	   // an iterator, doesn't implement remove() since it's optional 
 	   private class ListIterator implements Iterator<T> {
+
+	       private Node<T> actualNode;
+	       private int count;
+	       public ListIterator(){
+	           actualNode = CircularLinkedList.this.last.next;
+	           this.count = 0;
+           }
+
 		   @Override
-		   public boolean hasNext() {
-			   return false;
+		   public boolean hasNext() { // O(1)
+		       return this.count < CircularLinkedList.this.count;
 		   }
 
 		   @Override
-		   public T next() {
-			   return null;
+		   public T next() { //O(1)
+	           T result = this.actualNode.data;
+
+	           this.actualNode = actualNode.next;
+	           count++;
+
+	           return result;
 		   }
 
-		   @Override
-		   public void remove() {
-
-		   }
-
-		   @Override
-		   public void forEachRemaining(Consumer<? super T> consumer) {
-
-		   }
 
 
 		   // COMPLETAR EL CODIGO Y CALCULAR EL COSTE

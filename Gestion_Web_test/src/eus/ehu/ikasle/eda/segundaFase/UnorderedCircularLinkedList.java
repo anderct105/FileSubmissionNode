@@ -1,6 +1,6 @@
 package eus.ehu.ikasle.eda.segundaFase;
 
-public class UnorderedCircularLinkedList<T> extends CircularLinkedList<T> implements UnorderedListADT<T> {
+public class UnorderedCircularLinkedList<T extends Comparable<T>> extends CircularLinkedList<T> implements UnorderedListADT<T> {
 	
 	public void addToFront(T elem) { // O(1)
 	// a�ade un elemento al comienzo
@@ -11,22 +11,21 @@ public class UnorderedCircularLinkedList<T> extends CircularLinkedList<T> implem
             this.last.next = elemNode;
         }else{
 		    this.last = elemNode;
+		    elemNode.next = last;
         }
         this.count++;
 	}
 
-	public void addToRear(T elem) { // O(n) n = numero de elementos
+	public void addToRear(T elem) { // O(1)
 	// a�ade un elemento al final 
 		// COMPLETAR EL CODIGO Y CALCULAR EL COSTE
         Node<T> elemNode = new Node<T>(elem);
-        Node<T> tmp;
-        if (this.count != 0){
-            while(!(tmp = this.last.next).next.equals(last));
+        if (this.count != 0 ){
             elemNode.next = this.last.next;
-            tmp.next = elemNode;
-            this.last = elemNode;
+            this.last.next = elemNode;
         }else{
             this.last = elemNode;
+            this.last.next = elemNode;
         }
         this.count++;
 	}
