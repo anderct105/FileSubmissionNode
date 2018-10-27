@@ -6,16 +6,21 @@ public class OrderedCircularLinkedList<T extends Comparable<T>> extends Circular
 	
 	public void add(T elem){  //coste O(n) y n = al numero de elementos de la lista
 		// COMPLETAR EL CODIGO Y CALCULAR EL COSTE
-        Node<T> actual = this.last;
         Node<T> n = new Node<>(elem);
         if (!isEmpty()) {
+            Node<T> prev = this.last;
+            Node<T> actual = this.last.next;
+            boolean anadido = false;
             do{
+                if (actual.data.compareTo(elem) > 0){
+                    n.next = actual;
+                    prev.next = n;
+                    anadido = true;
+                }
+                prev = actual;
                 actual = actual.next;
-            }while (actual != last && actual.next.data.compareTo(elem) < 0);
-            if (actual != last){
-                n.next = actual.next;
-                actual.next = n;
-            }else{
+            }while(!actual.equals(this.last.next) && !anadido);
+            if (!anadido){
                 n.next = this.last.next;
                 this.last.next = n;
                 this.last = n;
@@ -24,6 +29,7 @@ public class OrderedCircularLinkedList<T extends Comparable<T>> extends Circular
             this.last = n;
             this.last.next = n;
         }
+        this.count++;
 	}
 
 
