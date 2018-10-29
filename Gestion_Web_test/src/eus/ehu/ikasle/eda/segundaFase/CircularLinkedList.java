@@ -65,7 +65,14 @@ public class CircularLinkedList<T extends Comparable<T>> implements ListADT<T> {
             Node<T> actual = this.last.next;
             Node<T> prev = this.last;
             boolean borrado = false;
-            do{
+            if (actual.data.equals(elem)){
+                result = actual.data;
+                prev.next = actual.next;
+                borrado = true;
+            }
+            prev = actual;
+            actual = actual.next;
+            while(!actual.equals(this.last.next) && !borrado){
                 if (actual.data.equals(elem)){
                     result = actual.data;
                     prev.next = actual.next;
@@ -73,13 +80,13 @@ public class CircularLinkedList<T extends Comparable<T>> implements ListADT<T> {
                 }
                 prev = actual;
                 actual = actual.next;
-            }while(!actual.equals(this.last) && !borrado);
-            if (!borrado && actual.data.equals(elem)){
-                prev.next = actual.next;
-                this.last = prev;
+            }
+
+            if(borrado){
+                count--;
             }
         }
-        count--;
+
         return result;
     }
 
@@ -100,12 +107,16 @@ public class CircularLinkedList<T extends Comparable<T>> implements ListADT<T> {
     public boolean contains(T elem) { //coste O(n) y n = al numero de elementos de la lista
         boolean esta = false;
         Node actual = this.last.next;
-        do {
+        if (actual.data.equals(elem)) {
+            esta = true;
+        }
+        actual = actual.next;
+        while (!esta && actual != last.next){
             if (actual.data.equals(elem)) {
                 esta = true;
             }
             actual = actual.next;
-        } while (!esta && actual != last.next);
+        }
         return esta;
     }
 
@@ -114,13 +125,18 @@ public class CircularLinkedList<T extends Comparable<T>> implements ListADT<T> {
         // COMPLETAR EL CODIGO Y CALCULAR EL COSTE
         Node<T> actual = last.next;
         T result = null;
-        while (!actual.equals(this.last) && !actual.data.equals(elem)){
+        if (!isEmpty()){
+            if (actual.data.equals(elem)) {
+                result = actual.data;
+            }
             actual = actual.next;
+            while(result == null && !actual.equals(this.last.next)){
+                if (actual.data.equals(elem)){
+                    result = actual.data;
+                }
+                actual = actual.next;
+            }
         }
-        if (actual.data.equals(elem)) {
-            result = actual.data;
-        }
-
         return result;
 
     }
@@ -164,11 +180,13 @@ public class CircularLinkedList<T extends Comparable<T>> implements ListADT<T> {
 
         @Override
         public T next() { //O(1)
-            T result = this.actualNode.data;
+            T result = null;
+            if (hasNext()){
+                result = this.actualNode.data;
+                this.actualNode = actualNode.next;
+                count++;
 
-            this.actualNode = actualNode.next;
-            count++;
-
+            }
             return result;
         }
     } // private class
@@ -186,7 +204,6 @@ public class CircularLinkedList<T extends Comparable<T>> implements ListADT<T> {
             T elem = it.next();
             result = result + "[" + elem.toString() + "] ";
         }
-        //result = result.substring(0,result.length()-1);
         return "SimpleLinkedList [ " + result + "]";
     }
 

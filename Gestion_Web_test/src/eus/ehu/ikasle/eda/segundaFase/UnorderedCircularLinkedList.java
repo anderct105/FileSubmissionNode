@@ -1,5 +1,7 @@
 package eus.ehu.ikasle.eda.segundaFase;
 
+import java.util.NoSuchElementException;
+
 public class UnorderedCircularLinkedList<T extends Comparable<T>> extends CircularLinkedList<T> implements UnorderedListADT<T> {
 	
 	public void addToFront(T elem) { // O(1)
@@ -43,6 +45,8 @@ public class UnorderedCircularLinkedList<T extends Comparable<T>> extends Circul
                 elemNode.next = tmp.next;
                 tmp.next = elemNode;
                 this.count++;
+            }else{
+                throw new NoSuchElementException("Target not found");
             }
         }
 	}
