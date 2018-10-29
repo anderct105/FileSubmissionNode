@@ -25,13 +25,14 @@ public class UnorderedCircularLinkedList<T extends Comparable<T>> extends Circul
         if (this.count != 0 ){
             elemNode.next = this.last.next;
             this.last.next = elemNode;
+            this.last = elemNode;
         }else{
             this.last = elemNode;
             this.last.next = elemNode;
         }
         this.count++;
 	}
-	
+
 	public void addAfter(T elem, T target) { //O(n) n= numero de elementos
 	// A�ade elem detr�s de otro elemento concreto, target,  que ya se encuentra en la lista
 		// �COMPLETAR OPCIONAL!
@@ -49,6 +50,7 @@ public class UnorderedCircularLinkedList<T extends Comparable<T>> extends Circul
                 throw new NoSuchElementException("Target not found");
             }
         }
+        //TODO me da que no hace lo que tiene que hacer
 	}
 
 }

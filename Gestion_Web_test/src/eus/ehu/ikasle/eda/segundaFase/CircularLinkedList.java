@@ -170,8 +170,10 @@ public class CircularLinkedList<T extends Comparable<T>> implements ListADT<T> {
         private int count;
 
         public ListIterator() {
-            actualNode = CircularLinkedList.this.last.next;
-            this.count = 0  ;
+            this.count = 0;
+            if (hasNext()){
+                actualNode = CircularLinkedList.this.last.next;
+            }
         }
 
         @Override
