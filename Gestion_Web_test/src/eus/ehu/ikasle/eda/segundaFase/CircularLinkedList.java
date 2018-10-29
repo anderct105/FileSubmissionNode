@@ -42,18 +42,19 @@ public class CircularLinkedList<T extends Comparable<T>> implements ListADT<T> {
         // Elimina el �ltimo elemento de la lista
         // Precondici�n: la lista tiene al menos un elemento
         // COMPLETAR EL CODIGO Y CALCULAR EL COSTE
-        Iterator<T> itr = this.iterator();
-        Node<T> n = null;
-        T last_aux = last.data;
-        if (!last.next.equals(last)) {
-            while (!itr.next().equals(last)) {
-                n = (Node<T>) itr.next(); //es necesario esta instruccion? como es circular el siguiente nunca es null
+        T result = null;
+        if (this.count == 1){
+            result = this.last.data;
+            this.last = null;
+        }else{
+            Node<T> actual = this.last.next;
+            while(actual.next != this.last){
+                actual = actual.next;
             }
-            n.next = last.next;
-        } else {
-            last = null;
+            actual.next = this.last.next;
         }
-        return last_aux;
+        count--;
+        return result;
     }
 
     public T remove(T elem) {  //O(n) -> n = el número de elementos de la lista
