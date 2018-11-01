@@ -2,7 +2,7 @@ package eus.ehu.ikasle.eda.segundaFase;
 
 import java.util.NoSuchElementException;
 
-public class UnorderedCircularLinkedList<T extends Comparable<T>> extends CircularLinkedList<T> implements UnorderedListADT<T> {
+public class UnorderedCircularLinkedList<T> extends CircularLinkedList<T> implements UnorderedListADT<T> {
 
     public void addToFront(T elem) { // O(1)
         // a�ade un elemento al comienzo
