@@ -12,12 +12,18 @@ public class Main {
 
     }
 
-    private static void testCircularLinkedList(){
+    private static void testCircularLinkedList() {
         UnorderedCircularLinkedList<Integer> testing = new UnorderedCircularLinkedList<Integer>();
-        UnorderedCircularLinkedList<Integer> testing1Element = new UnorderedCircularLinkedList<Integer>(){{addToRear(0);}};
-        UnorderedCircularLinkedList<Integer> testing2Elements = new UnorderedCircularLinkedList<Integer>(){
-            {addToRear(0);addToRear(1);}};
-        for (int i = 0; i < 10; i++){
+        UnorderedCircularLinkedList<Integer> testing1Element = new UnorderedCircularLinkedList<Integer>() {{
+            addToRear(0);
+        }};
+        UnorderedCircularLinkedList<Integer> testing2Elements = new UnorderedCircularLinkedList<Integer>() {
+            {
+                addToRear(0);
+                addToRear(1);
+            }
+        };
+        for (int i = 0; i < 10; i++) {
             testing.addToRear(i);
         }
         System.out.println("Testing CircularLinkedList methods");
@@ -48,13 +54,13 @@ public class Main {
                 testing2Elements.contains(0));
         System.out.println("\t\t- 2 elements list contains 2 < 0 1>:" +
                 testing2Elements.contains(2));
-        System.out.println("\t\t- 2+ elements list contains 0 < 0 1 2 3 4 5 6 7 8 9 >:"+
+        System.out.println("\t\t- 2+ elements list contains 0 < 0 1 2 3 4 5 6 7 8 9 >:" +
                 testing.contains(0));
-        System.out.println("\t\t- 2+ elements list contains 9 < 0 1 2 3 4 5 6 7 8 9 >:"+
+        System.out.println("\t\t- 2+ elements list contains 9 < 0 1 2 3 4 5 6 7 8 9 >:" +
                 testing.contains(9));
-        System.out.println("\t\t- 2+ elements list contains 5 < 1 2 3 4 5 6 7 8 9 >:"+
+        System.out.println("\t\t- 2+ elements list contains 5 < 1 2 3 4 5 6 7 8 9 >:" +
                 testing.contains(5));
-        System.out.println("\t\t- 2+ elements list contains 10 < 1 2 3 4 5 6 7 8 9 >:"+
+        System.out.println("\t\t- 2+ elements list contains 10 < 1 2 3 4 5 6 7 8 9 >:" +
                 testing.contains(10));
         //find
         System.out.println("\t| find test O(n)");
@@ -68,13 +74,13 @@ public class Main {
                 testing2Elements.find(0));
         System.out.println("\t\t- 2 elements list contains 2 < 0 1>:" +
                 testing2Elements.find(2));
-        System.out.println("\t\t- 2+ elements list contains 0 < 0 1 2 3 4 5 6 7 8 9 >:"+
+        System.out.println("\t\t- 2+ elements list contains 0 < 0 1 2 3 4 5 6 7 8 9 >:" +
                 testing.find(0));
-        System.out.println("\t\t- 2+ elements list contains 9 < 0 1 2 3 4 5 6 7 8 9 >:"+
+        System.out.println("\t\t- 2+ elements list contains 9 < 0 1 2 3 4 5 6 7 8 9 >:" +
                 testing.find(9));
-        System.out.println("\t\t- 2+ elements list contains 5 < 1 2 3 4 5 6 7 8 9 >:"+
+        System.out.println("\t\t- 2+ elements list contains 5 < 1 2 3 4 5 6 7 8 9 >:" +
                 testing.find(5));
-        System.out.println("\t\t- 2+ elements list contains 10 < 1 2 3 4 5 6 7 8 9 >:"+
+        System.out.println("\t\t- 2+ elements list contains 10 < 1 2 3 4 5 6 7 8 9 >:" +
                 testing.find(10));
         //isEmpty
         System.out.println("\t| isEmpty test O(1)");
@@ -90,7 +96,7 @@ public class Main {
         System.out.println("\t\t\t non-empty list: " + testing1Element.iterator().next());
         String result = " ";
         Iterator<Integer> itr = testing.iterator();
-        while(itr.hasNext()){
+        while (itr.hasNext()) {
             result += itr.next().toString() + " ";
         }
         System.out.println("\t\t\t loop test (while hasNext):" + "[" + result + "]");
@@ -106,10 +112,16 @@ public class Main {
         System.out.println("\t\t\tFinal list:" + testing.toString());
         //removeLast
         testing = new UnorderedCircularLinkedList<Integer>();
-        testing1Element = new UnorderedCircularLinkedList<Integer>(){{addToRear(0);}};
-        testing2Elements = new UnorderedCircularLinkedList<Integer>(){
-            {addToRear(0);addToRear(1);}};
-        for (int i = 0; i < 10; i++){
+        testing1Element = new UnorderedCircularLinkedList<Integer>() {{
+            addToRear(0);
+        }};
+        testing2Elements = new UnorderedCircularLinkedList<Integer>() {
+            {
+                addToRear(0);
+                addToRear(1);
+            }
+        };
+        for (int i = 0; i < 10; i++) {
             testing.addToRear(i);
         }
         System.out.println("\t| removeLast test O(n)");
@@ -123,10 +135,16 @@ public class Main {
         System.out.println("\t\t\tFinal list:" + testing.toString());
         //remove
         testing = new UnorderedCircularLinkedList<Integer>();
-        testing1Element = new UnorderedCircularLinkedList<Integer>(){{addToRear(0);}};
-        testing2Elements = new UnorderedCircularLinkedList<Integer>(){
-            {addToRear(0);addToRear(1);}};
-        for (int i = 0; i < 10; i++){
+        testing1Element = new UnorderedCircularLinkedList<Integer>() {{
+            addToRear(0);
+        }};
+        testing2Elements = new UnorderedCircularLinkedList<Integer>() {
+            {
+                addToRear(0);
+                addToRear(1);
+            }
+        };
+        for (int i = 0; i < 10; i++) {
             testing.addToRear(i);
         }
         System.out.println("\t| remove test O(n)");
@@ -140,29 +158,29 @@ public class Main {
         System.out.println("\t\t\tFinal list: " + testing2Elements.toString());
         System.out.println("\t\t- 2 elements list (remove 1) < 0 1 >:" + testing2Elements.remove(1));
         System.out.println("\t\t\tFinal list: " + testing2Elements.toString());
-        testing2Elements = new UnorderedCircularLinkedList<Integer>(){
-            {addToRear(0);addToRear(1);}};
+        testing2Elements = new UnorderedCircularLinkedList<Integer>() {
+            {
+                addToRear(0);
+                addToRear(1);
+            }
+        };
         System.out.println("\t\t- 2 elements list (remove 0) < 0 1 >:" + testing2Elements.remove(0));
         System.out.println("\t\t\tFinal list: " + testing2Elements.toString());
-        System.out.println("\t\t- 2+ elements list (remove 0) < 0 1 2 3 4 5 6 7 8 9 >:"+
+        System.out.println("\t\t- 2+ elements list (remove 0) < 0 1 2 3 4 5 6 7 8 9 >:" +
                 testing.remove(0));
         System.out.println("\t\t\tFinal list: " + testing.toString());
         testing.addToFront(0);
-        System.out.println("\t\t- 2+ elements list (remove 9) < 0 1 2 3 4 5 6 7 8 9 >:"+
+        System.out.println("\t\t- 2+ elements list (remove 9) < 0 1 2 3 4 5 6 7 8 9 >:" +
                 testing.remove(9));
         System.out.println("\t\t\tFinal list: " + testing.toString());
         testing.addToRear(9);
-        System.out.println("\t\t- 2+ elements list (remove 5)< 1 2 3 4 5 6 7 8 9 >:"+
+        System.out.println("\t\t- 2+ elements list (remove 5)< 1 2 3 4 5 6 7 8 9 >:" +
                 testing.remove(5));
         System.out.println("\t\t\tFinal list: " + testing.toString());
-        testing.addAfter(5,4);
-        System.out.println("\t\t- 2+ elements list (remove 10) < 1 2 3 4 5 6 7 8 9 >:"+
+        testing.addAfter(5, 4);
+        System.out.println("\t\t- 2+ elements list (remove 10) < 1 2 3 4 5 6 7 8 9 >:" +
                 testing.remove(10));
         System.out.println("\t\t\tFinal list: " + testing.toString());
-    }
-
-    private static void init() {
-
     }
 
     private static void testOrderedCircularLinkedList() {
