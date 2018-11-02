@@ -41,7 +41,7 @@ public class CircularLinkedList<T> implements ListADT<T> {
         return n;
     }
 
-    public T removeLast() {  //O(n) -> n = el número de elementos de la lista
+    public T removeLast() {  //O(n) -> n = el numero de elementos de la lista
         // Elimina el ultimo elemento de la lista
         // Precondicion: la lista tiene al menos un elemento
         T result = null;
@@ -63,7 +63,7 @@ public class CircularLinkedList<T> implements ListADT<T> {
         return result;
     }
 
-    public T remove(T elem) {  //O(n) -> n = el número de elementos de la lista
+    public T remove(T elem) {  //O(n) -> n = el numero de elementos de la lista
         //Elimina un elemento concreto de la lista
         T result = null;
 

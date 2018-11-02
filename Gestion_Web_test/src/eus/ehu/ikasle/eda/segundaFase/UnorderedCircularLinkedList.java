@@ -5,7 +5,7 @@ import java.util.NoSuchElementException;
 public class UnorderedCircularLinkedList<T> extends CircularLinkedList<T> implements UnorderedListADT<T> {
 
     public void addToFront(T elem) { // O(1)
-        // añade un elemento al comienzo
+        // anade un elemento al comienzo
         Node<T> elemNode = new Node<T>(elem);
         if (this.count != 0) {
             elemNode.next = this.last.next;
@@ -18,7 +18,7 @@ public class UnorderedCircularLinkedList<T> extends CircularLinkedList<T> implem
     }
 
     public void addToRear(T elem) { // O(1)
-        // añade un elemento al final
+        // anade un elemento al final
         Node<T> elemNode = new Node<T>(elem);
         if (this.count != 0) {
             elemNode.next = this.last.next;
@@ -32,7 +32,7 @@ public class UnorderedCircularLinkedList<T> extends CircularLinkedList<T> implem
     }
 
     public void addAfter(T elem, T target) { //O(n) n= numero de elementos
-        // Añade elem detras de otro elemento concreto, target,  que ya se encuentra en la lista
+        // Anade elem detras de otro elemento concreto, target,  que ya se encuentra en la lista
         Node tmp;
         if (count != 0) {
             tmp = this.last.next;

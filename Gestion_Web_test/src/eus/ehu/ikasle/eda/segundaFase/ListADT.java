@@ -14,7 +14,7 @@ public interface ListADT<T> {
 //Elimina el primer elemento de la lista
 
     public T removeLast();
-//Elimina el �ltimo elemento de la lista
+//Elimina el ultimo elemento de la lista
 
     public T remove(T elem);
 //Elimina un elemento concreto de la lista
@@ -23,19 +23,19 @@ public interface ListADT<T> {
 //Da acceso al primer elemento de la lista
 
     public T last();
-//Da acceso al �ltimo elemento de la lista
+//Da acceso al ultimo elemento de la lista
 
     public boolean contains(T elem);
 //Determina si la lista contiene un elemento concreto
 
     public T find(T elem);
-//Determina si la lista contiene un elemento concreto, y develve su referencia, null en caso de que no est�
+//Determina si la lista contiene un elemento concreto, y develve su referencia, null en caso de que no esta
 
     public boolean isEmpty();
-//Determina si la lista est� vac�a
+//Determina si la lista esta vacia
 
     public int size();
-//Determina el n�mero de elementos de la lista
+//Determina el numero de elementos de la lista
 
     public Iterator<T> iterator();
 
