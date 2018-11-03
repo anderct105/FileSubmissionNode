@@ -2,11 +2,10 @@ package eus.ehu.ikasle.eda.segundaFase;
 
 import java.util.NoSuchElementException;
 
-public class UnorderedCircularLinkedList<T extends Comparable<T>> extends CircularLinkedList<T> implements UnorderedListADT<T> {
+public class UnorderedCircularLinkedList<T> extends CircularLinkedList<T> implements UnorderedListADT<T> {
 
     public void addToFront(T elem) { // O(1)
-        // a�ade un elemento al comienzo
-        // COMPLETAR EL CODIGO Y CALCULAR EL COSTE
+        // anade un elemento al comienzo
         Node<T> elemNode = new Node<T>(elem);
         if (this.count != 0) {
             elemNode.next = this.last.next;
@@ -19,8 +18,7 @@ public class UnorderedCircularLinkedList<T extends Comparable<T>> extends Circul
     }
 
     public void addToRear(T elem) { // O(1)
-        // a�ade un elemento al final
-        // COMPLETAR EL CODIGO Y CALCULAR EL COSTE
+        // anade un elemento al final
         Node<T> elemNode = new Node<T>(elem);
         if (this.count != 0) {
             elemNode.next = this.last.next;
@@ -34,11 +32,8 @@ public class UnorderedCircularLinkedList<T extends Comparable<T>> extends Circul
     }
 
     public void addAfter(T elem, T target) { //O(n) n= numero de elementos
-        // A�ade elem detr�s de otro elemento concreto, target,  que ya se encuentra en la lista
-        // �COMPLETAR OPCIONAL!
-        // Target ya viene de la lista o es copia ?
-        //Si ya viene
-        Node tmp; // anterior al target
+        // Anade elem detras de otro elemento concreto, target,  que ya se encuentra en la lista
+        Node tmp;
         if (count != 0) {
             tmp = this.last.next;
             if (this.last.data.equals(target)) {
