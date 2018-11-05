@@ -72,13 +72,9 @@ public class CircularLinkedList<T> implements ListADT<T> {
             Node<T> prev = this.last;
             boolean borrado = false;
             if (this.last.data.equals(elem)) {
-                result = this.last.data;
-                removeLast();
-                borrado = true;
+                result = removeLast();
             } else if (actual.data.equals(elem)) {
-                result = actual.data;
-                removeFirst();
-                borrado = true;
+                result = removeFirst();
             } else {
                 prev = actual;
                 actual = actual.next;
