@@ -12,17 +12,20 @@ public class Graph {
     public void crearGrafo(ListaWebs lista){
         // Post: crea el grafo desde la lista de webs
         //       Los nodos son nombres de webs
-
-
-        // Paso 1: llenar “th”
-        // COMPLETAR CÓDIGO
-
+        th = new HashMap<>();
+        keys = new String[lista.size()];
+        int count = 0;
+        for (String web: lista) {
+            th.put(web,count++);
+        }
         // Paso 2: llenar “keys”
         keys = new String[th.size()];
         for (String k: th.keySet()) keys[th.get(k)] = k;
 
         // Paso 3: llenar “adjList”
         // COMPLETAR CÓDIGO
+
+
     }
 
     public void print(){
@@ -39,7 +42,9 @@ public class Graph {
         int pos1 = th.get(a1);
         int pos2 = th.get(a2);
         boolean enc = false;
-        int act, i, relacion = 0;
+        int act = 0;
+        int i = 0;
+        int relacion = 0;
         boolean[] examinados = new boolean[th.size()];
         porExaminar.add(pos1);
         examinados[i] = true;
@@ -47,24 +52,17 @@ public class Graph {
             act = porExaminar.removeFirst();
             if (act == pos2) {
                 enc = true;
-            }
-            else {
-                for (int j = 0; j < adjList.length; i++){
-                    for (int k = 0; k < adjList[j].size(); k++) { 
-                        relacion = adjList[j].get(k);
-                        if (examinados[relacion] == false) {
+            }else {
+                    for (int k = 0; k < adjList[act].size(); k++) {
+                        relacion = adjList[act].get(k);
+                        if (!examinados[relacion]) {
                             porExaminar.add(relacion);
                             examinados[relacion] = true;
                         }
                     }
-                }
             }
         }
-
-
         return enc;
     }
-    }
 }
 
-}
