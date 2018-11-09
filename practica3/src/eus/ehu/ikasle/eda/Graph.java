@@ -39,7 +39,7 @@ public class Graph {
         int pos1 = th.get(a1);
         int pos2 = th.get(a2);
         boolean enc = false;
-        int act, i, relacion, k = 0;
+        int act, i, relacion = 0;
         boolean[] examinados = new boolean[th.size()];
         porExaminar.add(pos1);
         examinados[i] = true;
@@ -50,7 +50,7 @@ public class Graph {
             }
             else {
                 for (int j = 0; j < adjList.length; i++){
-                    while () { // No se como ponerlo para que pare cuando no haya más enlaces que mirar de la web en la que estamos
+                    for (int k = 0; k < adjList[j].size(); k++) { 
                         relacion = adjList[j].get(k);
                         if (examinados[relacion] == false) {
                             porExaminar.add(relacion);
