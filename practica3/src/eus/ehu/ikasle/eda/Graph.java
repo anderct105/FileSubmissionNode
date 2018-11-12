@@ -43,26 +43,68 @@ public class Graph {
         int pos2 = th.get(a2);
         boolean enc = false;
         int act = 0;
-        int i = 0;
         int relacion = 0;
         boolean[] examinados = new boolean[th.size()];
         porExaminar.add(pos1);
-        examinados[i] = true;
+        examinados[0] = true;
         while (!enc && !porExaminar.isEmpty()) {
             act = porExaminar.removeFirst();
             if (act == pos2) {
                 enc = true;
             }else {
-                    for (int k = 0; k < adjList[act].size(); k++) {
-                        relacion = adjList[act].get(k);
-                        if (!examinados[relacion]) {
-                            porExaminar.add(relacion);
-                            examinados[relacion] = true;
-                        }
+                for (int k = 0; k < adjList[act].size(); k++) {
+                    relacion = adjList[act].get(k);
+                    if (!examinados[relacion]) {
+                        porExaminar.add(relacion);
+                        examinados[relacion] = true;
                     }
+                }
             }
         }
         return enc;
+    }
+
+    public ArrayList<Integer> backPointer(String a1, String a2) {
+        LinkedList<Integer> porExaminar = new LinkedList<Integer>();
+        int pos1 = th.get(a1);
+        int pos2 = th.get(a2);
+        boolean enc = false;
+        int act = 0;
+        int relacion = 0;
+        boolean[] examinados = new boolean[th.size()];
+        int[] bp = new int[th.size()];
+        bp[pos1] = -1;
+        porExaminar.add(pos1);
+        examinados[0] = true;
+        while (!enc && !porExaminar.isEmpty()) {
+            act = porExaminar.removeFirst();
+            if (act == pos2) {
+                enc = true;
+            } else {
+                for (int k = 0; k < adjList[act].size(); k++) {
+                    relacion = adjList[act].get(k);
+                    if (!examinados[relacion]) {
+                        porExaminar.add(relacion);
+                        examinados[relacion] = true;
+                        bp[relacion] = act;
+                    }
+                }
+            }
+        }
+        ArrayList<Integer> camino = new ArrayList<Integer>();
+        int valor = pos2;
+        while (valor != -1) {
+            camino.add(valor);
+            valor = bp[valor];
+        }
+        String p = "[";
+        int i  = 0;
+        for(i = 0;i < camino.size()-1;i++){
+            p = p+camino.get(i)+",";
+        }
+        p = p + camino.get(i+1)+"]";
+        System.out.println("El camino es: "+p);
+        return camino;
     }
 }
 
