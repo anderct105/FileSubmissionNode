@@ -8,6 +8,7 @@ public class Graph {
     HashMap<String, Integer> th;
     String[] keys;
     ArrayList<Integer>[] adjList;
+    Integer[] backPointer;
 
     public void crearGrafo(ListaWebs lista){
         // Post: crea el grafo desde la lista de webs
@@ -15,8 +16,8 @@ public class Graph {
         th = new HashMap<>();
         keys = new String[lista.size()];
         int count = 0;
-        for (String web: lista) {
-            th.put(web,count++);
+        for (Web web: lista) {
+            th.put(web.toString(),count++);
         }
         // Paso 2: llenar “keys”
         keys = new String[th.size()];
@@ -24,9 +25,19 @@ public class Graph {
 
         // Paso 3: llenar “adjList”
         // COMPLETAR CÓDIGO
-
-
+        count = 0;
+        for (ArrayList<Integer> relacionesCada: Fichero.getInstance().cargarRelaciones()) {
+            adjList[count] = new ArrayList<>();
+            for (Integer relacion: relacionesCada) {
+                adjList[count].add(relacion);
+            }
+            count++;
+        }
     }
+/* Como buscar camino de vuelta
+    _ usar tercer array para guardar desde donde he llegado
+
+  */
 
     public void print(){
         for (int i = 0; i < adjList.length; i++){

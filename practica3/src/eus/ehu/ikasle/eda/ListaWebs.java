@@ -3,19 +3,19 @@ package eus.ehu.ikasle.eda;
 import java.util.Iterator;
 import java.util.LinkedList;
 
-public class ListaWebs implements Iterable<String>{
+public class ListaWebs implements Iterable<Web> {
 
-    private LinkedList<String> webs;
+    private LinkedList<Web> webs;
 
     public ListaWebs(){
         this.webs = new LinkedList<>();
     }
 
-    public void add(String web){
+    public void add(Web web){
         this.webs.add(web);
     }
 
-    public Iterator<String> iterator(){
+    public Iterator<Web> iterator(){
         return this.webs.iterator();
     }
 
