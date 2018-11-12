@@ -71,12 +71,15 @@ public class Fichero {
                 if (!line.isEmpty()) {
                     line = line.replaceAll("\\D+", " ");
                     entradas = line.split(" "); // devuelve todos lo digitos como un array de strings
-                    ArrayList<Integer> relacionesCada = new ArrayList<>();
-                    for (int i = 1; i < entradas.length; i++) {
-                        relacionesCada.add(Integer.parseInt(entradas[i]));
+                    if (entradas.length > 1){
+                        ArrayList<Integer> relacionesCada = new ArrayList<>();
+                        for (int i = 1; i < entradas.length; i++) {
+                            relacionesCada.add(Integer.parseInt(entradas[i]));
+                        }
+                        relaciones.set(Integer.parseInt(entradas[0]), relacionesCada);
                     }
-                    relaciones.set(Integer.parseInt(entradas[0]), relacionesCada);
-                }
+                    }
+
             }
         } catch (IOException e) {
             e.printStackTrace();
