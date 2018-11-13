@@ -17,7 +17,7 @@ public class Web implements Comparable<Web> {
     public Web(int id, String web) {
         this.id = id;
         this.web = web;
-        this.websEnlazadas = new ArrayList<>();
+         this.websEnlazadas = new ArrayList<>();
         this.palabras = new UnorderedCircularLinkedList<>();
     }
 

@@ -39,7 +39,7 @@ public class Fichero {
         ListaWebs webs = new ListaWebs();
 
         try {
-            BufferedReader in = new BufferedReader(new FileReader(INDEX_FILE_PATH));
+            BufferedReader in = new BufferedReader(new FileReader(INDEX_TEST_FILE_PATH));
             String line;
             Web web;
             while ((line = in.readLine()) != null) {
@@ -64,7 +64,7 @@ public class Fichero {
     public ArrayList<ArrayList<Integer>> cargarRelaciones() {
         ArrayList<ArrayList<Integer>> relaciones = new ArrayList<>();
         try {
-            BufferedReader in = new BufferedReader(new FileReader(RELATIONS_FILE_PATH));
+            BufferedReader in = new BufferedReader(new FileReader(RELATIONS_TEST_FILE_PATH));
             String line;
             String[] entradas;
             while ((line = in.readLine()) != null) {
