@@ -25,13 +25,14 @@ public class Graph {
 
         // Paso 3: llenar “adjList”
         // COMPLETAR CÓDIGO
+        //CARGAR POR SEPARADO???
         count = 0;
-        for (ArrayList<Integer> relacionesCada: Fichero.getInstance().cargarRelaciones()) {
-            adjList[count] = new ArrayList<>();
-            for (Integer relacion: relacionesCada) {
-                adjList[count].add(relacion);
+        adjList = new ArrayList[lista.size()];
+        for (Web web: lista){
+            adjList[web.getId()] = new ArrayList<>();
+            for (Integer relacion: web.getWebsEnlazadas()) {
+                adjList[web.getId()].add(relacion);
             }
-            count++;
         }
     }
 /* Como buscar camino de vuelta
@@ -57,7 +58,7 @@ public class Graph {
         int relacion = 0;
         boolean[] examinados = new boolean[th.size()];
         porExaminar.add(pos1);
-        examinados[0] = true;
+        examinados[pos1] = true;
         while (!enc && !porExaminar.isEmpty()) {
             act = porExaminar.removeFirst();
             if (act == pos2) {
@@ -86,7 +87,7 @@ public class Graph {
         int[] bp = new int[th.size()];
         bp[pos1] = -1;
         porExaminar.add(pos1);
-        examinados[0] = true;
+        examinados[pos1] = true;
         while (!enc && !porExaminar.isEmpty()) {
             act = porExaminar.removeFirst();
             if (act == pos2) {
@@ -108,12 +109,12 @@ public class Graph {
             camino.add(valor);
             valor = bp[valor];
         }
-        String p = "[";
+        StringBuilder p = new StringBuilder("[");
         int i  = 0;
         for(i = 0;i < camino.size()-1;i++){
-            p = p+camino.get(i)+",";
+            p.append(camino.get(i)).append(",");
         }
-        p = p + camino.get(i+1)+"]";
+        p.append(camino.get(i + 1)).append("]");
         System.out.println("El camino es: "+p);
         return camino;
     }

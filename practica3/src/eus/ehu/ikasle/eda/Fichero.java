@@ -5,6 +5,8 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 
 public class Fichero {
     private static Fichero ourInstance = new Fichero();
@@ -31,15 +33,14 @@ public class Fichero {
         return ourInstance;
     }
 
-    private Fichero() {
-    }
 
+    private HashMap<Integer,Web> webs;
 
     public ListaWebs cargarWebs() {
         ListaWebs webs = new ListaWebs();
 
         try {
-            BufferedReader in = new BufferedReader(new FileReader(INDEX_TEST_FILE_PATH));
+            BufferedReader in = new BufferedReader(new FileReader(INDEX_FILE_PATH));
             String line;
             Web web;
             while ((line = in.readLine()) != null) {
@@ -54,37 +55,24 @@ public class Fichero {
                     }
                 }
             }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return webs;
-    }
-
-    public ArrayList<ArrayList<Integer>> cargarRelaciones() {
-        ArrayList<ArrayList<Integer>> relaciones = new ArrayList<>();
-        try {
-            BufferedReader in = new BufferedReader(new FileReader(RELATIONS_TEST_FILE_PATH));
-            String line;
+            in.close();
+            line = "";
+            in = new BufferedReader(new FileReader(RELATIONS_TEST_FILE_PATH));
             String[] entradas;
             while ((line = in.readLine()) != null) {
                 if (!line.isEmpty()) {
                     line = line.replaceAll("\\D+", " ");
                     entradas = line.split(" "); // devuelve todos lo digitos como un array de strings
-                    if (entradas.length > 1){
-                        ArrayList<Integer> relacionesCada = new ArrayList<>();
-                        for (int i = 1; i < entradas.length; i++) {
-                            relacionesCada.add(Integer.parseInt(entradas[i]));
-                        }
-                        relaciones.set(Integer.parseInt(entradas[0]), relacionesCada);
+                    for (int i = 1; i < entradas.length; i++){
+                        webs.addRelacion(Integer.parseInt(entradas[0]), Integer.parseInt(entradas[i]));
                     }
-                    }
-
+                }
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return relaciones;
+
+        return webs;
     }
 
 }
