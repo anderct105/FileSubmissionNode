@@ -58,7 +58,7 @@ public class Graph {
         int relacion = 0;
         boolean[] examinados = new boolean[th.size()];
         porExaminar.add(pos1);
-        examinados[0] = true;
+        examinados[pos1] = true;
         while (!enc && !porExaminar.isEmpty()) {
             act = porExaminar.removeFirst();
             if (act == pos2) {
@@ -87,7 +87,7 @@ public class Graph {
         int[] bp = new int[th.size()];
         bp[pos1] = -1;
         porExaminar.add(pos1);
-        examinados[0] = true;
+        examinados[pos1] = true;
         while (!enc && !porExaminar.isEmpty()) {
             act = porExaminar.removeFirst();
             if (act == pos2) {
