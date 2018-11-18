@@ -20,18 +20,18 @@ public class Web implements Comparable<Web> {
 * */
     private int id;
     private String web;
-    private LinkedList<Web> websEnlazadas;
+    private ArrayList<Integer> websEnlazadas;
 
 
     public Web(int id, String web) {
         this.id = id;
         this.web = web;
-        this.websEnlazadas = new LinkedList<>();
+        this.websEnlazadas = new ArrayList<>();
     }
 
     public Web(String web) {
         this.web = web;
-        this.websEnlazadas = new LinkedList<>();
+        this.websEnlazadas = new ArrayList<>();
     }
 
     public int getId() {
@@ -42,7 +42,7 @@ public class Web implements Comparable<Web> {
         return web;
     }
 
-    public List<Web> getWebsEnlazadas() {
+    public List<Integer> getWebsEnlazadas() {
         return websEnlazadas;
     }
 
@@ -50,7 +50,7 @@ public class Web implements Comparable<Web> {
     /**
      * Añade la web dada por el parametro a la lista de webs relacionadas a dicha web
      */
-    public void addWebRelacionada(Web webRelacionada) {
+    public void addWebRelacionada(Integer webRelacionada) {
         this.websEnlazadas.add(webRelacionada);
     }
 

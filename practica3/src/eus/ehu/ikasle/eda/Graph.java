@@ -25,13 +25,14 @@ public class Graph {
 
         // Paso 3: llenar “adjList”
         // COMPLETAR CÓDIGO
+        //CARGAR POR SEPARADO???
         count = 0;
-        for (ArrayList<Integer> relacionesCada: Fichero.getInstance().cargarRelaciones()) {
-            adjList[count] = new ArrayList<>();
-            for (Integer relacion: relacionesCada) {
-                adjList[count].add(relacion);
+        adjList = new ArrayList[lista.size()];
+        for (Web web: lista){
+            adjList[web.getId()] = new ArrayList<>();
+            for (Integer relacion: web.getWebsEnlazadas()) {
+                adjList[web.getId()].add(relacion);
             }
-            count++;
         }
     }
 /* Como buscar camino de vuelta
