@@ -1,6 +1,6 @@
 package eus.ehu.ikasle.eda.segundaFase;
 
-public class OrderedCircularLinkedList<T extends Comparable<T>> extends CircularLinkedList<T> implements OrderedListADT<T> {
+public class    OrderedCircularLinkedList<T extends Comparable<T>> extends CircularLinkedList<T> implements OrderedListADT<T> {
 
     public void add(T elem) {  //coste O(n) y n = al numero de elementos de la lista
         Node<T> n = new Node<>(elem);
