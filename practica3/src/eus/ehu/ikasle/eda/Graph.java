@@ -109,12 +109,12 @@ public class Graph {
             camino.add(valor);
             valor = bp[valor];
         }
-        String p = "[";
+        StringBuilder p = new StringBuilder("[");
         int i  = 0;
         for(i = 0;i < camino.size()-1;i++){
-            p = p+camino.get(i)+",";
+            p.append(camino.get(i)).append(",");
         }
-        p = p + camino.get(i+1)+"]";
+        p.append(camino.get(i + 1)).append("]");
         System.out.println("El camino es: "+p);
         return camino;
     }

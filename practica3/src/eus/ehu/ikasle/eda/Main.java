@@ -23,8 +23,9 @@ public class Main {
 
     private static void carga(Graph g){
         System.out.println("Cargando...");
+        ListaWebs webs = Fichero.getInstance().cargarWebs();
         Stopwatch sw = new Stopwatch();
-        g.crearGrafo(Fichero.getInstance().cargarWebs());
+        g.crearGrafo(webs);
         System.out.println("Tiempo de carga: "+sw.elapsedTime()+"s");
     }
 
@@ -47,7 +48,6 @@ public class Main {
         conectados = g.estanConectados("012design.com","007-taxi.ru");
         System.out.println("Esta conectado\n la web **012design.com** cuyo id es 2 a \nla web **007-taxi.ru** cuyo id es 5?" +
                 "la respuesta deberia ser False y es: "+conectados);
-        conectados = g.estanConectados()
     }
 
     private static void pruebaBackPointer(Graph g){

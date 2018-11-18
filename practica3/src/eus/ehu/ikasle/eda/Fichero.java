@@ -57,7 +57,7 @@ public class Fichero {
             }
             in.close();
             line = "";
-            in = new BufferedReader(new FileReader(RELATIONS_FILE_PATH));
+            in = new BufferedReader(new FileReader(RELATIONS_TEST_FILE_PATH));
             String[] entradas;
             while ((line = in.readLine()) != null) {
                 if (!line.isEmpty()) {
