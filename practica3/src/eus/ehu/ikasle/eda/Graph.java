@@ -55,8 +55,7 @@ public class Graph {
         int pos1 = th.get(a1);
         int pos2 = th.get(a2);
         boolean enc = false;
-        int act = 0;
-        int relacion = 0;
+        int act;
         boolean[] examinados = new boolean[th.size()];
         porExaminar.add(pos1);
         examinados[pos1] = true;
@@ -66,7 +65,7 @@ public class Graph {
                 enc = true;
             }else {
                 for (int k = 0; k < adjList[act].size(); k++) {
-                    relacion = adjList[act].get(k);
+                    int relacion = adjList[act].get(k);
                     if (!examinados[relacion]) {
                         porExaminar.add(relacion);
                         examinados[relacion] = true;
