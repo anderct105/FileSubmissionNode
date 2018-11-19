@@ -1,5 +1,6 @@
 package eus.ehu.ikasle.eda;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
@@ -51,6 +52,8 @@ public class Main {
     }
 
     private static void pruebaBackPointer(Graph g){
+        ArrayList<Integer> camino = new ArrayList<>();
+        g.backPointer("0","6");
 
     }
 }

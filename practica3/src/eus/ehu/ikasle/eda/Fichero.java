@@ -40,7 +40,7 @@ public class Fichero {
         ListaWebs webs = new ListaWebs();
 
         try {
-            BufferedReader in = new BufferedReader(new FileReader(INDEX_FILE_PATH));
+            BufferedReader in = new BufferedReader(new FileReader(INDEX_TEST_FILE_PATH));
             String line;
             Web web;
             while ((line = in.readLine()) != null) {

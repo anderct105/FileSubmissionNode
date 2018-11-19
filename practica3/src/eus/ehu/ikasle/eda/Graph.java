@@ -3,6 +3,7 @@ package eus.ehu.ikasle.eda;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.Stack;
 
 public class Graph {
     HashMap<String, Integer> th;
@@ -76,7 +77,7 @@ public class Graph {
         return enc;
     }
 
-    public ArrayList<Integer> backPointer(String a1, String a2) {
+    public Stack<Integer> backPointer(String a1, String a2) {
         LinkedList<Integer> porExaminar = new LinkedList<Integer>();
         int pos1 = th.get(a1);
         int pos2 = th.get(a2);
@@ -103,18 +104,21 @@ public class Graph {
                 }
             }
         }
-        ArrayList<Integer> camino = new ArrayList<Integer>();
+        Stack<Integer> camino = new Stack<Integer>();
         int valor = pos2;
-        while (valor != -1) {
-            camino.add(valor);
+        int size = 0;
+        while (bp[valor] != -1) {
+            camino.push(valor);
+            size++;
             valor = bp[valor];
         }
+        camino.push(valor);
         StringBuilder p = new StringBuilder("[");
         int i  = 0;
-        for(i = 0;i < camino.size()-1;i++){
-            p.append(camino.get(i)).append(",");
+        for(i = 0;i < size;i++){
+            p.append(camino.pop()).append(",");
         }
-        p.append(camino.get(i + 1)).append("]");
+        p.append(camino.pop()).append("]");
         System.out.println("El camino es: "+p);
         return camino;
     }
