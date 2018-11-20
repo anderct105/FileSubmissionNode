@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 
 public class Fichero {
     private static Fichero ourInstance = new Fichero();
@@ -36,11 +37,19 @@ public class Fichero {
 
     private HashMap<Integer,Web> webs;
 
-    public ListaWebs cargarWebs() {
+    public ListaWebs cargarWebsReales(){
+        return cargarWebs(INDEX_FILE_PATH,RELATIONS_FILE_PATH);
+    }
+
+    public ListaWebs cargarWebs(){
+        return cargarWebs(INDEX_TEST_FILE_PATH,RELATIONS_TEST_FILE_PATH);
+    }
+
+    private ListaWebs cargarWebs(String indexFilePath,String relationsFilePath) {
         ListaWebs webs = new ListaWebs();
 
         try {
-            BufferedReader in = new BufferedReader(new FileReader(INDEX_TEST_FILE_PATH));
+            BufferedReader in = new BufferedReader(new FileReader(indexFilePath));
             String line;
             Web web;
             while ((line = in.readLine()) != null) {
@@ -57,7 +66,7 @@ public class Fichero {
             }
             in.close();
             line = "";
-            in = new BufferedReader(new FileReader(RELATIONS_TEST_FILE_PATH));
+            in = new BufferedReader(new FileReader(relationsFilePath));
             String[] entradas;
             while ((line = in.readLine()) != null) {
                 if (!line.isEmpty()) {

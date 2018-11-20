@@ -1,9 +1,6 @@
 package eus.ehu.ikasle.eda;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.Stack;
+import java.util.*;
 
 public class Graph {
     HashMap<String, Integer> th;
@@ -11,27 +8,27 @@ public class Graph {
     ArrayList<Integer>[] adjList;
     Integer[] backPointer;
 
-    public void crearGrafo(ListaWebs lista){
+    public void crearGrafo(ListaWebs lista) {
         // Post: crea el grafo desde la lista de webs
         //       Los nodos son nombres de webs
         th = new HashMap<>();
         keys = new String[lista.size()];
         int count = 0;
-        for (Web web: lista) {
-            th.put(web.toString(),count++);
+        for (Web web : lista) {
+            th.put(web.toString(), count++);
         }
         // Paso 2: llenar “keys”
         keys = new String[th.size()];
-        for (String k: th.keySet()) keys[th.get(k)] = k;
+        for (String k : th.keySet()) keys[th.get(k)] = k;
 
         // Paso 3: llenar “adjList”
         // COMPLETAR CÓDIGO
         //CARGAR POR SEPARADO???
         count = 0;
         adjList = new ArrayList[lista.size()];
-        for (Web web: lista){
+        for (Web web : lista) {
             adjList[web.getId()] = new ArrayList<>();
-            for (Integer relacion: web.getWebsEnlazadas()) {
+            for (Integer relacion : web.getWebsEnlazadas()) {
                 adjList[web.getId()].add(relacion);
             }
         }
@@ -41,25 +38,25 @@ public class Graph {
 
   */
 
-    public void print(){
-        for (int i = 0; i < adjList.length; i++){
+    public void print() {
+        for (int i = 0; i < adjList.length; i++) {
             System.out.print("Element: " + i + " " + keys[i] + " --> ");
-            for (int k: adjList[i])  System.out.print(keys[k] + " ### ");
+            for (int k : adjList[i]) System.out.print(keys[k] + " ### ");
 
             System.out.println();
         }
     }
 
-    public boolean estanConectados(String a1, String a2){
+    public boolean estanConectados(String a1, String a2) {
         LinkedList<Integer> porExaminar = new LinkedList<Integer>();
         int pos1 = th.get(a1);
         int pos2 = th.get(a2);
         boolean enc = false;
-        int act;
-        boolean[] examinados = new boolean[th.size()];
-        porExaminar.add(pos1);
-        examinados[pos1] = true;
         if (a1 != null && a2 != null) {
+            int act;
+            boolean[] examinados = new boolean[th.size()];
+            porExaminar.add(pos1);
+            examinados[pos1] = true;
             while (!enc && !porExaminar.isEmpty()) {
                 act = porExaminar.removeFirst();
                 if (act == pos2) {
@@ -78,7 +75,8 @@ public class Graph {
         return enc;
     }
 
-    public Stack<Integer> backPointer(String a1, String a2) {
+    public ArrayList<String> backPointer(String a1, String a2) {
+        ArrayList<String> result = new ArrayList<>();
         LinkedList<Integer> porExaminar = new LinkedList<Integer>();
         int pos1 = th.get(a1);
         int pos2 = th.get(a2);
@@ -90,9 +88,7 @@ public class Graph {
         bp[pos1] = -1;
         porExaminar.add(pos1);
         examinados[pos1] = true;
-        boolean hayCamino = false;
         if (a1 != null && a2 != null) {
-            hayCamino = true;
             while (!enc && !porExaminar.isEmpty()) {
                 act = porExaminar.removeFirst();
                 if (act == pos2) {
@@ -109,27 +105,24 @@ public class Graph {
                 }
             }
         }
-        Stack<Integer> camino = new Stack<Integer>();
-        if (hayCamino == true) {
+        if (enc) {
+            Stack<Integer> caminoPila = new Stack<Integer>();
             int valor = pos2;
-            int size = 0;
             while (bp[valor] != -1) {
-                if (adjList[valor] != null) { // Hay que mirar cuando una web no tiene relaciones y hay que pasar por ahí para hacer el camino, que la respuesta sería []
-                    camino.push(valor);
-                    size++;
-                    valor = bp[valor];
-                }
+                caminoPila.push(valor);
+                valor = bp[valor];
             }
-            camino.push(valor);
-            StringBuilder p = new StringBuilder("[");
-            int i;
-            for (i = 0; i < size; i++) {
-                p.append(camino.pop()).append(",");
+            caminoPila.push(valor);
+            int stackSize = caminoPila.size();
+            for (int i = 0; i < stackSize; i++) {
+                result.add(this.keys[caminoPila.pop()]);
             }
-            p.append(camino.pop()).append("]");
-            System.out.println("El camino es: " + p);
         }
-        return camino;
+        return result;
+    }
+
+    public String getRandomNode() {
+        return this.keys[(new Random()).nextInt(this.keys.length)];
     }
 }
 
