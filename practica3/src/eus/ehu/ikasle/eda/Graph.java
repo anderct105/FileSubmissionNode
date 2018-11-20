@@ -59,16 +59,18 @@ public class Graph {
         boolean[] examinados = new boolean[th.size()];
         porExaminar.add(pos1);
         examinados[pos1] = true;
-        while (!enc && !porExaminar.isEmpty()) {
-            act = porExaminar.removeFirst();
-            if (act == pos2) {
-                enc = true;
-            }else {
-                for (int k = 0; k < adjList[act].size(); k++) {
-                    int relacion = adjList[act].get(k);
-                    if (!examinados[relacion]) {
-                        porExaminar.add(relacion);
-                        examinados[relacion] = true;
+        if (a1 != null && a2 != null) {
+            while (!enc && !porExaminar.isEmpty()) {
+                act = porExaminar.removeFirst();
+                if (act == pos2) {
+                    enc = true;
+                } else {
+                    for (int k = 0; k < adjList[act].size(); k++) {
+                        int relacion = adjList[act].get(k);
+                        if (!examinados[relacion]) {
+                            porExaminar.add(relacion);
+                            examinados[relacion] = true;
+                        }
                     }
                 }
             }
@@ -81,44 +83,52 @@ public class Graph {
         int pos1 = th.get(a1);
         int pos2 = th.get(a2);
         boolean enc = false;
-        int act = 0;
-        int relacion = 0;
+        int act;
+        int relacion;
         boolean[] examinados = new boolean[th.size()];
         int[] bp = new int[th.size()];
         bp[pos1] = -1;
         porExaminar.add(pos1);
         examinados[pos1] = true;
-        while (!enc && !porExaminar.isEmpty()) {
-            act = porExaminar.removeFirst();
-            if (act == pos2) {
-                enc = true;
-            } else {
-                for (int k = 0; k < adjList[act].size(); k++) {
-                    relacion = adjList[act].get(k);
-                    if (!examinados[relacion]) {
-                        porExaminar.add(relacion);
-                        examinados[relacion] = true;
-                        bp[relacion] = act;
+        boolean hayCamino = false;
+        if (a1 != null && a2 != null) {
+            hayCamino = true;
+            while (!enc && !porExaminar.isEmpty()) {
+                act = porExaminar.removeFirst();
+                if (act == pos2) {
+                    enc = true;
+                } else {
+                    for (int k = 0; k < adjList[act].size(); k++) {
+                        relacion = adjList[act].get(k);
+                        if (!examinados[relacion]) {
+                            porExaminar.add(relacion);
+                            examinados[relacion] = true;
+                            bp[relacion] = act;
+                        }
                     }
                 }
             }
         }
         Stack<Integer> camino = new Stack<Integer>();
-        int valor = pos2;
-        int size = 0;
-        while (bp[valor] != -1) {
+        if (hayCamino == true) {
+            int valor = pos2;
+            int size = 0;
+            while (bp[valor] != -1) {
+                if (adjList[valor] != null) { // Hay que mirar cuando una web no tiene relaciones y hay que pasar por ahí para hacer el camino, que la respuesta sería []
+                    camino.push(valor);
+                    size++;
+                    valor = bp[valor];
+                }
+            }
             camino.push(valor);
-            size++;
-            valor = bp[valor];
+            StringBuilder p = new StringBuilder("[");
+            int i;
+            for (i = 0; i < size; i++) {
+                p.append(camino.pop()).append(",");
+            }
+            p.append(camino.pop()).append("]");
+            System.out.println("El camino es: " + p);
         }
-        camino.push(valor);
-        StringBuilder p = new StringBuilder("[");
-        int i  = 0;
-        for(i = 0;i < size;i++){
-            p.append(camino.pop()).append(",");
-        }
-        p.append(camino.pop()).append("]");
-        System.out.println("El camino es: "+p);
         return camino;
     }
 }
