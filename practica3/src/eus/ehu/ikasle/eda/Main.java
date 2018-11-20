@@ -45,49 +45,48 @@ public class Main {
         //No estan conectados
         boolean conectados;
         System.out.println("----------------------------Prueba estanConectados()----------------------------");
-        conectados = g.estanConectados("0086k.com","007carteblanche.co.uk");
+        conectados = g.estanConectados("1","7");
         System.out.println("Prueba1:");
-        System.out.println("Web1: **0086k.com** ID1: 1\nWeb2: **007carteblanche.co.uk** ID2: 7");
+        System.out.println("Web1: **1** ID1: 1\nWeb2: **7** ID2: 7");
         System.out.println("Respuesta teorica: false");
         System.out.println("Respuesta practica: "+conectados);
-        conectados = g.estanConectados("012design.com","007-taxi.ru");
+        conectados = g.estanConectados("2","5");
         System.out.println("Prueba2:");
-        System.out.println("Web1: **012design.com** ID1: 2\nWeb2: **007-taxi.ru** ID2: 5");
+        System.out.println("Web1: **2** ID1: 2\nWeb2: **5** ID2: 5");
         System.out.println("Respuesta teorica: false");
         System.out.println("Respuesta practica: "+conectados);
         //estan conectados
-        conectados = g.estanConectados("0086k.com","012design.com");
+        conectados = g.estanConectados("1","2");
         System.out.println("Prueba3:");
-        System.out.println("Web1: **0086k.com** ID1: 1\nWeb2: **012design.com** ID2: 2");
+        System.out.println("Web1: **1** ID1: 1\nWeb2: **2** ID2: 2");
         System.out.println("Respuesta teorica: true");
         System.out.println("Respuesta practica: "+conectados);
-        conectados = g.estanConectados("0-3ani.ro","007hebergement.com");
+        conectados = g.estanConectados("0","6");
         System.out.println("Prueba4:");
-        System.out.println("Web1: **0-3ani.ro** ID1: 0\nWeb2: **007hebergement.com** ID2: 6");
+        System.out.println("Web1: **0** ID1: 0\nWeb2: **6** ID2: 6");
         System.out.println("Respuesta teorica: true");
         System.out.println("Respuesta practica: "+conectados);
     }
 
     private static void pruebaBackPointer(Graph g){
         System.out.println("----------------------------Prueba backPointer()----------------------------");
-        ArrayList<Integer> camino = new ArrayList<>();
-        System.out.println("Prueba1:");
-        System.out.println("Web1: **0086k.com** ID1: 1\nWeb2: **007carteblanche.co.uk** ID2: 7");
+         System.out.println("Prueba1:");
+        System.out.println("Web1: **1** ID1: 1\nWeb2: **7** ID2: 7");
         System.out.println("El camino deberia ser: []");
-        g.backPointer("0086k.com","007carteblanche.co.uk");
+        g.backPointer("1","7");
         System.out.println("Prueba2:");
-        System.out.println("Web1: **012design.com** ID1: 2\nWeb2: **007-taxi.ru** ID2: 5");
+        System.out.println("Web1: **2** ID1: 2\nWeb2: **5** ID2: 5");
         System.out.println("El camino deberia ser: []");
-        g.backPointer("012design.com","007-taxi.ru");
+        g.backPointer("2","5");
         //estan conectados
         System.out.println("Prueba3:");
-        System.out.println("Web1: **0086k.com** ID1: 1\nWeb2: **012design.com** ID2: 2");
-        System.out.println("Respuesta teorica: true");
-        g.backPointer("0086k.com","012design.com");
+        System.out.println("Web1: **1** ID1: 1\nWeb2: **2** ID2: 2");
+        System.out.println("El camino deberia ser: [1,2]");
+        g.backPointer("1","2");
         System.out.println("Prueba4:");
-        System.out.println("Web1: **0-3ani.ro** ID1: 0\nWeb2: **007hebergement.com** ID2: 6");
-        System.out.println("Respuesta teorica: true");
-        g.backPointer("0-3ani.ro","007hebergement.com");                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+        System.out.println("Web1: **0** ID1: 0\nWeb2: **6** ID2: 6");
+        System.out.println("El camino es: [0,3,4,6]");
+        g.backPointer("0","6");
     }
 }
 
