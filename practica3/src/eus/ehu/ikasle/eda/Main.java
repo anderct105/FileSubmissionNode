@@ -25,13 +25,21 @@ public class Main {
         graph = new Graph();
         graph.crearGrafo(webs);
         System.out.println("Prueba 10000 relaciones aleatorias:");
-        for (int i = 0 ; i < MAX_EXECUTIONS ; i++){
+        for (int i = 0 , numConectados = 0;; i++){
             initNode = graph.getRandomNode();
             finalNode = graph.getRandomNode();
-            boolean conectados = graph.estanConectados(initNode,finalNode);
+            if (graph.estanConectados(initNode,finalNode)){
+                ++numConectados;
+            }
+
            // System.out.println( "\t" + initNode + " --> " + finalNode + ": " + ((conectados)?"Conectado":"No conectado"));
+            if (stopwatch.elapsedTime() % 60 == 0){
+                System.out.println("Tiempo : " + stopwatch.elapsedTime()  + "s : " + i + " conexiones analizadas --> " + i + " --> conectadas -->" + numConectados);
+                i = 0;
+                numConectados = 0;
+                stopwatch = new Stopwatch();
+            }
         }
-        System.out.println("Tiempo : " + stopwatch.elapsedTime()  + "s");
     }
 
     private static void carga(){
