@@ -27,9 +27,9 @@ public class Graph {
         count = 0;
         adjList = new ArrayList[lista.size()];
         for (Web web : lista) {
-            adjList[web.getId()] = new ArrayList<>();
+            adjList[th.get(web.getWeb())] = new ArrayList<>();
             for (Integer relacion : web.getWebsEnlazadas()) {
-                adjList[web.getId()].add(relacion);
+                adjList[th.get(web.getWeb())].add(th.get(keys[relacion]));
             }
         }
     }

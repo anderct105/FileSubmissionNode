@@ -18,7 +18,7 @@ public class Main {
         carga();
         pruebaEstanConectados();
         pruebaBackPointer();
-        pruebaNp();
+     //   pruebaNp();
     }
 
     private static void pruebaNp() {
