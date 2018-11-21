@@ -1,5 +1,9 @@
 package eus.ehu.ikasle.eda;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
@@ -25,21 +29,77 @@ public class Main {
         graph = new Graph();
         graph.crearGrafo(webs);
         System.out.println("Prueba 10000 relaciones aleatorias:");
-        for (int i = 0 , numConectados = 0;; i++){
+        ArrayList<Integer> numConectadosMinuto = new ArrayList<>();
+        ArrayList<Integer> numConectadosHora = new ArrayList<>();
+        File file = new File("output.log");
+        try {
+            if (file.exists()){
+                file.delete();
+            }
+            file.createNewFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        for (int i = 0 , minutos = 0 , horas = 0; horas <24 ; i++){
             initNode = graph.getRandomNode();
             finalNode = graph.getRandomNode();
-            if (graph.estanConectados(initNode,finalNode)){
-                ++numConectados;
-            }
-
+            graph.estanConectados(initNode,finalNode);
            // System.out.println( "\t" + initNode + " --> " + finalNode + ": " + ((conectados)?"Conectado":"No conectado"));
-            if (stopwatch.elapsedTime() % 60 == 0){
-                System.out.println("Tiempo : " + stopwatch.elapsedTime()  + "s : " + i + " conexiones analizadas --> " + i + " --> conectadas -->" + numConectados);
+            int finalI = i;
+            if ((int)(stopwatch.elapsedTime()) % 60 == 0){
+                minutos++;
+                numConectadosMinuto.add(i);
+                int finalMinutos = minutos;
+                new Thread(() -> {
+                    BufferedWriter out = null;
+                    try {
+                        out = new BufferedWriter(new FileWriter(file,true));
+                        out.write("- " + finalMinutos + " minuto : " + finalI + " ejecuciones\n");
+                        out.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }).start();
+                if (minutos % 60 == 0){
+                    minutos = 0;
+                    horas++;
+                    numConectadosHora.add(i);
+                    int finalHoras = horas;
+                    new Thread(() -> {
+                        BufferedWriter out = null;
+                        try {
+                            out = new BufferedWriter(new FileWriter(file,true));
+                            out.write("-- " + finalHoras + " hora : " + finalI + " ejecuciones\n");
+                            out.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }).start();
+                }
                 i = 0;
-                numConectados = 0;
                 stopwatch = new Stopwatch();
             }
         }
+        int sumMinutos = 0;
+        for (int i : numConectadosMinuto) {
+            sumMinutos += i;
+        }
+        int sumHoras = 0;
+        for (int i : numConectadosHora){
+            sumHoras += i;
+        }
+
+        try {
+            BufferedWriter out = new BufferedWriter(new FileWriter(file,true));
+            out.write("Conectados por minuto (Datos): " + numConectadosMinuto);
+            out.write("Conectados por hora (Datos) : " + numConectadosHora);
+            out.write("C/m :" + (sumMinutos/numConectadosMinuto.size()) );
+            out.write("C/h :" + (sumHoras/numConectadosMinuto.size()) );
+            out.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
     private static void carga(){

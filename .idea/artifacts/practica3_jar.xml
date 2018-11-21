@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="practica3:jar">
+    <output-path>$PROJECT_DIR$/../outs/practica-1/out/artifacts/practica3_jar</output-path>
+    <root id="archive" name="practica3.jar">
+      <element id="module-output" name="practica3" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/Gestion_Web_test/lib/hamcrest-core-1.3.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/Gestion_Web_test/lib/junit-4.12.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
