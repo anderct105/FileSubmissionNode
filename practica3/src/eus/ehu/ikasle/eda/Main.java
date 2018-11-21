@@ -46,7 +46,7 @@ public class Main {
             graph.estanConectados(initNode,finalNode);
            // System.out.println( "\t" + initNode + " --> " + finalNode + ": " + ((conectados)?"Conectado":"No conectado"));
             int finalI = i;
-            if ((int)(stopwatch.elapsedTime()) % 60 == 0){
+            if ((int)(stopwatch.elapsedTime()) >= 60){
                 minutos++;
                 numConectadosMinuto.add(i);
                 int finalMinutos = minutos;
