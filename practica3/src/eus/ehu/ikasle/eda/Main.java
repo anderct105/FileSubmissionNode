@@ -40,16 +40,16 @@ public class Main {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        for (int i = 0 , minutos = 0 , horas = 0; horas <24 ; i++){
+        for (int i = 0, iHoras = 0 , minutos = 0 , horas = 0; horas <24 ; i++, iHoras++){
             initNode = graph.getRandomNode();
             finalNode = graph.getRandomNode();
             graph.estanConectados(initNode,finalNode);
            // System.out.println( "\t" + initNode + " --> " + finalNode + ": " + ((conectados)?"Conectado":"No conectado"));
-            int finalI = i;
             if ((int)(stopwatch.elapsedTime()) >= 60){
                 minutos++;
                 numConectadosMinuto.add(i);
                 int finalMinutos = minutos;
+                int finalI = i;
                 new Thread(() -> {
                     BufferedWriter out = null;
                     try {
@@ -63,18 +63,20 @@ public class Main {
                 if (minutos % 60 == 0){
                     minutos = 0;
                     horas++;
-                    numConectadosHora.add(i);
+                    numConectadosHora.add(iHoras);
                     int finalHoras = horas;
+                    int finalIHoras = iHoras;
                     new Thread(() -> {
                         BufferedWriter out = null;
                         try {
                             out = new BufferedWriter(new FileWriter(file,true));
-                            out.write("-- " + finalHoras + " hora : " + finalI + " ejecuciones\n");
+                            out.write("-- " + finalHoras + " hora : " + finalIHoras + " ejecuciones\n");
                             out.close();
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
                     }).start();
+                    iHoras = 0;
                 }
                 i = 0;
                 stopwatch = new Stopwatch();
