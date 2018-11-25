@@ -7,17 +7,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class Web implements Comparable<Web> {
-/*
-*
-*
-* for x € 1..NP
-*
-*   origen = random(nodos)
-*   destino = random(nodos)
-*   if origen != destino
-*       b = conectados(origen,destino)
-*
-* */
+
     private int id;
     private String web;
     private ArrayList<Integer> websEnlazadas;
