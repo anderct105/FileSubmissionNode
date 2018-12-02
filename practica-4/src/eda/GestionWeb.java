@@ -2,6 +2,7 @@ package eda;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class GestionWeb {
@@ -109,5 +110,9 @@ public class GestionWeb {
 
     public Web getWebById(int id2) {
         return Webs.getInstance().getWebById(id2);
+    }
+
+    public HashMap<String, Double> pageRank() {
+        return Webs.getInstance().pageRank();
     }
 }

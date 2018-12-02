@@ -1,15 +1,16 @@
 package eda;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.List;
+import java.text.DecimalFormat;
+import java.util.*;
 
 public class Webs {
 
     private LinkedHashMap<Integer, Web> webs;//Se manteniene el orden de insercion
     private List<Web> listaAnadidas;
     private static int lastId;
+    private HashMap<String,Double> pageRank;
+    private static double d = 0.85;
+    private static double dif = 0.000001;
 
     private static Webs ourInstance = new Webs();
 
@@ -20,6 +21,7 @@ public class Webs {
     private Webs() {
         this.webs = new LinkedHashMap<>();
         this.listaAnadidas = new ArrayList<>();
+        this.pageRank = new HashMap();
     }
 
 
@@ -172,4 +174,41 @@ public class Webs {
     public void limparAnadidas() {
         this.listaAnadidas.clear();
     }
+
+
+    public HashMap<String,Double> pageRank(){
+        HashMap<String,Double> l = new HashMap();
+        int N = webs.size();
+        double tmp =  (double)1/N;
+        webs.forEach((v,k)->l.put(k.getWeb(),tmp));
+        String inicial = "A";
+        double actualPageRank = 0;
+        double previousPageRank = 0;
+        double rackedUpPageRank = 0.0;
+        do{
+            previousPageRank = actualPageRank;
+            actualPageRank = 0;
+           for (Web w1 : webs.values()) {
+               rackedUpPageRank = 0.0;
+               for (Web w2 : webs.values()) {
+                   if (!w2.getWeb().equals(w1) && w2.getWebsEnlazadas().contains(w1)) {
+                       rackedUpPageRank += (double) l.get(w2.getWeb()) / (w2.getWebsEnlazadas().size());
+                   }
+               }
+               w1.setpR((1-d)/N+d*rackedUpPageRank);
+           }
+           for(Web w : webs.values()) {
+               l.replace(w.getWeb(),w.getpR());
+               actualPageRank += Math.abs(tmp - w.getpR());
+           }
+            System.out.println("ActualPageRank: "+actualPageRank);
+            System.out.println("Diference: "+Math.abs(actualPageRank-previousPageRank));
+       }while(Math.abs(actualPageRank-previousPageRank) > Webs.dif);
+
+        DecimalFormat df = new DecimalFormat("#0.00000");
+        //l.forEach((v,k)-> System.out.println("La web "+v+" tiene pageRank: "+df.format(k)));
+        return l;
+    }
+
+
 }

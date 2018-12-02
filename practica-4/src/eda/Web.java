@@ -1,6 +1,6 @@
 package eda;
 
-import eus.ehu.ikasle.eda.segundaFase.UnorderedCircularLinkedList;
+import eda.segundaFase.UnorderedCircularLinkedList;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,12 +12,13 @@ public class Web implements Comparable<Web> {
     private String web;
     private List<Web> websEnlazadas;
     private UnorderedCircularLinkedList<Palabra> palabras;
+    private Double pR;
 
 
     public Web(int id, String web) {
         this.id = id;
         this.web = web;
-         this.websEnlazadas = new ArrayList<>();
+        this.websEnlazadas = new ArrayList<>();
         this.palabras = new UnorderedCircularLinkedList<>();
     }
 
@@ -25,6 +26,14 @@ public class Web implements Comparable<Web> {
         this.web = web;
         this.websEnlazadas = new ArrayList<>();
         this.palabras = new UnorderedCircularLinkedList<>();
+    }
+
+    public double getpR() {
+        return pR;
+    }
+
+    public void setpR(double pR) {
+        this.pR = pR;
     }
 
     public int getId() {
