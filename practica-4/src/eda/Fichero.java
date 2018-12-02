@@ -43,6 +43,7 @@ public class Fichero {
                             webRelacionada = webs.getWebById(Integer.parseInt(entradas[i]));
                             if (webRelacionada != null) { // Si existe la web a relacionar
                                 web.addWebRelacionada(webRelacionada); // añade a la lista de relaciones la web
+                                webRelacionada.addWebEntrante(web);
                             } else {
                                 System.out.println("Error en la carga de las relaciones ," +
                                         " web relacionada no encontrada");

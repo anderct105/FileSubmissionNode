@@ -9,7 +9,7 @@ public class Webs {
     private List<Web> listaAnadidas;
     private static int lastId;
     private static double d = 0.85;
-    private static double dif = 0.000001;
+    private static double dif = 0.001;
 
     private static Webs ourInstance = new Webs();
 
@@ -188,19 +188,24 @@ public class Webs {
             actualPageRank = 0;
            for (Web w1 : webs.values()) {
                rackedUpPageRank = 0.0;
-               for (Web w2 : webs.values()) {
+               for (Web w2 : w1.getWebsEntrantes()){
+                   rackedUpPageRank += (double) l.get(w2.getWeb()) / (w2.getWebsEnlazadas().size());
+               }
+               /*for (Web w2 : webs.values()) {
                    if (!w2.getWeb().equals(w1) && w2.getWebsEnlazadas().contains(w1)) {
                        rackedUpPageRank += (double) l.get(w2.getWeb()) / (w2.getWebsEnlazadas().size());
                    }
-               }
+               }*/
                w1.setpR((1-d)/N+d*rackedUpPageRank);
+               l.replace(w1.getWeb(), w1.getpR());
+               actualPageRank +=Math.abs(tmp - w1.getpR());
            }
-           for(Web w : webs.values()) {
+           /*for(Web w : webs.values()) {
                l.replace(w.getWeb(),w.getpR());
                actualPageRank += Math.abs(tmp - w.getpR());
-           }
-            System.out.println("ActualPageRank: "+actualPageRank);
-            System.out.println("Diference: "+Math.abs(actualPageRank-previousPageRank));
+           }*/
+           // System.out.println("ActualPageRank: "+actualPageRank);
+           // System.out.println("Diference: "+Math.abs(actualPageRank-previousPageRank));
        }while(Math.abs(actualPageRank-previousPageRank) > Webs.dif);
 
         DecimalFormat df = new DecimalFormat("#0.00000");

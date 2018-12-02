@@ -4,6 +4,8 @@ import eda.GestionWeb;
 import eda.Webs;
 import eda.utils.Stopwatch;
 
+import java.util.HashMap;
+
 public class Main4 {
     
     private static GestionWeb gestionWeb = GestionWeb.getInstance();
@@ -13,8 +15,9 @@ public class Main4 {
         gestionWeb.cargarDatos();
         System.out.println("Carga de datos "+s.elapsedTime()+"s");
         s = new Stopwatch();
-        gestionWeb.pageRank();
+        HashMap<String,Double> a = gestionWeb.pageRank();
         System.out.println("Carga de pageRank "+s.elapsedTime()+"s");
+        //a.toString();
     }
     
     

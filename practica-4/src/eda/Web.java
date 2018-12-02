@@ -11,6 +11,7 @@ public class Web implements Comparable<Web> {
     private int id;
     private String web;
     private List<Web> websEnlazadas;
+    private List<Web> arcosEntrantes;
     private UnorderedCircularLinkedList<Palabra> palabras;
     private Double pR;
 
@@ -19,12 +20,14 @@ public class Web implements Comparable<Web> {
         this.id = id;
         this.web = web;
         this.websEnlazadas = new ArrayList<>();
+        this.arcosEntrantes = new ArrayList<>();
         this.palabras = new UnorderedCircularLinkedList<>();
     }
 
     public Web(String web) {
         this.web = web;
         this.websEnlazadas = new ArrayList<>();
+        this.arcosEntrantes = new ArrayList<>();
         this.palabras = new UnorderedCircularLinkedList<>();
     }
 
@@ -57,6 +60,10 @@ public class Web implements Comparable<Web> {
      */
     public void addWebRelacionada(Web webRelacionada) {
         this.websEnlazadas.add(webRelacionada);
+    }
+
+    public void addWebEntrante(Web webRelacionada) {
+        this.arcosEntrantes.add(webRelacionada);
     }
 
     public boolean contains(Palabra palabra) {
@@ -104,5 +111,9 @@ public class Web implements Comparable<Web> {
     @Override
     public int hashCode() {
         return Objects.hash(web);
+    }
+
+    public List<Web> getWebsEntrantes() {
+        return this.arcosEntrantes;
     }
 }
