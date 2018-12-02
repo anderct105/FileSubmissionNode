@@ -8,7 +8,6 @@ public class Webs {
     private LinkedHashMap<Integer, Web> webs;//Se manteniene el orden de insercion
     private List<Web> listaAnadidas;
     private static int lastId;
-    private HashMap<String,Double> pageRank;
     private static double d = 0.85;
     private static double dif = 0.000001;
 
@@ -21,7 +20,6 @@ public class Webs {
     private Webs() {
         this.webs = new LinkedHashMap<>();
         this.listaAnadidas = new ArrayList<>();
-        this.pageRank = new HashMap();
     }
 
 
