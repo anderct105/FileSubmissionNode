@@ -10,8 +10,8 @@ public class Web implements Comparable<Web> {
 
     private int id;
     private String web;
-    private List<Web> websEnlazadas;
-    private List<Web> arcosEntrantes;
+    private List<Web> websEnlazadas; // arcos salientes
+    private List<Web> arcosEntrantes; // arcos entrantes
     private UnorderedCircularLinkedList<Palabra> palabras;
     private Double pR;
 
