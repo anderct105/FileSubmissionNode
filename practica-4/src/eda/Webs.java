@@ -1,5 +1,6 @@
 package eda;
 
+import java.lang.reflect.Array;
 import java.text.DecimalFormat;
 import java.util.*;
 
@@ -213,5 +214,11 @@ public class Webs {
         return l;
     }
 
+    public ArrayList<Web> buscar (String palabraClave){
+        ArrayList<String> ls = new ArrayList<String>();
+        ls.add(palabraClave);
+        List<Web> l = GestionWeb.getInstance().buscarWebsPorPalabras((List<String>)ls);
+        return this.mergeSort((ArrayList<Web>) l);
+    }
 
 }
