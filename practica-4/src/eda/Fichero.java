@@ -71,6 +71,7 @@ public class Fichero {
                         // entrada ej:  0-3ani.ro 0 -> Web(0,"0-3ani.ro")
                         web = new Web(Integer.parseInt(line.substring(line.lastIndexOf(" ") + 1)),
                                 line.substring(0, line.lastIndexOf(" ")));
+                        web.fillPalabras();
                         webs.addWeb(web); // añadir al hashmap de webs la web de la linea correspondiente
                     } catch (NumberFormatException ex) {
                         System.out.println("Formato del archivo incorrecto, se seguirá comprobando");
@@ -99,23 +100,4 @@ public class Fichero {
             e.printStackTrace();
         }
     }
-
-
-    /**
-     * Añade cada lista
-     */
-    public void escribirWebs(String path) {
-        try {
-            BufferedWriter bw = new BufferedWriter(new FileWriter(path, true));
-            List<Web> lista = Webs.getInstance().getListaAnadidas();
-            for (Web w : lista) {
-                bw.newLine();
-                bw.write(w.toString() + " " + w.getId());
-            }
-            bw.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
 }

@@ -1,8 +1,8 @@
 package eda;
 
-import eda.segundaFase.UnorderedCircularLinkedList;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 
@@ -12,7 +12,7 @@ public class Web implements Comparable<Web> {
     private String web;
     private List<Web> websEnlazadas; // arcos salientes
     private List<Web> arcosEntrantes; // arcos entrantes
-    private UnorderedCircularLinkedList<Palabra> palabras;
+    private HashSet palabras;
     private Double pR;
 
 
@@ -21,14 +21,14 @@ public class Web implements Comparable<Web> {
         this.web = web;
         this.websEnlazadas = new ArrayList<>();
         this.arcosEntrantes = new ArrayList<>();
-        this.palabras = new UnorderedCircularLinkedList<>();
+        this.palabras = new HashSet();
     }
 
     public Web(String web) {
         this.web = web;
         this.websEnlazadas = new ArrayList<>();
         this.arcosEntrantes = new ArrayList<>();
-        this.palabras = new UnorderedCircularLinkedList<>();
+        this.palabras = new HashSet();
     }
 
     public double getpR() {
@@ -51,10 +51,6 @@ public class Web implements Comparable<Web> {
         return websEnlazadas;
     }
 
-    public UnorderedCircularLinkedList<Palabra> getPalabras() {
-        return palabras;
-    }
-
     /**
      * Añade la web dada por el parametro a la lista de webs relacionadas a dicha web
      */
@@ -71,11 +67,11 @@ public class Web implements Comparable<Web> {
     }
 
     public void addPalabra(Palabra palabra) {
-        this.palabras.addToRear(palabra);
+        this.palabras.add(palabra);
     }
 
     public boolean estaEnListaPalabras(Palabra palabra) {
-        return this.palabras.contains(palabra);
+        return this.palabras.contains(palabra); //O(1)
     }
 
     /**

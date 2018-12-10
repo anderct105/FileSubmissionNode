@@ -2,6 +2,7 @@ package eda;
 
 import java.lang.reflect.Array;
 import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.*;
 
 public class Webs {
@@ -181,36 +182,22 @@ public class Webs {
         double tmp =  (double)1/N;
         webs.forEach((v,k)->l.put(k.getWeb(),tmp));
         String inicial = "A";
-        double actualPageRank = 0;
-        double previousPageRank = 0;
-        double rackedUpPageRank = 0.0;
+        double actualPageRank = 0d;
+        double previousPageRank = 0d;
+        double sumPageRank =0d;
         do{
             previousPageRank = actualPageRank;
             actualPageRank = 0;
            for (Web w1 : webs.values()) {
-               rackedUpPageRank = 0.0;
+               sumPageRank = 0.0;
                for (Web w2 : w1.getWebsEntrantes()){
-                   rackedUpPageRank += (double) l.get(w2.getWeb()) / (w2.getWebsEnlazadas().size());
+                   sumPageRank += (double) l.get(w2.getWeb()) / (w2.getWebsEnlazadas().size());
                }
-               /*for (Web w2 : webs.values()) {
-                   if (!w2.getWeb().equals(w1) && w2.getWebsEnlazadas().contains(w1)) {
-                       rackedUpPageRank += (double) l.get(w2.getWeb()) / (w2.getWebsEnlazadas().size());
-                   }
-               }*/
-               w1.setpR((1-d)/N+d*rackedUpPageRank);
+               w1.setpR((1-d)/N+d*sumPageRank);
                l.replace(w1.getWeb(), w1.getpR());
                actualPageRank +=Math.abs(tmp - w1.getpR());
            }
-           /*for(Web w : webs.values()) {
-               l.replace(w.getWeb(),w.getpR());
-               actualPageRank += Math.abs(tmp - w.getpR());
-           }*/
-           // System.out.println("ActualPageRank: "+actualPageRank);
-           // System.out.println("Diference: "+Math.abs(actualPageRank-previousPageRank));
        }while(Math.abs(actualPageRank-previousPageRank) > Webs.dif);
-
-        DecimalFormat df = new DecimalFormat("#0.00000");
-        //l.forEach((v,k)-> System.out.println("La web "+v+" tiene pageRank: "+df.format(k)));
         return l;
     }
 
@@ -219,6 +206,18 @@ public class Webs {
         ls.add(palabraClave);
         List<Web> l = GestionWeb.getInstance().buscarWebsPorPalabras((List<String>)ls);
         return this.mergeSort((ArrayList<Web>) l);
+    }
+
+    public ArrayList<Web> buscar (String palabra1, String palabra2){ // n² log n
+        ArrayList<Web> resultado = new ArrayList<>();
+
+        for (Web web : Webs.getInstance().getWebsOrdenadasMergeSort() ){ // n log n
+            if (web.estaEnListaPalabras(new Palabra(palabra1)) && web.estaEnListaPalabras(new Palabra(palabra2))){
+                resultado.add(web);
+            }
+        }
+
+        return resultado;
     }
 
 }
