@@ -89,7 +89,7 @@ public class Web implements Comparable<Web> {
 
 
     public int compareTo(Web web) {
-        return this.pR.compareTo(web.pR);
+        return web.pR.compareTo(this.pR);
     }
 
     public void setId(int id) {

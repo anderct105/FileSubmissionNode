@@ -53,31 +53,6 @@ public class Webs {
         return this.webs.get(id);
     }
 
-    public void limpiar() {
-        this.webs.clear();
-    }
-
-    public void websQueContienen(Palabra palabra) {
-        webs.forEach((integer, web) -> {
-            if (web.contains(palabra)) {
-                web.addPalabra(palabra);
-                palabra.addWebConPalabra(web);
-            }
-        });
-    }
-
-    public Web getWebByFullName(String name) {
-        Web result = null;
-        Iterator<Web> itr = this.webs.values().iterator();
-        Web tmp = null;
-        // mientras tenga siguiente y ese no tenga el mismo nombre que estoy buscando , sigue
-        while (itr.hasNext() && !(tmp = itr.next()).getWeb().equalsIgnoreCase(name)) ;
-        if (tmp != null && tmp.getWeb().equalsIgnoreCase(name)) {
-            result = tmp;
-        }
-        return result;
-    }
-
     public List<Web> getListaAnadidas() {
         return this.listaAnadidas;
     }
@@ -202,17 +177,22 @@ public class Webs {
     }
 
     public ArrayList<Web> buscar (String palabraClave){
-        ArrayList<String> ls = new ArrayList<String>();
-        ls.add(palabraClave);
-        List<Web> l = GestionWeb.getInstance().buscarWebsPorPalabras((List<String>)ls);
-        return this.mergeSort((ArrayList<Web>) l);
+        ArrayList<Web> resultado = new ArrayList<>();
+
+        for (Web web : Webs.getInstance().getWebsOrdenadasMergeSort() ){ // n log n
+            if (web.getWeb().contains(palabraClave)){
+                resultado.add(web);
+            }
+        }
+
+        return resultado;
     }
 
     public ArrayList<Web> buscar (String palabra1, String palabra2){ // n² log n
         ArrayList<Web> resultado = new ArrayList<>();
 
         for (Web web : Webs.getInstance().getWebsOrdenadasMergeSort() ){ // n log n
-            if (web.estaEnListaPalabras(new Palabra(palabra1)) && web.estaEnListaPalabras(new Palabra(palabra2))){
+            if (web.getWeb().contains(palabra1)&& web.getWeb().contains(palabra2)){
                 resultado.add(web);
             }
         }
