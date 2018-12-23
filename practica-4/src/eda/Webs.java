@@ -107,12 +107,11 @@ public class Webs {
 
 
 
-    public HashMap<String,Double> pageRank(){// O(n²*i) donde n es el número de webs e i el número de iteraciones hasta que la probabilidad converga en la diferencia
+    public HashMap<String,Double> pageRank(){// O(n²*i) donde n es el número de webs e i el número de iteraciones hasta que la probabilidad converja en la diferencia
         HashMap<String,Double> l = new HashMap();
         int N = webs.size();
         double tmp =  (double)1/N;
         webs.forEach((v,k)->l.put(k.getWeb(),tmp));
-        String inicial = "A";
         double actualPageRank = 0d;
         double previousPageRank = 0d;
         double sumPageRank =0d;
@@ -135,7 +134,7 @@ public class Webs {
     public ArrayList<Web> buscar (String palabraClave){
         ArrayList<Web> resultado = new ArrayList<>();
 
-        for (Web web : Webs.getInstance().getWebsOrdenadasMergeSort() ){ // n log n
+        for (Web web : Webs.getInstance().getWebsOrdenadasMergeSort() ){ // O(n * log n  + (n*m))
             if (web.getWeb().contains(palabraClave)){
                 resultado.add(web);
             }
@@ -144,7 +143,7 @@ public class Webs {
         return resultado;
     }
 
-    public ArrayList<Web> buscar (String palabra1, String palabra2){ // n² log n
+    public ArrayList<Web> buscar (String palabra1, String palabra2){ // O(n * log n  + (n*2m))
         ArrayList<Web> resultado = new ArrayList<>();
 
         for (Web web : Webs.getInstance().getWebsOrdenadasMergeSort() ){ // n log n
