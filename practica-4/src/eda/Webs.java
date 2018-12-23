@@ -1,15 +1,10 @@
 package eda;
 
-import java.lang.reflect.Array;
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
 import java.util.*;
 
 public class Webs {
 
     private LinkedHashMap<Integer, Web> webs;//Se manteniene el orden de insercion
-    private List<Web> listaAnadidas;
-    private static int lastId;
     private static double d = 0.85;
     private static double dif = 0.001;
 
@@ -21,28 +16,11 @@ public class Webs {
 
     private Webs() {
         this.webs = new LinkedHashMap<>();
-        this.listaAnadidas = new ArrayList<>();
     }
 
 
     public void addWeb(Web web) {
         this.webs.put(web.getId(), web);
-    }
-
-    /**
-     * @para*m web
-     * Añade la web (con el ultimo id disponible) solo si no se encuentra ya en la lista
-     */
-    public boolean addWebNueva(Web web) {
-        boolean insertado = false;
-        if (!this.webs.containsValue(web)) {
-            web.setId(++lastId);
-            web.fillPalabras();
-            this.addWeb(web);
-            this.listaAnadidas.add(web);
-            insertado = true;
-        }
-        return insertado;
     }
 
     /**
@@ -53,9 +31,6 @@ public class Webs {
         return this.webs.get(id);
     }
 
-    public List<Web> getListaAnadidas() {
-        return this.listaAnadidas;
-    }
 
     /**
      * Realiza un merge-sort para ordenar alfabeticamente las webs
@@ -130,28 +105,9 @@ public class Webs {
         }
     }
 
-    public void loadLastId() {
-        int max = -1;
-        for (int id :
-                this.webs.keySet()) {
-            if (id > max) {
-                max = id;
-            }
-        }
-        Webs.lastId = max;
-    }
-
-    public int getCantidad() {
-        int cant = webs.size();
-        return cant;
-    }
-
-    public void limparAnadidas() {
-        this.listaAnadidas.clear();
-    }
 
 
-    public HashMap<String,Double> pageRank(){
+    public HashMap<String,Double> pageRank(){// O(n²*i) donde n es el número de webs e i el número de iteraciones hasta que la probabilidad converga en la diferencia
         HashMap<String,Double> l = new HashMap();
         int N = webs.size();
         double tmp =  (double)1/N;
@@ -166,7 +122,7 @@ public class Webs {
            for (Web w1 : webs.values()) {
                sumPageRank = 0.0;
                for (Web w2 : w1.getWebsEntrantes()){
-                   sumPageRank += (double) l.get(w2.getWeb()) / (w2.getWebsEnlazadas().size());
+                   sumPageRank += (double) l.get(w2.getWeb()) / (w2.getWebsAdjuntas().size());
                }
                w1.setpR((1-d)/N+d*sumPageRank);
                l.replace(w1.getWeb(), w1.getpR());

@@ -71,29 +71,10 @@ public class Fichero {
                         // entrada ej:  0-3ani.ro 0 -> Web(0,"0-3ani.ro")
                         web = new Web(Integer.parseInt(line.substring(line.lastIndexOf(" ") + 1)),
                                 line.substring(0, line.lastIndexOf(" ")));
-                        web.fillPalabras();
                         webs.addWeb(web); // añadir al hashmap de webs la web de la linea correspondiente
                     } catch (NumberFormatException ex) {
                         System.out.println("Formato del archivo incorrecto, se seguirá comprobando");
                     }
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        Webs.getInstance().loadLastId();
-    }
-
-    public void cargarDiccionario(String path) {
-        try {
-            BufferedReader in = new BufferedReader(new FileReader(path));
-            String line;
-            Diccionario dic = Diccionario.getInstance();
-            dic.limpiar();
-            Palabra palabra;
-            while ((line = in.readLine()) != null) {
-                if (!line.isEmpty()) {
-                    dic.addPalabra(new Palabra(line));
                 }
             }
         } catch (IOException e) {

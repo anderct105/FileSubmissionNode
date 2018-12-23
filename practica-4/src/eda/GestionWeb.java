@@ -23,26 +23,12 @@ public class GestionWeb {
     public static final String SMALL_RELATIONS_FILE_PATH = System.getProperty("user.dir")
             + File.separator + "smallpld-arcs-1-N";
 
-    public static final String WORDS_FILE_PATH = System.getProperty("user.dir")
-            + File.separator + "words.txt";
 
     public static GestionWeb getInstance() {
         return ourInstance;
     }
 
     private GestionWeb() {
-    }
-
-
-    public void cargarDatos() {
-        Fichero f = Fichero.getInstance();
-        f.cargarDiccionario(GestionWeb.WORDS_FILE_PATH);
-        f.cargarWebs(GestionWeb.INDEX_FILE_PATH);
-        f.cargarRelaciones(GestionWeb.RELATIONS_FILE_PATH);
-    }
-
-    public Web getWebById(int id2) {
-        return Webs.getInstance().getWebById(id2);
     }
 
     public HashMap<String, Double> pageRank() {
