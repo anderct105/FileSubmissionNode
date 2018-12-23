@@ -17,26 +17,41 @@ public class Main4 {
         System.out.println("Cargando datos");
         Fichero.getInstance().cargarWebs(GestionWeb.INDEX_TEST_FILE_PATH);
         Fichero.getInstance().cargarRelaciones(GestionWeb.RELATIONS_TEST_FILE_PATH);
-        //Fichero.getInstance().cargarWebs(GestionWeb.INDEX_FILE_PATH);
-        //Fichero.getInstance().cargarRelaciones(GestionWeb.RELATIONS_FILE_PATH);
         System.out.println("Carga de datos "+s.elapsedTime()+"s");
         s = new Stopwatch();
         HashMap<String,Double> a = gestionWeb.pageRank();
+        System.out.println(a.toString());
         System.out.println("Carga de pageRank "+s.elapsedTime()+"s");
-        System.out.println("Búsqueda 1 palabra : ");
+        System.out.println("Búsqueda 'a': ");
         s = new Stopwatch();
         ArrayList<Web> l = Webs.getInstance().buscar("a");
         System.out.println("Tiempo búsqueda: " + s.elapsedTime());
-        for (int i = 0; i < 50 ; i ++){
-            System.out.println(l.get(i).getWeb() + " PR: " + l.get(i).getpR());
-        }
+        System.out.println("Búsqueda 'credit' : ");
+        s = new Stopwatch();
+        l = Webs.getInstance().buscar("credit");
+        System.out.println("Tiempo búsqueda: " + s.elapsedTime());
         System.out.println("Búsqueda 2 palabras : ");
         s = new Stopwatch();
-        l = Webs.getInstance().buscar("macro","com");
+        l = Webs.getInstance().buscar("a","credit");
         System.out.println("Tiempo búsqueda: " + s.elapsedTime());
-        /*for (int i = 0; i < 50 ; i ++){
-            System.out.println(l.get(i).getWeb() + " PR: " + l.get(i).getpR());
-        }*/
+        Fichero.getInstance().cargarWebs(GestionWeb.INDEX_FILE_PATH);
+        Fichero.getInstance().cargarRelaciones(GestionWeb.RELATIONS_FILE_PATH);
+        System.out.println("Carga de datos "+s.elapsedTime()+"s");
+        s = new Stopwatch();
+        a = gestionWeb.pageRank();
+        System.out.println("Carga de pageRank "+s.elapsedTime()+"s");
+        System.out.println("Búsqueda 'a': ");
+        s = new Stopwatch();
+        l = Webs.getInstance().buscar("a");
+        System.out.println("Tiempo búsqueda: " + s.elapsedTime());
+        System.out.println("Búsqueda 'credit' : ");
+        s = new Stopwatch();
+        l = Webs.getInstance().buscar("credit");
+        System.out.println("Tiempo búsqueda: " + s.elapsedTime());
+        System.out.println("Búsqueda 2 palabras : ");
+        s = new Stopwatch();
+        l = Webs.getInstance().buscar("a","credit");
+        System.out.println("Tiempo búsqueda: " + s.elapsedTime());
     }
     
     
